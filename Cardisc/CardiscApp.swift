@@ -11,7 +11,7 @@ import SwiftUI
 struct CardiscApp: App {
     var body: some Scene {
         WindowGroup {
-            RegisterView()
+            StartView()
         }
     }
 }

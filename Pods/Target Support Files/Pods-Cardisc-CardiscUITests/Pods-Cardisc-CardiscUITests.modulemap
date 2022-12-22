@@ -1,0 +1,6 @@
+framework module Pods_Cardisc_CardiscUITests {
+  umbrella header "Pods-Cardisc-CardiscUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

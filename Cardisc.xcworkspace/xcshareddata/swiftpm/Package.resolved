@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "signalr-client-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/moozzyk/SignalR-Client-Swift",
+      "state" : {
+        "revision" : "08131e5a66b22ea78cc4459f16ff7191f48ba1c7",
+        "version" : "0.9.1"
+      }
+    }
+  ],
+  "version" : 2
+}

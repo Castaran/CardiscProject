@@ -9,84 +9,70 @@ import Foundation
 import SwiftUI
 
 struct JoinGameView: View {
-    @State private var username: String = ""
-    @State private var password: String = ""
+    
+    @StateObject var vm: GameViewModel
     
     var body: some View {
-        VStack {
-            // Back button
-            HStack {
-                HStack {
-                    Image(systemName: "chevron.left").foregroundColor(Color(UIColor.systemBlue))
-                    Text("Back").foregroundColor(Color(UIColor.systemBlue))
+        GeometryReader { geometry in
+            ZStack {
+                Image("WP1")
+                    .resizable()
+                    .aspectRatio(geometry.size, contentMode: .fill)
+                    .edgesIgnoringSafeArea(.all)
+                VStack {
+                    VStack{
+                        HStack {
+                            Image(systemName: "person.fill.questionmark.rtl")
+                                .resizable()
+                                .frame(width: 30, height: 28)
+                                .foregroundColor(Color.white)
+                                .padding(.trailing, 5)
+                            Text("Join a game").font(.system(size: 24)).foregroundColor(Color.white).bold()
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+
+                        HStack {
+                            Text("Join a game by entering the Game ID you received from the game host.").foregroundColor(Color.white)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+
+                    }.padding(.horizontal, 30)
+                    VStack{
+                        HStack {
+                            Text("Enter game id.").foregroundColor(Color(UIColor.white)).bold()
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 20)
+
+                        HStack {
+                            TextField(
+                                "...",
+                                text: $vm.gameId
+                            )
+                            .padding(.vertical, 10)
+                            .padding(.horizontal, 15)
+                            .background(Color.white)
+                            .cornerRadius(10)
+                        }
+
+                    }.padding(.horizontal, 30)
+                    HStack {
+
+                    }
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .padding(.top, 40)
+
+                    NavigationLink("", destination: GameLobbyView(vm: vm, isHost: false), isActive: $vm.joinSucceed)
+                    MenuItem(menuIcon: "lock.open.fill", iconHeight: 24, iconWidth: 30, menuTitle: "Join Game", menuColor: UIColor.systemBlue, menuPaddingRight: 40, isLoading: false).onTapGesture {
+                        self.vm.joinGame()
+                    }
+
                 }
-                .padding(.vertical, 10)
-                .padding(.horizontal, 25)
-                .background(Color.white)
-                .cornerRadius(20, corners: [.topRight, .bottomRight])
-                .shadow(radius: 8)
-                .padding(.top, 10)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            
-            Spacer().frame(height: 50)
-            
-            VStack{
-                HStack {
-                    Image(systemName: "person.fill.questionmark.rtl")
-                        .resizable()
-                        .frame(width: 30, height: 28)
-                        .foregroundColor(Color.white)
-                        .padding(.trailing, 5)
-                    Text("Join a game").font(.system(size: 24)).foregroundColor(Color.white).bold()
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                
-                
-                HStack {
-                    Text("Join a game by entering the Game ID you received from the game host.").foregroundColor(Color(UIColor.white))
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                
-                
-            }.padding(.horizontal, 30)
-            VStack{
-                HStack {
-                    Text("Enter game id.").foregroundColor(Color(UIColor.white)).bold()
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 20)
-                
-                HStack {
-                    TextField(
-                        "...",
-                        text: $username
-                    )
-                    .padding(.vertical, 10)
-                    .padding(.horizontal, 15)
-                    .background(Color.white)
-                    .cornerRadius(10)
-                }
-                
-            }.padding(.horizontal, 30)
-            HStack {
-                MenuItem(menuIcon: "play.fill", iconHeight: 25, iconWidth: 25, menuTitle: "Join game", menuColor: UIColor.systemBlue, menuPaddingRight: 30, destination: "")
+                .frame(maxHeight: .infinity, alignment: .top)
             }
-            .frame(maxWidth: .infinity, alignment: .trailing)
-            .padding(.top, 40)
-
         }
-        .frame(maxHeight: .infinity, alignment: .top)
-        .background(Image("WP1")
-            .resizable()
-            .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height+30)
-            .brightness(-0.08)
-        )
-    }
-}
-
-struct JoinGameView_Previews: PreviewProvider {
-    static var previews: some View {
-        JoinGameView()
     }
 }

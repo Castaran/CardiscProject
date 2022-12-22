@@ -1,3 +1,4 @@
+
 //
 //  GameLobbyView.swift
 //  Cardisc
@@ -9,150 +10,99 @@ import Foundation
 import SwiftUI
 
 struct GameLobbyView: View {
+    @StateObject var vm: GameViewModel
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    let isHost: Bool
+    
     var body: some View {
-        VStack {
-            // Back button
-            HStack {
-                HStack {
-                    Image(systemName: "chevron.left").foregroundColor(Color(UIColor.systemBlue))
-                    Text("Back").foregroundColor(Color(UIColor.systemBlue))
+        NavigationStack {
+            GeometryReader { geometry in
+                ZStack {
+                    Image("WP1")
+                        .resizable()
+                        .aspectRatio(geometry.size, contentMode: .fill)
+                        .edgesIgnoringSafeArea(.all)
+                    VStack {
+                        VStack{
+                            HStack {
+                                Image(systemName: "person.2.fill")
+                                    .resizable()
+                                    .frame(width: 38, height: 22)
+                                    .foregroundColor(Color.white)
+                                    .padding(.trailing, 1)
+                                Text("Game lobby (\(vm.lobbyResponseDto?.sessionCode ?? "0000"))").font(.system(size: 20)).bold().foregroundColor(Color.white)
+                                Spacer()
+                                Image(systemName: "square.and.arrow.up").foregroundColor(Color.white).padding(.trailing, 20)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            PlayerList(players: vm.players)
+                            
+                            
+                            if(isHost) {
+                                HStack {
+                                    Picker("Number of cards", selection: $vm.amountSelected) {
+                                        ForEach(1 ..< 10) {
+                                            Text("\($0) round(s)")
+                                        }
+                                    }
+                                    .padding(.vertical, 5)
+                                    .padding(.horizontal, 50)
+                                    .background(Color.white)
+                                    .frame(maxWidth: .infinity)
+                                    .cornerRadius(25, corners: [.allCorners])
+                                }
+                                .background(Color.white)
+                                .cornerRadius(10, corners: [.allCorners])
+                                .shadow(radius: 5)
+                                .padding(.bottom, 10)
+                            }
+                        }
+                        .padding(.horizontal, 35)
+                        
+                        if(isHost) {
+                            MenuItem(
+                                menuIcon: "play.fill",
+                                iconHeight: 25,
+                                iconWidth: 25,
+                                menuTitle: "Start game",
+                                menuColor: UIColor.systemGreen,
+                                menuPaddingRight: 30
+                            ).onTapGesture {
+                                vm.startGame()
+                            }
+                        }
+                        else {
+                            MenuItem(
+                                menuIcon: "person.crop.circle.badge.checkmark",
+                                iconHeight: 30,
+                                iconWidth: 35,
+                                menuTitle: "Ready/unready",
+                                menuColor: UIColor.systemGreen,
+                                menuPaddingRight: 30
+                            ).onTapGesture {
+                                vm.changeState()
+                            }
+                        }
+                    }
+                    .frame(maxHeight: .infinity, alignment: .top)
+                    .padding(.top, 30)
                 }
-                .padding(.vertical, 10)
-                .padding(.horizontal, 25)
-                .background(Color.white)
-                .cornerRadius(20, corners: [.topRight, .bottomRight])
-                .shadow(radius: 8)
-                .padding(.top, 10)
-                
-                Spacer()
-                
-                Text("#1234")
-                    .padding(.horizontal, 40)
-                    .foregroundColor(Color(UIColor.white))
-                    .font(.system(size: 28))
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            
-            Spacer().frame(height: 50)
-            
-            VStack{
-                VStack{
-                    HStack {
-                        Image(systemName: "person.2.fill")
-                            .resizable()
-                            .frame(width: 44, height: 28)
-                            .foregroundColor(Color.white)
-                            .padding(.trailing, 1)
-                        Text("Game lobby").font(.system(size: 24)).bold().foregroundColor(Color.white)
-                        Spacer()
-                        Image(systemName: "square.and.arrow.up").foregroundColor(Color.white).padding(.trailing, 20)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                }
-                
-                VStack {
-                    HStack {
-                        Text("Players")
-                        Spacer()
-                        Text("Ready")
-                    }
-                    .bold()
-                    
-                    Divider()
-                    
-                    HStack {
-                        Image("UserIcon").resizable().frame(width: 20, height: 20)
-                        Text("Player1")
-                        Spacer()
-                        Image(systemName: "checkmark.circle.fill").resizable().frame(width: 20, height: 20).foregroundColor(Color(UIColor.systemGreen))
-                    }
-                    HStack {
-                        Image("UserIcon").resizable().frame(width: 20, height: 20)
-                        Text("Player2")
-                        Spacer()
-                        Image(systemName: "checkmark.circle.fill").resizable().frame(width: 20, height: 20).foregroundColor(Color(UIColor.systemGreen))
-                    }
-                    HStack {
-                        Image("UserIcon").resizable().frame(width: 20, height: 20)
-                        Text("Player3")
-                        Spacer()
-                        Image(systemName: "checkmark.circle.fill").resizable().frame(width: 20, height: 20).foregroundColor(Color(UIColor.systemGreen))
-                    }
-                    HStack {
-                        Image("UserIcon").resizable().frame(width: 20, height: 20)
-                        Text("Player4")
-                        Spacer()
-                        Image(systemName: "checkmark.circle.fill").resizable().frame(width: 20, height: 20).foregroundColor(Color(UIColor.systemGreen))
-                    }
-                    HStack {
-                        Image("UserIcon").resizable().frame(width: 20, height: 20)
-                        Text("Player5")
-                        Spacer()
-                        Image(systemName: "checkmark.circle.fill").resizable().frame(width: 20, height: 20).foregroundColor(Color(UIColor.systemGreen))
-                    }
-                    HStack {
-                        Image("UserIcon").resizable().frame(width: 20, height: 20)
-                        Text("Player6")
-                        Spacer()
-                        Image(systemName: "checkmark.circle.fill").resizable().frame(width: 20, height: 20).foregroundColor(Color(UIColor.systemGreen))
-                    }
-                    HStack {
-                        Image("UserIcon").resizable().frame(width: 20, height: 20)
-                        Text("Player7")
-                        Spacer()
-                        Image(systemName: "checkmark.circle.fill").resizable().frame(width: 20, height: 20).foregroundColor(Color(UIColor.systemGreen))
-                    }
-                    HStack {
-                        Image("UserIcon").resizable().frame(width: 20, height: 20)
-                        Text("Player8")
-                        Spacer()
-                        Image(systemName: "checkmark.circle.fill").resizable().frame(width: 20, height: 20).foregroundColor(Color(UIColor.systemGreen))
-                    }
-                }
-                .padding(20)
-                .background(Color.white)
-                .cornerRadius(10)
-                .shadow(radius: 5)
-                
-                HStack {
-                    Text("3 Rounds")
-                    Spacer()
-                    Image(systemName: "chevron.down").resizable().frame(width: 20, height: 10)
-                }
-                .padding(.vertical, 15)
-                .padding(.horizontal, 20)
-                .background(Color(UIColor.white))
-                .cornerRadius(10)
-                .shadow(radius: 5)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .foregroundColor(Color(UIColor.systemGray))
-            }
-            .padding(.horizontal, 30)
-            .padding(.bottom, 20)
-            
-            
-            HStack {
-                MenuItem(menuIcon: "play.fill", iconHeight: 25, iconWidth: 23, menuTitle: "Start game", menuColor: UIColor.systemGreen, menuPaddingRight: 40, destination: "")
-            }.frame(maxWidth: .infinity, alignment: .trailing)
-
         }
-        
-        .frame(maxHeight: .infinity, alignment: .top)
-        .background(Image("WP1")
-            .resizable()
-            .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height+30)
-            .brightness(-0.08)
-        )
-        
-        
 
-    }
-}
-
-
-struct GameLobbyView_Previews: PreviewProvider {
-    static var previews: some View {
-        GameLobbyView()
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: Button(action : {
+            vm.leaveGame()
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            HStack {
+                Image(systemName: "chevron.backward")
+                Text("Leave session").foregroundColor(Color(UIColor.systemBlue))
+            }
+            
+            
+        })
     }
 }

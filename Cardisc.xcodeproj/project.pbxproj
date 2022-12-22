@@ -7,8 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		226B189B2943F71F005BBD06 /* PlayerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B189A2943F71F005BBD06 /* PlayerList.swift */; };
+		226B189D2943F72A005BBD06 /* PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B189C2943F72A005BBD06 /* PlayerItem.swift */; };
+		226B18A02943F9F3005BBD06 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B189F2943F9F3005BBD06 /* User.swift */; };
+		226B18A22943FA68005BBD06 /* Lobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B18A12943FA68005BBD06 /* Lobby.swift */; };
+		226B18A42943FAA6005BBD06 /* LobbyPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B18A32943FAA6005BBD06 /* LobbyPlayer.swift */; };
+		226CC8772930EB32005663C5 /* OpenQuestionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226CC8762930EB32005663C5 /* OpenQuestionCard.swift */; };
+		226CC8792930ECEB005663C5 /* MPCQuestionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226CC8782930ECEB005663C5 /* MPCQuestionCard.swift */; };
+		226CC87B2930ED00005663C5 /* ScalableQuestionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226CC87A2930ED00005663C5 /* ScalableQuestionCard.swift */; };
+		227E57E229436881006A2955 /* MainMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227E57E129436881006A2955 /* MainMenuViewModel.swift */; };
+		22801DCF2938F03300E7F825 /* SignalRClient in Frameworks */ = {isa = PBXBuildFile; productRef = 22801DCE2938F03300E7F825 /* SignalRClient */; };
 		2281CDD2292B9C1200106B12 /* EditAccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2281CDD1292B9C1200106B12 /* EditAccountSettingsView.swift */; };
 		22939309292ADE1D0010F0FD /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22939308292ADE1D0010F0FD /* MenuItem.swift */; };
+		229A7BB42944EC460089CC02 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229A7BB32944EC460089CC02 /* RegisterViewModel.swift */; };
+		22A40E4429313EAA00FF7952 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E4329313EAA00FF7952 /* CardType.swift */; };
+		22A40E4729313F3F00FF7952 /* SessionResponseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E4629313F3F00FF7952 /* SessionResponseType.swift */; };
+		22A40E4929313F8400FF7952 /* SessionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E4829313F8400FF7952 /* SessionStatus.swift */; };
+		22A40E4B29313FBF00FF7952 /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E4A29313FBF00FF7952 /* UserRole.swift */; };
+		22A40E53293165B400FF7952 /* userDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E52293165B400FF7952 /* userDto.swift */; };
+		22A40E562931664E00FF7952 /* submitAnswerDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E552931664E00FF7952 /* submitAnswerDto.swift */; };
+		22A40E582931669500FF7952 /* startGameDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E572931669500FF7952 /* startGameDto.swift */; };
+		22A40E5A2931670000FF7952 /* sessionResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E592931670000FF7952 /* sessionResponseDto.swift */; };
+		22A40E5C2931676200FF7952 /* sessionDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E5B2931676200FF7952 /* sessionDto.swift */; };
+		22A40E5E293167F900FF7952 /* loginResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E5D293167F900FF7952 /* loginResponseDto.swift */; };
+		22A40E602931686E00FF7952 /* lobbyResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E5F2931686E00FF7952 /* lobbyResponseDto.swift */; };
+		22A40E622931693B00FF7952 /* lobbyPlayerDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E612931693B00FF7952 /* lobbyPlayerDto.swift */; };
+		22A40E64293169D500FF7952 /* joinRequestDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E63293169D500FF7952 /* joinRequestDto.swift */; };
+		22A40E6629316A0300FF7952 /* createUserDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E6529316A0300FF7952 /* createUserDto.swift */; };
+		22A40E6829316A6300FF7952 /* conclusionDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E6729316A6300FF7952 /* conclusionDto.swift */; };
+		22A40E6A29316AB400FF7952 /* changeReadinessDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E6929316AB400FF7952 /* changeReadinessDto.swift */; };
+		22A40E6C29316AEF00FF7952 /* cardListDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E6B29316AEF00FF7952 /* cardListDto.swift */; };
+		22A40E6E29316B1B00FF7952 /* cardDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E6D29316B1B00FF7952 /* cardDto.swift */; };
+		22A40E702932CC4100FF7952 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E6F2932CC4100FF7952 /* AccountManager.swift */; };
+		22A40E722932CCB800FF7952 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E712932CCB800FF7952 /* GameManager.swift */; };
+		22A40E742932CEDF00FF7952 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E732932CEDF00FF7952 /* GameViewModel.swift */; };
+		22A40E762932CEEF00FF7952 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E752932CEEF00FF7952 /* LoginViewModel.swift */; };
+		22A40E7A2932CF6C00FF7952 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E792932CF6C00FF7952 /* UserViewModel.swift */; };
+		22A40E7C2932DD8600FF7952 /* registerResponseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A40E7B2932DD8600FF7952 /* registerResponseDto.swift */; };
 		22A80AAC292A722D003CD018 /* CardiscApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80AAB292A722D003CD018 /* CardiscApp.swift */; };
 		22A80AAE292A722D003CD018 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80AAD292A722D003CD018 /* StartView.swift */; };
 		22A80AB0292A722F003CD018 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A80AAF292A722F003CD018 /* Assets.xcassets */; };
@@ -18,7 +53,6 @@
 		22A80AC9292A722F003CD018 /* CardiscUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80AC8292A722F003CD018 /* CardiscUITestsLaunchTests.swift */; };
 		22A80ADF292A7869003CD018 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80ADE292A7869003CD018 /* LoginView.swift */; };
 		22A80AE3292A78C1003CD018 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80AE2292A78C1003CD018 /* RegisterView.swift */; };
-		22A80AE5292A78D7003CD018 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80AE4292A78D7003CD018 /* ForgotPasswordView.swift */; };
 		22A80AE7292A7914003CD018 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80AE6292A7914003CD018 /* MainMenuView.swift */; };
 		22A80AE9292A7928003CD018 /* AccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80AE8292A7928003CD018 /* AccountSettingsView.swift */; };
 		22A80AEB292A7944003CD018 /* JoinGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80AEA292A7944003CD018 /* JoinGameView.swift */; };
@@ -28,15 +62,16 @@
 		22A80AF5292A7A34003CD018 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80AF4292A7A34003CD018 /* CardView.swift */; };
 		22A80AF7292A7A63003CD018 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80AF6292A7A63003CD018 /* ChatView.swift */; };
 		22A80AF9292A7A90003CD018 /* ConclussionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80AF8292A7A90003CD018 /* ConclussionView.swift */; };
-		22A80AFE292A83C3003CD018 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80AFD292A83C3003CD018 /* AccountViewModel.swift */; };
-		22A80B00292A83D9003CD018 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80AFF292A83D9003CD018 /* MenuViewModel.swift */; };
-		22A80B02292A83FC003CD018 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80B01292A83FC003CD018 /* GameViewModel.swift */; };
 		22A80B04292A8420003CD018 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80B03292A8420003CD018 /* UserManager.swift */; };
 		22A80B06292A842D003CD018 /* CardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80B05292A842D003CD018 /* CardManager.swift */; };
-		22A80B08292A845B003CD018 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80B07292A845B003CD018 /* User.swift */; };
-		22A80B0A292A846A003CD018 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80B09292A846A003CD018 /* Card.swift */; };
 		22A80B0C292A8549003CD018 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80B0B292A8549003CD018 /* Constants.swift */; };
-		22A80B0E292A856C003CD018 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80B0D292A856C003CD018 /* API.swift */; };
+		22A80B0E292A856C003CD018 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80B0D292A856C003CD018 /* ApiService.swift */; };
+		22BB35DD2946940800986383 /* JoinGameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BB35DC2946940800986383 /* JoinGameManager.swift */; };
+		22E8C752293CE8A7005CCC00 /* SignalRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E8C751293CE8A7005CCC00 /* SignalRService.swift */; };
+		22FD227129302CB000E9A02C /* ChatMessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FD227029302CB000E9A02C /* ChatMessageItem.swift */; };
+		B9F38F49C4CC083C02468A7A /* Pods_Cardisc_CardiscUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29D13F3CB9C870FF15F6C57A /* Pods_Cardisc_CardiscUITests.framework */; };
+		C7B7B8132D87BBD042459D48 /* Pods_Cardisc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B626FFDE03C7E1B9A83B885 /* Pods_Cardisc.framework */; };
+		FAE4FFBA10EC82CCC6985E71 /* Pods_CardiscTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E3E68CA30FC94C26959D26 /* Pods_CardiscTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,8 +92,43 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1398CE1AC0769B0545970AB4 /* Pods-Cardisc-CardiscUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardisc-CardiscUITests.debug.xcconfig"; path = "Target Support Files/Pods-Cardisc-CardiscUITests/Pods-Cardisc-CardiscUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		226B189A2943F71F005BBD06 /* PlayerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerList.swift; sourceTree = "<group>"; };
+		226B189C2943F72A005BBD06 /* PlayerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerItem.swift; sourceTree = "<group>"; };
+		226B189F2943F9F3005BBD06 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		226B18A12943FA68005BBD06 /* Lobby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lobby.swift; sourceTree = "<group>"; };
+		226B18A32943FAA6005BBD06 /* LobbyPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyPlayer.swift; sourceTree = "<group>"; };
+		226CC8762930EB32005663C5 /* OpenQuestionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuestionCard.swift; sourceTree = "<group>"; };
+		226CC8782930ECEB005663C5 /* MPCQuestionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCQuestionCard.swift; sourceTree = "<group>"; };
+		226CC87A2930ED00005663C5 /* ScalableQuestionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalableQuestionCard.swift; sourceTree = "<group>"; };
+		227E57E129436881006A2955 /* MainMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewModel.swift; sourceTree = "<group>"; };
 		2281CDD1292B9C1200106B12 /* EditAccountSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountSettingsView.swift; sourceTree = "<group>"; };
 		22939308292ADE1D0010F0FD /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		229A7BB32944EC460089CC02 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		22A40E4329313EAA00FF7952 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
+		22A40E4629313F3F00FF7952 /* SessionResponseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionResponseType.swift; sourceTree = "<group>"; };
+		22A40E4829313F8400FF7952 /* SessionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStatus.swift; sourceTree = "<group>"; };
+		22A40E4A29313FBF00FF7952 /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
+		22A40E52293165B400FF7952 /* userDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userDto.swift; sourceTree = "<group>"; };
+		22A40E552931664E00FF7952 /* submitAnswerDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = submitAnswerDto.swift; sourceTree = "<group>"; };
+		22A40E572931669500FF7952 /* startGameDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = startGameDto.swift; sourceTree = "<group>"; };
+		22A40E592931670000FF7952 /* sessionResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sessionResponseDto.swift; sourceTree = "<group>"; };
+		22A40E5B2931676200FF7952 /* sessionDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sessionDto.swift; sourceTree = "<group>"; };
+		22A40E5D293167F900FF7952 /* loginResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginResponseDto.swift; sourceTree = "<group>"; };
+		22A40E5F2931686E00FF7952 /* lobbyResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lobbyResponseDto.swift; sourceTree = "<group>"; };
+		22A40E612931693B00FF7952 /* lobbyPlayerDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lobbyPlayerDto.swift; sourceTree = "<group>"; };
+		22A40E63293169D500FF7952 /* joinRequestDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = joinRequestDto.swift; sourceTree = "<group>"; };
+		22A40E6529316A0300FF7952 /* createUserDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createUserDto.swift; sourceTree = "<group>"; };
+		22A40E6729316A6300FF7952 /* conclusionDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = conclusionDto.swift; sourceTree = "<group>"; };
+		22A40E6929316AB400FF7952 /* changeReadinessDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = changeReadinessDto.swift; sourceTree = "<group>"; };
+		22A40E6B29316AEF00FF7952 /* cardListDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cardListDto.swift; sourceTree = "<group>"; };
+		22A40E6D29316B1B00FF7952 /* cardDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cardDto.swift; sourceTree = "<group>"; };
+		22A40E6F2932CC4100FF7952 /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
+		22A40E712932CCB800FF7952 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		22A40E732932CEDF00FF7952 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		22A40E752932CEEF00FF7952 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		22A40E792932CF6C00FF7952 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		22A40E7B2932DD8600FF7952 /* registerResponseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registerResponseDto.swift; sourceTree = "<group>"; };
 		22A80AA8292A722D003CD018 /* Cardisc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cardisc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A80AAB292A722D003CD018 /* CardiscApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardiscApp.swift; sourceTree = "<group>"; };
 		22A80AAD292A722D003CD018 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
@@ -71,7 +141,6 @@
 		22A80AC8292A722F003CD018 /* CardiscUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardiscUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		22A80ADE292A7869003CD018 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		22A80AE2292A78C1003CD018 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
-		22A80AE4292A78D7003CD018 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		22A80AE6292A7914003CD018 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		22A80AE8292A7928003CD018 /* AccountSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsView.swift; sourceTree = "<group>"; };
 		22A80AEA292A7944003CD018 /* JoinGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGameView.swift; sourceTree = "<group>"; };
@@ -81,15 +150,21 @@
 		22A80AF4292A7A34003CD018 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		22A80AF6292A7A63003CD018 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		22A80AF8292A7A90003CD018 /* ConclussionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConclussionView.swift; sourceTree = "<group>"; };
-		22A80AFD292A83C3003CD018 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
-		22A80AFF292A83D9003CD018 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
-		22A80B01292A83FC003CD018 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		22A80B03292A8420003CD018 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		22A80B05292A842D003CD018 /* CardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardManager.swift; sourceTree = "<group>"; };
-		22A80B07292A845B003CD018 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		22A80B09292A846A003CD018 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		22A80B0B292A8549003CD018 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		22A80B0D292A856C003CD018 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		22A80B0D292A856C003CD018 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		22BB35DC2946940800986383 /* JoinGameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGameManager.swift; sourceTree = "<group>"; };
+		22E8C751293CE8A7005CCC00 /* SignalRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalRService.swift; sourceTree = "<group>"; };
+		22FD227029302CB000E9A02C /* ChatMessageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageItem.swift; sourceTree = "<group>"; };
+		29D13F3CB9C870FF15F6C57A /* Pods_Cardisc_CardiscUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cardisc_CardiscUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B626FFDE03C7E1B9A83B885 /* Pods_Cardisc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cardisc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		47C4B49C1F2910E7A83CF41A /* Pods-Cardisc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardisc.debug.xcconfig"; path = "Target Support Files/Pods-Cardisc/Pods-Cardisc.debug.xcconfig"; sourceTree = "<group>"; };
+		9896CC1D496694EAFB14BAD7 /* Pods-CardiscTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardiscTests.debug.xcconfig"; path = "Target Support Files/Pods-CardiscTests/Pods-CardiscTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A1E3E68CA30FC94C26959D26 /* Pods_CardiscTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardiscTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3B7FA5447D43BEEE05F2420 /* Pods-CardiscTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardiscTests.release.xcconfig"; path = "Target Support Files/Pods-CardiscTests/Pods-CardiscTests.release.xcconfig"; sourceTree = "<group>"; };
+		CC1420868FA86C9938FD4475 /* Pods-Cardisc-CardiscUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardisc-CardiscUITests.release.xcconfig"; path = "Target Support Files/Pods-Cardisc-CardiscUITests/Pods-Cardisc-CardiscUITests.release.xcconfig"; sourceTree = "<group>"; };
+		F4F4C0DD5DF1692725C079B6 /* Pods-Cardisc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardisc.release.xcconfig"; path = "Target Support Files/Pods-Cardisc/Pods-Cardisc.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +172,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22801DCF2938F03300E7F825 /* SignalRClient in Frameworks */,
+				C7B7B8132D87BBD042459D48 /* Pods_Cardisc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAE4FFBA10EC82CCC6985E71 /* Pods_CardiscTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,18 +189,71 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9F38F49C4CC083C02468A7A /* Pods_Cardisc_CardiscUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		226B18992943F6ED005BBD06 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				226B189A2943F71F005BBD06 /* PlayerList.swift */,
+				226B189C2943F72A005BBD06 /* PlayerItem.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		226B189E2943F9B7005BBD06 /* DomainModels */ = {
+			isa = PBXGroup;
+			children = (
+				226B189F2943F9F3005BBD06 /* User.swift */,
+				226B18A12943FA68005BBD06 /* Lobby.swift */,
+				226B18A32943FAA6005BBD06 /* LobbyPlayer.swift */,
+			);
+			path = DomainModels;
+			sourceTree = "<group>";
+		};
 		22939307292ADE070010F0FD /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				22939308292ADE1D0010F0FD /* MenuItem.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		22A40E4529313F2600FF7952 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				22A40E4329313EAA00FF7952 /* CardType.swift */,
+				22A40E4629313F3F00FF7952 /* SessionResponseType.swift */,
+				22A40E4829313F8400FF7952 /* SessionStatus.swift */,
+				22A40E4A29313FBF00FF7952 /* UserRole.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		22A40E51293165A000FF7952 /* Dto */ = {
+			isa = PBXGroup;
+			children = (
+				22A40E52293165B400FF7952 /* userDto.swift */,
+				22A40E552931664E00FF7952 /* submitAnswerDto.swift */,
+				22A40E572931669500FF7952 /* startGameDto.swift */,
+				22A40E592931670000FF7952 /* sessionResponseDto.swift */,
+				22A40E5B2931676200FF7952 /* sessionDto.swift */,
+				22A40E5D293167F900FF7952 /* loginResponseDto.swift */,
+				22A40E5F2931686E00FF7952 /* lobbyResponseDto.swift */,
+				22A40E612931693B00FF7952 /* lobbyPlayerDto.swift */,
+				22A40E63293169D500FF7952 /* joinRequestDto.swift */,
+				22A40E6529316A0300FF7952 /* createUserDto.swift */,
+				22A40E6729316A6300FF7952 /* conclusionDto.swift */,
+				22A40E6929316AB400FF7952 /* changeReadinessDto.swift */,
+				22A40E6B29316AEF00FF7952 /* cardListDto.swift */,
+				22A40E6D29316B1B00FF7952 /* cardDto.swift */,
+				22A40E7B2932DD8600FF7952 /* registerResponseDto.swift */,
+			);
+			path = Dto;
 			sourceTree = "<group>";
 		};
 		22A80A9F292A722D003CD018 = {
@@ -132,6 +263,8 @@
 				22A80ABB292A722F003CD018 /* CardiscTests */,
 				22A80AC5292A722F003CD018 /* CardiscUITests */,
 				22A80AA9292A722D003CD018 /* Products */,
+				ABA177DBABDDFE7BF3025C12 /* Pods */,
+				D091C486B20EB904115A0256 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,11 +282,11 @@
 			isa = PBXGroup;
 			children = (
 				22A80AAB292A722D003CD018 /* CardiscApp.swift */,
+				22A80AD5292A7260003CD018 /* Data */,
 				22A80AD9292A7284003CD018 /* Managers */,
 				22A80AD8292A727A003CD018 /* Viewmodels */,
 				22A80AD7292A7270003CD018 /* Views */,
 				22A80AD6292A7269003CD018 /* Models */,
-				22A80AD5292A7260003CD018 /* Helpers */,
 				22A80AB1292A722F003CD018 /* Preview Content */,
 				22A80AAF292A722F003CD018 /* Assets.xcassets */,
 			);
@@ -185,20 +318,22 @@
 			path = CardiscUITests;
 			sourceTree = "<group>";
 		};
-		22A80AD5292A7260003CD018 /* Helpers */ = {
+		22A80AD5292A7260003CD018 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				22A40E4529313F2600FF7952 /* Enums */,
+				22A40E51293165A000FF7952 /* Dto */,
 				22A80B0B292A8549003CD018 /* Constants.swift */,
-				22A80B0D292A856C003CD018 /* API.swift */,
+				22A80B0D292A856C003CD018 /* ApiService.swift */,
+				22E8C751293CE8A7005CCC00 /* SignalRService.swift */,
 			);
-			path = Helpers;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		22A80AD6292A7269003CD018 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				22A80B07292A845B003CD018 /* User.swift */,
-				22A80B09292A846A003CD018 /* Card.swift */,
+				226B189E2943F9B7005BBD06 /* DomainModels */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -216,8 +351,11 @@
 		22A80AD8292A727A003CD018 /* Viewmodels */ = {
 			isa = PBXGroup;
 			children = (
-				22A80AFB292A82CD003CD018 /* Game */,
-				22A80AFA292A82C0003CD018 /* Menu */,
+				22A40E752932CEEF00FF7952 /* LoginViewModel.swift */,
+				229A7BB32944EC460089CC02 /* RegisterViewModel.swift */,
+				227E57E129436881006A2955 /* MainMenuViewModel.swift */,
+				22A40E732932CEDF00FF7952 /* GameViewModel.swift */,
+				22A40E792932CF6C00FF7952 /* UserViewModel.swift */,
 			);
 			path = Viewmodels;
 			sourceTree = "<group>";
@@ -225,8 +363,11 @@
 		22A80AD9292A7284003CD018 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				22A80B03292A8420003CD018 /* UserManager.swift */,
 				22A80B05292A842D003CD018 /* CardManager.swift */,
+				22A40E6F2932CC4100FF7952 /* AccountManager.swift */,
+				22A40E712932CCB800FF7952 /* GameManager.swift */,
+				22A80B03292A8420003CD018 /* UserManager.swift */,
+				22BB35DC2946940800986383 /* JoinGameManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -234,6 +375,7 @@
 		22A80ADA292A7734003CD018 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				226B18992943F6ED005BBD06 /* Components */,
 				22A80AFC292A8368003CD018 /* Account */,
 				22A80AF0292A79CE003CD018 /* GameLobbyView.swift */,
 				22A80AE6292A7914003CD018 /* MainMenuView.swift */,
@@ -246,27 +388,11 @@
 		22A80ADB292A774C003CD018 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				22FD226F29302C7400E9A02C /* Components */,
 				22A80AF2292A7A17003CD018 /* LoadingView.swift */,
 				22A80AF4292A7A34003CD018 /* CardView.swift */,
 				22A80AF6292A7A63003CD018 /* ChatView.swift */,
 				22A80AF8292A7A90003CD018 /* ConclussionView.swift */,
-			);
-			path = Game;
-			sourceTree = "<group>";
-		};
-		22A80AFA292A82C0003CD018 /* Menu */ = {
-			isa = PBXGroup;
-			children = (
-				22A80AFD292A83C3003CD018 /* AccountViewModel.swift */,
-				22A80AFF292A83D9003CD018 /* MenuViewModel.swift */,
-			);
-			path = Menu;
-			sourceTree = "<group>";
-		};
-		22A80AFB292A82CD003CD018 /* Game */ = {
-			isa = PBXGroup;
-			children = (
-				22A80B01292A83FC003CD018 /* GameViewModel.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -277,11 +403,44 @@
 				22939307292ADE070010F0FD /* Components */,
 				22A80AE8292A7928003CD018 /* AccountSettingsView.swift */,
 				2281CDD1292B9C1200106B12 /* EditAccountSettingsView.swift */,
-				22A80AE4292A78D7003CD018 /* ForgotPasswordView.swift */,
 				22A80ADE292A7869003CD018 /* LoginView.swift */,
 				22A80AE2292A78C1003CD018 /* RegisterView.swift */,
 			);
 			path = Account;
+			sourceTree = "<group>";
+		};
+		22FD226F29302C7400E9A02C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				22FD227029302CB000E9A02C /* ChatMessageItem.swift */,
+				226CC8762930EB32005663C5 /* OpenQuestionCard.swift */,
+				226CC8782930ECEB005663C5 /* MPCQuestionCard.swift */,
+				226CC87A2930ED00005663C5 /* ScalableQuestionCard.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		ABA177DBABDDFE7BF3025C12 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				47C4B49C1F2910E7A83CF41A /* Pods-Cardisc.debug.xcconfig */,
+				F4F4C0DD5DF1692725C079B6 /* Pods-Cardisc.release.xcconfig */,
+				1398CE1AC0769B0545970AB4 /* Pods-Cardisc-CardiscUITests.debug.xcconfig */,
+				CC1420868FA86C9938FD4475 /* Pods-Cardisc-CardiscUITests.release.xcconfig */,
+				9896CC1D496694EAFB14BAD7 /* Pods-CardiscTests.debug.xcconfig */,
+				A3B7FA5447D43BEEE05F2420 /* Pods-CardiscTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D091C486B20EB904115A0256 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2B626FFDE03C7E1B9A83B885 /* Pods_Cardisc.framework */,
+				29D13F3CB9C870FF15F6C57A /* Pods_Cardisc_CardiscUITests.framework */,
+				A1E3E68CA30FC94C26959D26 /* Pods_CardiscTests.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,6 +450,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22A80ACC292A722F003CD018 /* Build configuration list for PBXNativeTarget "Cardisc" */;
 			buildPhases = (
+				B4539BF3ECC44BD008F77A98 /* [CP] Check Pods Manifest.lock */,
 				22A80AA4292A722D003CD018 /* Sources */,
 				22A80AA5292A722D003CD018 /* Frameworks */,
 				22A80AA6292A722D003CD018 /* Resources */,
@@ -300,6 +460,9 @@
 			dependencies = (
 			);
 			name = Cardisc;
+			packageProductDependencies = (
+				22801DCE2938F03300E7F825 /* SignalRClient */,
+			);
 			productName = Cardisc;
 			productReference = 22A80AA8292A722D003CD018 /* Cardisc.app */;
 			productType = "com.apple.product-type.application";
@@ -308,6 +471,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22A80ACF292A722F003CD018 /* Build configuration list for PBXNativeTarget "CardiscTests" */;
 			buildPhases = (
+				B22192E9C639881B794D18F1 /* [CP] Check Pods Manifest.lock */,
 				22A80AB4292A722F003CD018 /* Sources */,
 				22A80AB5292A722F003CD018 /* Frameworks */,
 				22A80AB6292A722F003CD018 /* Resources */,
@@ -326,6 +490,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22A80AD2292A722F003CD018 /* Build configuration list for PBXNativeTarget "CardiscUITests" */;
 			buildPhases = (
+				FBE426CFA4EED4EC2F7FB2B4 /* [CP] Check Pods Manifest.lock */,
 				22A80ABE292A722F003CD018 /* Sources */,
 				22A80ABF292A722F003CD018 /* Frameworks */,
 				22A80AC0292A722F003CD018 /* Resources */,
@@ -372,6 +537,9 @@
 				Base,
 			);
 			mainGroup = 22A80A9F292A722D003CD018;
+			packageReferences = (
+				22801DCD2938F03300E7F825 /* XCRemoteSwiftPackageReference "SignalR-Client-Swift" */,
+			);
 			productRefGroup = 22A80AA9292A722D003CD018 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -409,36 +577,136 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		B22192E9C639881B794D18F1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CardiscTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B4539BF3ECC44BD008F77A98 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cardisc-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FBE426CFA4EED4EC2F7FB2B4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cardisc-CardiscUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		22A80AA4292A722D003CD018 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22A80B02292A83FC003CD018 /* GameViewModel.swift in Sources */,
 				2281CDD2292B9C1200106B12 /* EditAccountSettingsView.swift in Sources */,
 				22A80ADF292A7869003CD018 /* LoginView.swift in Sources */,
 				22A80B04292A8420003CD018 /* UserManager.swift in Sources */,
+				22A40E742932CEDF00FF7952 /* GameViewModel.swift in Sources */,
 				22A80AF9292A7A90003CD018 /* ConclussionView.swift in Sources */,
+				22A40E702932CC4100FF7952 /* AccountManager.swift in Sources */,
 				22A80AE7292A7914003CD018 /* MainMenuView.swift in Sources */,
+				22A40E5C2931676200FF7952 /* sessionDto.swift in Sources */,
+				22A40E4B29313FBF00FF7952 /* UserRole.swift in Sources */,
+				22A40E4929313F8400FF7952 /* SessionStatus.swift in Sources */,
+				22BB35DD2946940800986383 /* JoinGameManager.swift in Sources */,
+				226CC87B2930ED00005663C5 /* ScalableQuestionCard.swift in Sources */,
+				22A40E4729313F3F00FF7952 /* SessionResponseType.swift in Sources */,
+				22FD227129302CB000E9A02C /* ChatMessageItem.swift in Sources */,
 				22A80AF1292A79CE003CD018 /* GameLobbyView.swift in Sources */,
 				22A80B0C292A8549003CD018 /* Constants.swift in Sources */,
+				22A40E4429313EAA00FF7952 /* CardType.swift in Sources */,
 				22A80AAE292A722D003CD018 /* StartView.swift in Sources */,
+				22A40E6A29316AB400FF7952 /* changeReadinessDto.swift in Sources */,
+				22A40E562931664E00FF7952 /* submitAnswerDto.swift in Sources */,
+				22A40E7A2932CF6C00FF7952 /* UserViewModel.swift in Sources */,
 				22A80AF7292A7A63003CD018 /* ChatView.swift in Sources */,
+				22A40E602931686E00FF7952 /* lobbyResponseDto.swift in Sources */,
+				226B189B2943F71F005BBD06 /* PlayerList.swift in Sources */,
 				22A80AEB292A7944003CD018 /* JoinGameView.swift in Sources */,
+				22A40E64293169D500FF7952 /* joinRequestDto.swift in Sources */,
+				22A40E7C2932DD8600FF7952 /* registerResponseDto.swift in Sources */,
+				22A40E53293165B400FF7952 /* userDto.swift in Sources */,
+				226B189D2943F72A005BBD06 /* PlayerItem.swift in Sources */,
+				22A40E722932CCB800FF7952 /* GameManager.swift in Sources */,
+				226CC8792930ECEB005663C5 /* MPCQuestionCard.swift in Sources */,
 				22A80AF3292A7A17003CD018 /* LoadingView.swift in Sources */,
+				22A40E762932CEEF00FF7952 /* LoginViewModel.swift in Sources */,
+				226B18A22943FA68005BBD06 /* Lobby.swift in Sources */,
 				22A80AE3292A78C1003CD018 /* RegisterView.swift in Sources */,
 				22A80AF5292A7A34003CD018 /* CardView.swift in Sources */,
-				22A80AFE292A83C3003CD018 /* AccountViewModel.swift in Sources */,
+				226CC8772930EB32005663C5 /* OpenQuestionCard.swift in Sources */,
 				22939309292ADE1D0010F0FD /* MenuItem.swift in Sources */,
 				22A80B06292A842D003CD018 /* CardManager.swift in Sources */,
+				22A40E6629316A0300FF7952 /* createUserDto.swift in Sources */,
+				22A40E6C29316AEF00FF7952 /* cardListDto.swift in Sources */,
 				22A80AEF292A7992003CD018 /* HowToPlayView.swift in Sources */,
 				22A80AE9292A7928003CD018 /* AccountSettingsView.swift in Sources */,
-				22A80B00292A83D9003CD018 /* MenuViewModel.swift in Sources */,
+				22A40E622931693B00FF7952 /* lobbyPlayerDto.swift in Sources */,
 				22A80AAC292A722D003CD018 /* CardiscApp.swift in Sources */,
-				22A80AE5292A78D7003CD018 /* ForgotPasswordView.swift in Sources */,
-				22A80B08292A845B003CD018 /* User.swift in Sources */,
-				22A80B0E292A856C003CD018 /* API.swift in Sources */,
-				22A80B0A292A846A003CD018 /* Card.swift in Sources */,
+				226B18A42943FAA6005BBD06 /* LobbyPlayer.swift in Sources */,
+				227E57E229436881006A2955 /* MainMenuViewModel.swift in Sources */,
+				22A40E582931669500FF7952 /* startGameDto.swift in Sources */,
+				22A40E6E29316B1B00FF7952 /* cardDto.swift in Sources */,
+				22A40E6829316A6300FF7952 /* conclusionDto.swift in Sources */,
+				22E8C752293CE8A7005CCC00 /* SignalRService.swift in Sources */,
+				229A7BB42944EC460089CC02 /* RegisterViewModel.swift in Sources */,
+				22A80B0E292A856C003CD018 /* ApiService.swift in Sources */,
+				226B18A02943F9F3005BBD06 /* User.swift in Sources */,
+				22A40E5E293167F900FF7952 /* loginResponseDto.swift in Sources */,
+				22A40E5A2931670000FF7952 /* sessionResponseDto.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,6 +859,7 @@
 		};
 		22A80ACD292A722F003CD018 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 47C4B49C1F2910E7A83CF41A /* Pods-Cardisc.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -619,6 +888,7 @@
 		};
 		22A80ACE292A722F003CD018 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4F4C0DD5DF1692725C079B6 /* Pods-Cardisc.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -647,6 +917,7 @@
 		};
 		22A80AD0292A722F003CD018 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9896CC1D496694EAFB14BAD7 /* Pods-CardiscTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -666,6 +937,7 @@
 		};
 		22A80AD1292A722F003CD018 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3B7FA5447D43BEEE05F2420 /* Pods-CardiscTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -685,6 +957,7 @@
 		};
 		22A80AD3292A722F003CD018 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1398CE1AC0769B0545970AB4 /* Pods-Cardisc-CardiscUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -702,6 +975,7 @@
 		};
 		22A80AD4292A722F003CD018 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC1420868FA86C9938FD4475 /* Pods-Cardisc-CardiscUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -757,6 +1031,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		22801DCD2938F03300E7F825 /* XCRemoteSwiftPackageReference "SignalR-Client-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/moozzyk/SignalR-Client-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		22801DCE2938F03300E7F825 /* SignalRClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22801DCD2938F03300E7F825 /* XCRemoteSwiftPackageReference "SignalR-Client-Swift" */;
+			productName = SignalRClient;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 22A80AA0292A722D003CD018 /* Project object */;
 }
