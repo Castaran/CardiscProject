@@ -12,15 +12,15 @@ import Combine
 class GameViewModel: ObservableObject {
     
     private let gameManager = GameManager()
-    @Published var lobbyResponseDto: lobbyResponseDto?
+    @Published var lobby: Lobby?
     @Published var gameId = ""
     @Published var joinSucceed = false
     @Published var amountSelected = 0
     
-    @Published var players: [lobbyPlayerDto] = []
+    @Published var players: [LobbyPlayer] = []
     
     private var cancellables: [AnyCancellable] = []
-
+    
     init() {
         self.gameManager.$players
             .sink(receiveValue: { players in
@@ -46,13 +46,8 @@ class GameViewModel: ObservableObject {
     func joinGame() {
         DispatchQueue.main.async {
             self.gameManager.joinGame(sessionAuth: self.gameId) { data in
-                if(data.players != nil) {
-                    self.joinSucceed = true
-                    self.lobbyResponseDto = data
-                }
-                else {
-                    print("NEEEEEE")
-                }
+                self.joinSucceed = true
+                self.lobby = data
             }
         }
         
@@ -60,9 +55,9 @@ class GameViewModel: ObservableObject {
     
     func leaveGame() {
         DispatchQueue.main.async {
-            if let lobbyResponseDto = self.lobbyResponseDto {
-                self.gameManager.leaveGame(sessionCode: lobbyResponseDto.sessionCode)
-                self.lobbyResponseDto = nil
+            if let lobby = self.lobby {
+                self.gameManager.leaveGame(sessionCode: lobby.sessionCode)
+                self.lobby = nil
             }
             
         }
@@ -72,13 +67,12 @@ class GameViewModel: ObservableObject {
         DispatchQueue.main.async {
             self.gameManager.startGame()
         }
-        print("START GAME METHOD VIEWMODEL")
     }
     
     func createGame() {
         DispatchQueue.main.async {
             self.gameManager.createGame() { data in
-                self.lobbyResponseDto = data
+                self.lobby = data
             }
         }
     }

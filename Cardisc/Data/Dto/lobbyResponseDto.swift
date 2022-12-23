@@ -14,4 +14,22 @@ struct lobbyResponseDto: Identifiable, Decodable {
     let created: String
     let sessionAuth: String
     let players: [lobbyPlayerDto]
+    
+    func toDomainModel() -> Lobby {
+        var players: [LobbyPlayer] = []
+        
+        for p in self.players {
+            players.append(p.toDomainModel())
+        }
+        
+        let lobby = Lobby(
+            id: self.id,
+            hostId: self.hostId,
+            sessionCode: self.sessionCode,
+            created: self.created,
+            sessionAuth: self.sessionAuth,
+            players: players)
+        
+        return lobby
+    }
 }

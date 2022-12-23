@@ -11,48 +11,34 @@ import Combine
 
 class GameManager: ObservableObject {
     
-    @Published var players: [lobbyPlayerDto] = []
-    @Published var signalRService: SignalRService?
+    @Published var players: [LobbyPlayer] = []
+    @Published var signalRService = SignalRService()
     private var apiService = ApiService()
     private let defaults = UserDefaults.standard
     
     private var currentUser: userDto?
-    
-    var anyCancellable: AnyCancellable? = nil
+    private var cancellables: [AnyCancellable] = []
     
     init() {
+        self.signalRService.$players
+            .sink(receiveValue: { players in
+                self.players = players
+            })
+            .store(in: &cancellables)
         
-        if let signalRService = self.signalRService {
-            anyCancellable = signalRService.objectWillChange.sink { [weak self] (_) in
-                self?.objectWillChange.send()
-            }
-        }
-
-        
-        if let token = defaults.string(forKey: "X-AUTHTOKEN") {
-            if let url = URL(string: Constants.SIGNALR_BASE_URL + token){
-                self.signalRService = SignalRService(url: url)
-                
-                if let currentUser = UserDefaults.standard.data(forKey: "user") {
-                    do {
-                        let decoder = JSONDecoder()
-                        self.currentUser = try decoder.decode(loginResponseDto.self, from: currentUser).user
-                    } catch {
-                        print("Unable to Decode Note (\(error))")
-                    }
-                }
-                else {
-                    print("No user found")
-                }
-                
-            }
-            else {
-                print("incorrect url")
+        if let currentUser = UserDefaults.standard.data(forKey: "user") {
+            do {
+                let decoder = JSONDecoder()
+                self.currentUser = try decoder.decode(loginResponseDto.self, from: currentUser).user
+            } catch {
+                print("Unable to Decode Note (\(error))")
             }
         }
         else {
-            print ("no key found")
+            print("No user found")
         }
+        
+        
     }
     
     func submitSession(id: Int, completion:@escaping (userDto) -> ()) {
@@ -71,16 +57,15 @@ class GameManager: ObservableObject {
         apiService.postDataWithoutReturn(body: nil, url: Constants.API_BASE_URL + "session/end")
     }
     
-    func joinGame(sessionAuth: String, completion:@escaping (lobbyResponseDto) -> ()) {
+    func joinGame(sessionAuth: String, completion:@escaping (Lobby) -> ()) {
         let body: [String: AnyHashable] = [
             "sessionAuth": sessionAuth
         ]
         apiService.postData(body: body, url: Constants.API_BASE_URL + "session/join", model: lobbyResponseDto.self) { data in
-            self.signalRService?.players = data.players
-            completion(data)
-            if let signalRService = self.signalRService {
-                signalRService.joinMessageGroup()
-            }
+            let lobby = data.toDomainModel()
+            self.signalRService.players = lobby.players
+            self.signalRService.joinMessageGroup()
+            completion(lobby)
         } failure: { error in
             print(error)
         }
@@ -98,13 +83,13 @@ class GameManager: ObservableObject {
         
     }
     
-    func createGame(completion:@escaping (lobbyResponseDto) -> ()) {
-        apiService.postData(body: nil, url: "\(Constants.API_BASE_URL)session/create", model: lobbyResponseDto.self) { data in
-            self.signalRService?.players = data.players
-            completion(data)
-            if let signalRService = self.signalRService {
-                signalRService.joinMessageGroup()
-            }
+    func createGame(completion:@escaping (Lobby) -> ()) {
+        apiService.postData(body: nil, url: "\(Constants.API_BASE_URL)session/create", model: lobbyResponseDto.self)
+        { data in
+            let lobby = data.toDomainModel()
+            self.signalRService.players = lobby.players
+            self.signalRService.joinMessageGroup()
+            completion(lobby)
         } failure: { error in
             print(error)
         }
@@ -115,9 +100,17 @@ class GameManager: ObservableObject {
     }
     
     func changeState() {
-        let body: [String: AnyHashable] = [
-            "ready": true
-        ]
-        apiService.postDataWithoutReturn(body: body, url: Constants.API_BASE_URL + "session/ready")
+        if let currentUser = self.currentUser {
+            for p in players {
+                if(p.username == currentUser.username) {
+                    let body: [String: AnyHashable] = [
+                        "ready": !p.ready
+                    ]
+                    apiService.postDataWithoutReturn(body: body, url: Constants.API_BASE_URL + "session/ready")
+                }
+            }
+           
+        }
+
     }
 }

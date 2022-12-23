@@ -16,7 +16,7 @@ struct GameLobbyView: View {
     let isHost: Bool
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             GeometryReader { geometry in
                 ZStack {
                     Image("WP1")
@@ -31,7 +31,7 @@ struct GameLobbyView: View {
                                     .frame(width: 38, height: 22)
                                     .foregroundColor(Color.white)
                                     .padding(.trailing, 1)
-                                Text("Game lobby (\(vm.lobbyResponseDto?.sessionCode ?? "0000"))").font(.system(size: 20)).bold().foregroundColor(Color.white)
+                                Text("Game lobby (\(vm.lobby?.sessionCode ?? "0000"))").font(.system(size: 20)).bold().foregroundColor(Color.white)
                                 Spacer()
                                 Image(systemName: "square.and.arrow.up").foregroundColor(Color.white).padding(.trailing, 20)
                             }
@@ -73,25 +73,25 @@ struct GameLobbyView: View {
                                 vm.startGame()
                             }
                         }
-                        else {
-                            MenuItem(
-                                menuIcon: "person.crop.circle.badge.checkmark",
-                                iconHeight: 30,
-                                iconWidth: 35,
-                                menuTitle: "Ready/unready",
-                                menuColor: UIColor.systemGreen,
-                                menuPaddingRight: 30
-                            ).onTapGesture {
-                                vm.changeState()
-                            }
+                        
+                        MenuItem(
+                            menuIcon: "person.crop.circle.badge.checkmark",
+                            iconHeight: 30,
+                            iconWidth: 35,
+                            menuTitle: "Ready/unready",
+                            menuColor: UIColor.systemGreen,
+                            menuPaddingRight: 30
+                        ).onTapGesture {
+                            vm.changeState()
                         }
+                        
                     }
                     .frame(maxHeight: .infinity, alignment: .top)
                     .padding(.top, 30)
                 }
             }
         }
-
+        
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: Button(action : {
             vm.leaveGame()

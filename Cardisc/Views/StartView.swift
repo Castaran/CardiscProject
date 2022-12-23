@@ -9,15 +9,14 @@ import SwiftUI
 
 struct StartView: View {
     
+    let defaults = UserDefaults.standard
     var body: some View {
-        let defaults = UserDefaults.standard
-        
-        if let token = defaults.string(forKey: "X-AUTHTOKEN"){
-            MainMenuView()
-        }
-        
-        else {
-            NavigationStack {
+        NavigationStack {
+            if let token = defaults.string(forKey: "X-AUTHTOKEN"){
+                MainMenuView()
+            }
+            
+            else {
                 VStack {
                     // Logo
                     HStack {
@@ -60,7 +59,7 @@ struct StartView: View {
                             
                             Spacer().frame(height: 30)
                             
-                        
+                            
                             MenuItem(menuIcon: "arrowshape.turn.up.backward.fill", iconHeight: 26, iconWidth: 30,menuTitle: "Exit", menuColor: UIColor.systemRed, menuPaddingRight: 30).onTapGesture {
                                 exit(0)
                             }
@@ -76,6 +75,5 @@ struct StartView: View {
                 .navigationBarHidden(true)
             }
         }
-        
     }
 }

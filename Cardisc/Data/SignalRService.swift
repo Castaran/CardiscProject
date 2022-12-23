@@ -15,11 +15,13 @@ class SignalRService: ObservableObject {
     private var apiService = ApiService()
     private var connectionId = ""
     
-    @Published var players: [lobbyPlayerDto] = []
+    //Game variables, these change on the actions of any user in the session
+    @Published var players: [LobbyPlayer] = []
     
-    public init(url: URL) {
+    
+    public init() {
         // has to be created after logging in
-        self.connection = HubConnectionBuilder(url: url)
+        self.connection = HubConnectionBuilder(url: URL(string: Constants.SIGNALR_BASE_URL + defaults.string(forKey: "X-AUTHTOKEN")!)!)
             .withLogging(minLogLevel: .error)
             .build()
         
@@ -27,23 +29,24 @@ class SignalRService: ObservableObject {
             (id: String) in
             print("NEW CONNECTION ACTION PERFORMED")
             self.connectionId = id
-            //perform action
         })
         
         connection.on(method: "readyStateChanged", callback: {
-            (player: lobbyPlayerDto) in
+            (player: LobbyPlayer) in
             print("READY STATE CHANGE ACTION PERFORMED")
             self.onReadyStateChange(player: player)
         })
         
         connection.on(method: "newPlayer", callback: {
-            (player: lobbyPlayerDto) in
+            (player: LobbyPlayer) in
             print("NEW PLAYER IN THE ROOM")
             self.onNewPlayer(player: player)
         })
         
         connection.on(method: "playerLeft", callback: {
+            (player: lobbyPlayerDto) in
             print("PLAYER LEFT ACTION PERFORMED")
+            
         })
         
         connection.on(method: "startGame", callback: {
@@ -92,25 +95,22 @@ class SignalRService: ObservableObject {
     }
     
     private func onClose() {
-//      console.log("connection closed")
-//      store.setConnectionId("");
-//      store.setConnection(null);
+        //..
     }
     
-    private func onReadyStateChange(player: lobbyPlayerDto) {
+    private func onReadyStateChange(player: LobbyPlayer) {
         var index = 0
-        for var p in self.players {
+        for p in self.players {
             if(p.username == player.username) {
-                self.players[index].ready = !self.players[index].ready
-                self.players[index].username = "changed"
-                print("Player status changed to: \(!p.ready)")
-                index+=1
+                self.players[index].ready.toggle()
+                print("Player \(player.username) status changed to: \(self.players[index].ready)")
             }
+            index+=1
         }
-        print(players.count)
+        
     }
     
-    private func onNewPlayer(player: lobbyPlayerDto) {
+    private func onNewPlayer(player: LobbyPlayer) {
         //is there a better way?
         var contains = false
         for p in self.players {
@@ -126,7 +126,7 @@ class SignalRService: ObservableObject {
     
     private func onPlayerLeft(player: lobbyPlayerDto) {
         var index = 0
-        for var p in self.players {
+        for p in self.players {
             if(p.username == player.username) {
                 self.players.remove(at: index)
                 print("Player removed from session: \(p.username)")
@@ -136,32 +136,22 @@ class SignalRService: ObservableObject {
     }
     
     private func onGameStarted(gameInfo: String) {
-//      console.log("GAME STARTED")
-//      gameInfo.rounds = gameInfo.cards.length;
-//      gameInfo.currentRound = 0;
-//      store.setGameState("game");
-//      store.setGameInfo(gameInfo);
+        //..
     }
     
     private func onNewMessage(user: userDto, cardIndex: Int, message: String) {
-//      store.addMessage({ user: user, message: message, round: cardIndex });
+        //..
     }
     
     private func onNewAnswer(user: userDto, answer: submitAnswerDto) {
-//      console.log("OnNewAnswer", user, answer)
-//      store.addAnswer({ user: user, answer: answer });
+        //..
     }
     
     private func onNextRound() {
-//      store.setAnswers([]);
-//      store.setAnswerSubmitted(false);
-//      store.setConclusion("");
-//      store.increaseRound();
+        //..
     }
     
     private func onEndSession() {
-//      console.log("onEndSession")
-//      store.resetState();
-//      store.setGameState('end');
+        //..
     }
 }

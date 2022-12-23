@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct LobbyPlayer: Codable {
-    let ready: Bool
+struct LobbyPlayer: Codable, Identifiable {
+    var ready: Bool
     let id: String
     let username: String
     let email: String

@@ -9,28 +9,29 @@ import Foundation
 import SwiftUI
 
 struct PlayerItem: View {
-    var player: lobbyPlayerDto
+    var player: LobbyPlayer
     
     var body: some View {
         HStack {
             if(player.picture != "") {
-                AsyncImage(url: URL(string: player.picture))
+                AsyncImage(url: URL(string: player.picture)).frame(width: 25, height: 25)
             }
             else {
-                Image(systemName: "person.circle.fill")
+                Image(systemName: "person.circle.fill").resizable().frame(width: 25, height: 25)
             }
             
-            Text(player.username)
+            Text(player.username).font(.system(size: 20))
             
             Spacer()
             
             if(player.ready) {
-                Image(systemName: "checkmark.circle.fill").foregroundColor(Color(UIColor.systemGreen))
+                Image(systemName: "checkmark.circle.fill").resizable().frame(width: 25, height: 25).foregroundColor(Color(UIColor.systemGreen))
             }
             else {
-                Image(systemName: "multiply.circle.fill").foregroundColor(Color(UIColor.systemRed))
+                Image(systemName: "multiply.circle.fill").resizable().frame(width: 25, height: 25).foregroundColor(Color(UIColor.systemRed))
             }
         }
-        .padding(.horizontal, 15)
+        .padding(.horizontal, 20)
+        .padding(.vertical, 5)
     }
 }
