@@ -11,18 +11,34 @@ import Combine
 
 class GameManager: ObservableObject {
     
-    @Published var players: [LobbyPlayer] = []
-    @Published var signalRService = SignalRService()
     private var apiService = ApiService()
     private let defaults = UserDefaults.standard
+    @Published var signalRService = SignalRService()
     
-    private var currentUser: userDto?
+    private var currentUser = userDto(id: "", username: "", email: "", picture: "")
     private var cancellables: [AnyCancellable] = []
+    
+    //Game variables, these change on the actions of any user in the session
+    @Published var game = Game(cards: [], roundDuration: 0)
+    @Published var players: [LobbyPlayer] = []
+    @Published var answers: [Answer] = []
     
     init() {
         self.signalRService.$players
             .sink(receiveValue: { players in
                 self.players = players
+            })
+            .store(in: &cancellables)
+        
+        self.signalRService.$game
+            .sink(receiveValue: { game in
+                self.game = game
+            })
+            .store(in: &cancellables)
+        
+        self.signalRService.$answers
+            .sink(receiveValue: { answers in
+                self.answers = answers
             })
             .store(in: &cancellables)
         
@@ -37,16 +53,22 @@ class GameManager: ObservableObject {
         else {
             print("No user found")
         }
-        
-        
     }
     
-    func submitSession(id: Int, completion:@escaping (userDto) -> ()) {
+    func submitAnswer(answer: String) {
+        let body: [String: AnyHashable] = [
+            "answer": answer
+        ]
         
+        apiService.postDataWithoutReturn(body: body, url: Constants.API_BASE_URL + "session/submit")
     }
     
-    func sendChatMessage(id: Int, completion:@escaping (userDto) -> ()) {
+    func sendChatMessage(msg: String) {
+        let body: [String: AnyHashable] = [
+            "message": msg
+        ]
         
+        apiService.postDataWithoutReturn(body: body, url: Constants.API_BASE_URL + "session/message")
     }
     
     func nextRound(id: Int, completion:@escaping (userDto) -> ()) {
@@ -95,22 +117,22 @@ class GameManager: ObservableObject {
         }
     }
     
-    func startGame() {
-        apiService.postDataWithoutReturn(body: nil, url: Constants.API_BASE_URL + "session/start")
+    func startGame(rounds: Int, duration: Int) {
+        let body: [String: AnyHashable] = [
+            "rounds": rounds+1,
+            "duration": duration
+        ]
+        apiService.postDataWithoutReturn(body: body, url: Constants.API_BASE_URL + "session/start")
     }
     
     func changeState() {
-        if let currentUser = self.currentUser {
-            for p in players {
-                if(p.username == currentUser.username) {
-                    let body: [String: AnyHashable] = [
-                        "ready": !p.ready
-                    ]
-                    apiService.postDataWithoutReturn(body: body, url: Constants.API_BASE_URL + "session/ready")
-                }
+        for p in players {
+            if(p.username == currentUser.username) {
+                let body: [String: AnyHashable] = [
+                    "ready": !p.ready
+                ]
+                apiService.postDataWithoutReturn(body: body, url: Constants.API_BASE_URL + "session/ready")
             }
-           
         }
-
     }
 }

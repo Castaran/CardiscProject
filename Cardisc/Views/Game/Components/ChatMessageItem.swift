@@ -58,10 +58,4 @@ struct ChatMessageItem: View {
     }
 }
 
-struct ChatMessageItem_Preview: PreviewProvider {
-    static var previews: some View {
-        ChatMessageItem(name: "Name", message: "Hi!")
-    }
-}
-
 

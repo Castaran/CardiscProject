@@ -17,7 +17,8 @@ class SignalRService: ObservableObject {
     
     //Game variables, these change on the actions of any user in the session
     @Published var players: [LobbyPlayer] = []
-    
+    @Published var game: Game = Game(cards: [], roundDuration: 0)
+    @Published var answers: [Answer] = []
     
     public init() {
         // has to be created after logging in
@@ -44,14 +45,15 @@ class SignalRService: ObservableObject {
         })
         
         connection.on(method: "playerLeft", callback: {
-            (player: lobbyPlayerDto) in
+            (player: playerLeftDto) in
             print("PLAYER LEFT ACTION PERFORMED")
-            
+            self.onPlayerLeft(player: player)
         })
         
         connection.on(method: "startGame", callback: {
+            (game: startGameDto) in
             print("START GAME ACTION PERFORMED")
-            //Method te perform
+            self.onGameStarted(game: game.toDomainModel())
         })
         
         connection.on(method: "newMessage", callback: {
@@ -60,8 +62,9 @@ class SignalRService: ObservableObject {
         })
         
         connection.on(method: "newAnswer", callback: {
-            print("NEW ANSWER ACTION PERFORMED")
-            //Method te perform
+            (player: userDto, answer: String) in
+            print("NEW ANSWER ACTION PERFORMED: \(answer) + \(player.id)")
+            self.onNewAnswer(user: player.toDomainModel(), answer: answer)
         })
         
         connection.on(method: "nextRound", callback: {
@@ -124,27 +127,27 @@ class SignalRService: ObservableObject {
         }
     }
     
-    private func onPlayerLeft(player: lobbyPlayerDto) {
+    private func onPlayerLeft(player: playerLeftDto) {
         var index = 0
         for p in self.players {
-            if(p.username == player.username) {
+            if(p.username == player.name) {
                 self.players.remove(at: index)
-                print("Player removed from session: \(p.username)")
                 index+=1
             }
         }
     }
     
-    private func onGameStarted(gameInfo: String) {
-        //..
+    private func onGameStarted(game: Game) {
+        self.game = game
     }
     
     private func onNewMessage(user: userDto, cardIndex: Int, message: String) {
         //..
     }
     
-    private func onNewAnswer(user: userDto, answer: submitAnswerDto) {
-        //..
+    private func onNewAnswer(user: User, answer: String) {
+        let answer = Answer(id: user.id, username: user.username, answer: answer)
+        self.answers.append(answer)
     }
     
     private func onNextRound() {

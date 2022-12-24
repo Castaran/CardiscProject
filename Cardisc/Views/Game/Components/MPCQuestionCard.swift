@@ -11,85 +11,58 @@ import SwiftUI
 struct MPCQuestionCard : View {
     @State private var answer: Int = 0
     
+    @ObservedObject var vm: GameViewModel
+    
     var body: some View {
         VStack {
             HStack {
-                Text("Question 1").foregroundColor(Color.black).bold().font(.system(size: 20))
+                Text("Question \(vm.currentCard.number)").foregroundColor(Color.black).bold().font(.system(size: 20))
                 Spacer()
-                Text("Round 1/3").foregroundColor(Color.black).opacity(0.5)
             }
-            .padding(10)
-            HStack {
-                Text("What fruit type is most innovative?").foregroundColor(Color.black)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 10)
             
             HStack {
-                Text("Pick an answer:")
+                Text(vm.currentCard.body).foregroundColor(Color.black)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 10)
+            .padding(.top, 5)
+            
+            HStack {
+                Text("Pick an answer: \(vm.answer)")
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.top, 15)
             
             VStack {
                 HStack {
-                    Text("A:").font(.system(size: 24)).bold()
-                    Text("This is the first answer.")
+                    MPCButton(buttonBody: "A", color: UIColor.systemRed).onTapGesture { vm.answer = "A" }
+                    MPCButton(buttonBody: "B", color: UIColor.systemBlue).onTapGesture { vm.answer = "B" }
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(20)
-                .background(Color(UIColor.systemBlue))
-                .cornerRadius(30)
-                
                 HStack {
-                    Text("B:").font(.system(size: 24)).bold()
-                    Text("This is the second answer.")
+                    MPCButton(buttonBody: "C", color: UIColor.systemYellow).onTapGesture { vm.answer = "C" }
+                    MPCButton(buttonBody: "D", color: UIColor.systemGreen).onTapGesture { vm.answer = "D" }
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(20)
-                .background(Color(UIColor.white))
-                .foregroundColor(Color(UIColor.systemBlue))
-                .cornerRadius(30)
-                
-                HStack {
-                    Text("C:").font(.system(size: 24)).bold()
-                    Text("This is the third answer.")
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(20)
-                .background(Color(UIColor.white))
-                .foregroundColor(Color(UIColor.systemBlue))
-                .cornerRadius(30)
-                
-                HStack {
-                    Text("D:").font(.system(size: 24)).bold()
-                    Text("This is the fourth answer.")
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(20)
-                .background(Color(UIColor.white))
-                .foregroundColor(Color(UIColor.systemBlue))
-                .cornerRadius(30)
             }
-            .padding(.horizontal, 20)
+            .padding(.horizontal, 25)
             .padding(.vertical, 10)
-            .foregroundColor(Color.white)
-            
-            
-            
-            
-            Spacer().frame(height: 20)
         }
-        .padding(10)
-        .border(Color(UIColor.black), width: 5)
-        .background(Color(UIColor.systemGray3))
-        .padding(25)
-    }
-}
-
-struct MPCQuestionCard_Preview: PreviewProvider {
-    static var previews: some View {
-        MPCQuestionCard()
+        .padding(20)
+        .background(Color.white)
+        .cornerRadius(20, corners: [.allCorners])
+        .padding(.horizontal, 30)
+        .shadow(radius: 10)
+        
+        VStack {
+            NavigationLink {
+                ChatView(vm: vm)
+            } label: {
+                HStack {
+                    MenuItem(menuIcon: "play.fill", iconHeight: 22, iconWidth: 22, menuTitle: "Play card", menuColor: UIColor.systemBlue, menuPaddingRight: 40).onTapGesture {
+                        vm.submitAnswer()
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
+            }
+            
+        }
     }
 }

@@ -12,12 +12,7 @@ struct AccountSettingsView: View {
     private let vm = UserViewModel()
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                Image("WP1")
-                    .resizable()
-                    .aspectRatio(geometry.size, contentMode: .fill)
-                    .edgesIgnoringSafeArea(.all)
+        VStack {
                 VStack {
                     VStack{
                         HStack {
@@ -97,15 +92,13 @@ struct AccountSettingsView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     
-                    
-                    
-                    
-                    
                 }
                 .frame(maxHeight: .infinity, alignment: .top)
                 .padding(.top, 30)
             }
-        }
+        .background(Image("WP1").resizable()
+            .aspectRatio(contentMode: .fill)
+            .edgesIgnoringSafeArea(.all))
     }
 }
 

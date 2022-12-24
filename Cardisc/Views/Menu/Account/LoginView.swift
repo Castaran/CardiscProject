@@ -12,62 +12,57 @@ struct LoginView: View {
     @StateObject private var vm = LoginViewModel()
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                Image("WP1")
-                    .resizable()
-                    .aspectRatio(geometry.size, contentMode: .fill)
-                    .edgesIgnoringSafeArea(.all)
+        VStack {
+            VStack {
+                HStack {
+                    Image(systemName: "person.crop.circle.badge.plus.fill")
+                        .resizable()
+                        .frame(width: 30, height: 28)
+                        .foregroundColor(Color.white)
+                        .padding(.trailing, 5)
+                    Text("Login").font(.system(size: 24)).foregroundColor(Color.white).bold()
+                }.frame(maxWidth: .infinity, alignment: .leading)
                 
-                VStack {
-                    HStack {
-                        Image(systemName: "person.crop.circle.badge.plus.fill")
-                            .resizable()
-                            .frame(width: 30, height: 28)
-                            .foregroundColor(Color.white)
-                            .padding(.trailing, 5)
-                        Text("Login").font(.system(size: 24)).foregroundColor(Color.white).bold()
-                    }.frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    
-                    HStack {
-                        Text("Login to your Cardisc-Account to gain access to the game.")
-                            .foregroundColor(Color.white).padding(.bottom, 20)
-                    }.frame(maxWidth: .infinity, alignment: .leading)
-
-                    
-                    Text("Username").frame(maxWidth: .infinity, alignment: .leading).bold().foregroundColor(Color(UIColor.white))
-                    TextField(
-                        "...",
-                        text: $vm.username
-                    )
-                    .padding(.vertical, 10)
-                    .padding(.horizontal, 15)
-                    .background(Color.white)
-                    .autocapitalization(.none)
-                    .cornerRadius(10)
-                    
-                    Text("Password").frame(maxWidth: .infinity, alignment: .leading).bold().foregroundColor(Color(UIColor.white))
-                    SecureField(
-                        "...",
-                        text: $vm.password
-                    )
-                    .padding(.vertical, 10)
-                    .padding(.horizontal, 15)
-                    .autocapitalization(.none)
-                    .background(Color.white)
-                    .cornerRadius(10)
-                }
-                .frame(maxHeight: .infinity, alignment: .top)
-                .padding(.horizontal, 30)
-                .padding(.vertical, 30)
                 
-                NavigationLink("", destination: StartView(), isActive: $vm.isActive)
-                MenuItem(menuIcon: "lock.open.fill", iconHeight: 26, iconWidth: 30, menuTitle: "Login", menuColor: UIColor.systemBlue, menuPaddingRight: 40).onTapGesture {
-                    vm.loginUser(username: vm.username, password: vm.password)
-                }
+                HStack {
+                    Text("Login to your Cardisc-Account to gain access to the game.")
+                        .foregroundColor(Color.white).padding(.bottom, 20)
+                }.frame(maxWidth: .infinity, alignment: .leading)
+                
+                
+                Text("Username").frame(maxWidth: .infinity, alignment: .leading).bold().foregroundColor(Color(UIColor.white))
+                TextField(
+                    "...",
+                    text: $vm.username
+                )
+                .padding(.vertical, 10)
+                .padding(.horizontal, 15)
+                .background(Color.white)
+                .autocapitalization(.none)
+                .cornerRadius(10)
+                
+                Text("Password").frame(maxWidth: .infinity, alignment: .leading).bold().foregroundColor(Color(UIColor.white))
+                SecureField(
+                    "...",
+                    text: $vm.password
+                )
+                .padding(.vertical, 10)
+                .padding(.horizontal, 15)
+                .autocapitalization(.none)
+                .background(Color.white)
+                .cornerRadius(10)
+            }
+            .frame(maxHeight: .infinity, alignment: .top)
+            .padding(.horizontal, 30)
+            NavigationLink("", destination: StartView(), isActive: $vm.isActive)
+            MenuItem(menuIcon: "lock.open.fill", iconHeight: 26, iconWidth: 30, menuTitle: "Login", menuColor: UIColor.systemBlue, menuPaddingRight: 40).onTapGesture {
+                vm.loginUser(username: vm.username, password: vm.password)
             }
         }
+        .background(Image("WP1").resizable()
+            .aspectRatio(contentMode: .fill)
+            .edgesIgnoringSafeArea(.all))
+        
     }
     
     

@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2203C91B2955E9B100FD2921 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203C91A2955E9B000FD2921 /* Game.swift */; };
+		2203C91D2955E9DA00FD2921 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203C91C2955E9DA00FD2921 /* Card.swift */; };
+		2203C9212956426E00FD2921 /* playerLeftDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203C9202956426E00FD2921 /* playerLeftDto.swift */; };
+		2203C92329572F7B00FD2921 /* MPCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203C92229572F7B00FD2921 /* MPCButton.swift */; };
+		2203C925295755AB00FD2921 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203C924295755AB00FD2921 /* Answer.swift */; };
+		2203C9272957585500FD2921 /* PlayerAnswerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203C9262957585500FD2921 /* PlayerAnswerList.swift */; };
+		2203C9292957586300FD2921 /* PlayerAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203C9282957586300FD2921 /* PlayerAnswer.swift */; };
 		226B189B2943F71F005BBD06 /* PlayerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B189A2943F71F005BBD06 /* PlayerList.swift */; };
 		226B189D2943F72A005BBD06 /* PlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B189C2943F72A005BBD06 /* PlayerItem.swift */; };
 		226B18A02943F9F3005BBD06 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B189F2943F9F3005BBD06 /* User.swift */; };
@@ -93,6 +100,13 @@
 
 /* Begin PBXFileReference section */
 		1398CE1AC0769B0545970AB4 /* Pods-Cardisc-CardiscUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardisc-CardiscUITests.debug.xcconfig"; path = "Target Support Files/Pods-Cardisc-CardiscUITests/Pods-Cardisc-CardiscUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		2203C91A2955E9B000FD2921 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		2203C91C2955E9DA00FD2921 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		2203C9202956426E00FD2921 /* playerLeftDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = playerLeftDto.swift; sourceTree = "<group>"; };
+		2203C92229572F7B00FD2921 /* MPCButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCButton.swift; sourceTree = "<group>"; };
+		2203C924295755AB00FD2921 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
+		2203C9262957585500FD2921 /* PlayerAnswerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerAnswerList.swift; sourceTree = "<group>"; };
+		2203C9282957586300FD2921 /* PlayerAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerAnswer.swift; sourceTree = "<group>"; };
 		226B189A2943F71F005BBD06 /* PlayerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerList.swift; sourceTree = "<group>"; };
 		226B189C2943F72A005BBD06 /* PlayerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerItem.swift; sourceTree = "<group>"; };
 		226B189F2943F9F3005BBD06 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -211,6 +225,9 @@
 				226B189F2943F9F3005BBD06 /* User.swift */,
 				226B18A12943FA68005BBD06 /* Lobby.swift */,
 				226B18A32943FAA6005BBD06 /* LobbyPlayer.swift */,
+				2203C91A2955E9B000FD2921 /* Game.swift */,
+				2203C91C2955E9DA00FD2921 /* Card.swift */,
+				2203C924295755AB00FD2921 /* Answer.swift */,
 			);
 			path = DomainModels;
 			sourceTree = "<group>";
@@ -252,6 +269,7 @@
 				22A40E6B29316AEF00FF7952 /* cardListDto.swift */,
 				22A40E6D29316B1B00FF7952 /* cardDto.swift */,
 				22A40E7B2932DD8600FF7952 /* registerResponseDto.swift */,
+				2203C9202956426E00FD2921 /* playerLeftDto.swift */,
 			);
 			path = Dto;
 			sourceTree = "<group>";
@@ -416,6 +434,9 @@
 				226CC8762930EB32005663C5 /* OpenQuestionCard.swift */,
 				226CC8782930ECEB005663C5 /* MPCQuestionCard.swift */,
 				226CC87A2930ED00005663C5 /* ScalableQuestionCard.swift */,
+				2203C92229572F7B00FD2921 /* MPCButton.swift */,
+				2203C9262957585500FD2921 /* PlayerAnswerList.swift */,
+				2203C9282957586300FD2921 /* PlayerAnswer.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -663,8 +684,10 @@
 				22A40E4929313F8400FF7952 /* SessionStatus.swift in Sources */,
 				22BB35DD2946940800986383 /* JoinGameManager.swift in Sources */,
 				226CC87B2930ED00005663C5 /* ScalableQuestionCard.swift in Sources */,
+				2203C9272957585500FD2921 /* PlayerAnswerList.swift in Sources */,
 				22A40E4729313F3F00FF7952 /* SessionResponseType.swift in Sources */,
 				22FD227129302CB000E9A02C /* ChatMessageItem.swift in Sources */,
+				2203C92329572F7B00FD2921 /* MPCButton.swift in Sources */,
 				22A80AF1292A79CE003CD018 /* GameLobbyView.swift in Sources */,
 				22A80B0C292A8549003CD018 /* Constants.swift in Sources */,
 				22A40E4429313EAA00FF7952 /* CardType.swift in Sources */,
@@ -674,6 +697,7 @@
 				22A40E7A2932CF6C00FF7952 /* UserViewModel.swift in Sources */,
 				22A80AF7292A7A63003CD018 /* ChatView.swift in Sources */,
 				22A40E602931686E00FF7952 /* lobbyResponseDto.swift in Sources */,
+				2203C91D2955E9DA00FD2921 /* Card.swift in Sources */,
 				226B189B2943F71F005BBD06 /* PlayerList.swift in Sources */,
 				22A80AEB292A7944003CD018 /* JoinGameView.swift in Sources */,
 				22A40E64293169D500FF7952 /* joinRequestDto.swift in Sources */,
@@ -688,13 +712,16 @@
 				22A80AE3292A78C1003CD018 /* RegisterView.swift in Sources */,
 				22A80AF5292A7A34003CD018 /* CardView.swift in Sources */,
 				226CC8772930EB32005663C5 /* OpenQuestionCard.swift in Sources */,
+				2203C9212956426E00FD2921 /* playerLeftDto.swift in Sources */,
 				22939309292ADE1D0010F0FD /* MenuItem.swift in Sources */,
+				2203C9292957586300FD2921 /* PlayerAnswer.swift in Sources */,
 				22A80B06292A842D003CD018 /* CardManager.swift in Sources */,
 				22A40E6629316A0300FF7952 /* createUserDto.swift in Sources */,
 				22A40E6C29316AEF00FF7952 /* cardListDto.swift in Sources */,
 				22A80AEF292A7992003CD018 /* HowToPlayView.swift in Sources */,
 				22A80AE9292A7928003CD018 /* AccountSettingsView.swift in Sources */,
 				22A40E622931693B00FF7952 /* lobbyPlayerDto.swift in Sources */,
+				2203C925295755AB00FD2921 /* Answer.swift in Sources */,
 				22A80AAC292A722D003CD018 /* CardiscApp.swift in Sources */,
 				226B18A42943FAA6005BBD06 /* LobbyPlayer.swift in Sources */,
 				227E57E229436881006A2955 /* MainMenuViewModel.swift in Sources */,
@@ -703,6 +730,7 @@
 				22A40E6829316A6300FF7952 /* conclusionDto.swift in Sources */,
 				22E8C752293CE8A7005CCC00 /* SignalRService.swift in Sources */,
 				229A7BB42944EC460089CC02 /* RegisterViewModel.swift in Sources */,
+				2203C91B2955E9B100FD2921 /* Game.swift in Sources */,
 				22A80B0E292A856C003CD018 /* ApiService.swift in Sources */,
 				226B18A02943F9F3005BBD06 /* User.swift in Sources */,
 				22A40E5E293167F900FF7952 /* loginResponseDto.swift in Sources */,
