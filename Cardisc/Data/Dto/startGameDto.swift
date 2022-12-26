@@ -10,4 +10,15 @@ import Foundation
 struct startGameDto: Codable {
     let cards: [cardDto]
     let roundDuration: Int
+    
+    func toDomainModel() -> Game {
+        var cards: [Card] = []
+        
+        for c in self.cards {
+            var card = c.toDomainModel()
+            cards.append(card)
+        }
+        
+        return Game(cards: cards, roundDuration: self.roundDuration)
+    }
 }

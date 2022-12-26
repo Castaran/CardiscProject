@@ -8,13 +8,22 @@
 import Foundation
 
 struct lobbyPlayerDto: Identifiable, Decodable {
-    var ready: Bool
+    let ready: Bool
     let id: String
-    var username: String
+    let username: String
     let email: String
     let role: String
     let picture: String
 
+    func toDomainModel() -> LobbyPlayer {
+        return LobbyPlayer(
+            ready: self.ready,
+            id: self.id,
+            username: self.username,
+            email: self.email,
+            role: self.role,
+            picture: self.picture)
+    }
 }
 
 

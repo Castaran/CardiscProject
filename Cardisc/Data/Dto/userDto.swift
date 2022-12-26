@@ -12,4 +12,8 @@ struct userDto: Codable {
     let username: String
     let email: String
     let picture: String
+    
+    func toDomainModel() -> User {
+        return User(id: self.id, username: self.username, email: self.email, picture: self.picture)
+    }
 }

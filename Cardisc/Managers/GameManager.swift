@@ -11,113 +11,175 @@ import Combine
 
 class GameManager: ObservableObject {
     
-    @Published var players: [lobbyPlayerDto] = []
-    @Published var signalRService: SignalRService?
     private var apiService = ApiService()
     private let defaults = UserDefaults.standard
+    @Published var signalRService = SignalRService()
     
-    private var currentUser: userDto?
+    private var currentUser = userDto(id: "", username: "", email: "", picture: "")
+    private var cancellables: [AnyCancellable] = []
     
-    var anyCancellable: AnyCancellable? = nil
+    //Game variables, these change on the actions of any user in the session
+    @Published var game = Game(cards: [], roundDuration: 0)
+    @Published var gameIndex: Int = 0
+    @Published var currentCard: Card = Card(id: "", number: 0, name: "", body: "", type: 0)
+    @Published var players: [LobbyPlayer] = []
+    @Published var answers: [Answer] = []
+    @Published var chatMessages: [ChatMessage] = []
+    @Published var startedGame: Bool = false
+    
     
     init() {
+        self.syncVariables()
         
-        if let signalRService = self.signalRService {
-            anyCancellable = signalRService.objectWillChange.sink { [weak self] (_) in
-                self?.objectWillChange.send()
-            }
-        }
-
-        
-        if let token = defaults.string(forKey: "X-AUTHTOKEN") {
-            if let url = URL(string: Constants.SIGNALR_BASE_URL + token){
-                self.signalRService = SignalRService(url: url)
-                
-                if let currentUser = UserDefaults.standard.data(forKey: "user") {
-                    do {
-                        let decoder = JSONDecoder()
-                        self.currentUser = try decoder.decode(loginResponseDto.self, from: currentUser).user
-                    } catch {
-                        print("Unable to Decode Note (\(error))")
-                    }
-                }
-                else {
-                    print("No user found")
-                }
-                
-            }
-            else {
-                print("incorrect url")
+        if let currentUser = UserDefaults.standard.data(forKey: "user") {
+            do {
+                let decoder = JSONDecoder()
+                self.currentUser = try decoder.decode(loginResponseDto.self, from: currentUser).user
+            } catch {
+                print("Unable to Decode Note (\(error))")
             }
         }
         else {
-            print ("no key found")
+            print("No user found")
         }
     }
     
-    func submitSession(id: Int, completion:@escaping (userDto) -> ()) {
+    
+    //Keeps the variables synchronised between the manager and the SignalR Client
+    private func syncVariables() {
+        self.signalRService.$players
+            .sink(receiveValue: { players in
+                self.players = players
+            })
+            .store(in: &cancellables)
         
+        self.signalRService.$gameIndex
+            .sink(receiveValue: { gameIndex in
+                self.gameIndex = gameIndex+1
+            })
+            .store(in: &cancellables)
+        
+        self.signalRService.$game
+            .sink(receiveValue: { game in
+                self.game = game
+            })
+            .store(in: &cancellables)
+        
+        self.signalRService.$answers
+            .sink(receiveValue: { answers in
+                self.answers = answers
+            })
+            .store(in: &cancellables)
+        
+        self.signalRService.$chatMessages
+            .sink(receiveValue: { chatMessages in
+                self.chatMessages = chatMessages
+            })
+            .store(in: &cancellables)
+        
+        self.signalRService.$currentCard
+            .sink(receiveValue: { currentCard in
+                self.currentCard = currentCard
+            })
+            .store(in: &cancellables)
+        
+        self.signalRService.$startedGame
+            .sink(receiveValue: { startedGame in
+                self.startedGame = startedGame
+            })
+            .store(in: &cancellables)
     }
     
-    func sendChatMessage(id: Int, completion:@escaping (userDto) -> ()) {
+    //Submits an answer to the API
+    func submitAnswer(answer: String) {
+        let body: [String: AnyHashable] = [
+            "answer": answer
+        ]
         
+        apiService.postDataWithoutReturn(body: body, url: Constants.API_BASE_URL + "session/submit")
     }
     
-    func nextRound(id: Int, completion:@escaping (userDto) -> ()) {
+    //Sends a chatmessage to the API
+    func sendChatMessage(msg: String) {
+        let body: [String: AnyHashable] = [
+            "message": msg
+        ]
         
+        apiService.postDataWithoutReturn(body: body, url: Constants.API_BASE_URL + "session/message")
+        signalRService.chatMessages.append(ChatMessage(username: nil, message: msg))
     }
     
+    //Tells the API that the next round is ready to start
+    func nextRound() {
+        let body: [String: AnyHashable] = [
+            "conclussion": ""
+        ]
+        
+        apiService.postDataWithoutReturn(body: body, url: Constants.API_BASE_URL + "session/next")
+    }
+    
+    //Tells the API that the game is completed
     func endGame() {
         apiService.postDataWithoutReturn(body: nil, url: Constants.API_BASE_URL + "session/end")
     }
     
-    func joinGame(sessionAuth: String, completion:@escaping (lobbyResponseDto) -> ()) {
+    //Joins a session and gets the lobby object from the API
+    func joinGame(sessionAuth: String, completion:@escaping (Lobby) -> ()) {
         let body: [String: AnyHashable] = [
             "sessionAuth": sessionAuth
         ]
         apiService.postData(body: body, url: Constants.API_BASE_URL + "session/join", model: lobbyResponseDto.self) { data in
-            self.signalRService?.players = data.players
-            completion(data)
-            if let signalRService = self.signalRService {
-                signalRService.joinMessageGroup()
-            }
+            let lobby = data.toDomainModel()
+            self.signalRService.players = lobby.players
+            self.signalRService.joinMessageGroup()
+            completion(lobby)
         } failure: { error in
             print(error)
         }
         
     }
     
+    //Let the current user leave the session he is in
     func leaveGame(sessionCode: String) {
         let body: [String: AnyHashable] = [
             "sessionCode": sessionCode
         ]
         
-        print(sessionCode)
-        
         apiService.postDataWithoutReturn(body: body, url: Constants.API_BASE_URL + "session/leave")
         
     }
     
-    func createGame(completion:@escaping (lobbyResponseDto) -> ()) {
-        apiService.postData(body: nil, url: "\(Constants.API_BASE_URL)session/create", model: lobbyResponseDto.self) { data in
-            self.signalRService?.players = data.players
-            completion(data)
-            if let signalRService = self.signalRService {
-                signalRService.joinMessageGroup()
-            }
+    //Creates a new session
+    func createGame(completion:@escaping (Lobby) -> ()) {
+        apiService.postData(body: nil, url: "\(Constants.API_BASE_URL)session/create", model: lobbyResponseDto.self)
+        { data in
+            let lobby = data.toDomainModel()
+            self.signalRService.players = lobby.players
+            self.signalRService.joinMessageGroup()
+            completion(lobby)
         } failure: { error in
             print(error)
         }
     }
     
-    func startGame() {
-        apiService.postDataWithoutReturn(body: nil, url: Constants.API_BASE_URL + "session/start")
+    //Tells the API that the session/game is ready to start
+    func startGame(rounds: Int, duration: Int) {
+        let body: [String: AnyHashable] = [
+            "rounds": rounds+1,
+            "duration": duration
+        ]
+        apiService.postDataWithoutReturn(body: body, url: Constants.API_BASE_URL + "session/start")
     }
     
+    //Changes the state of the player
     func changeState() {
-        let body: [String: AnyHashable] = [
-            "ready": true
-        ]
-        apiService.postDataWithoutReturn(body: body, url: Constants.API_BASE_URL + "session/ready")
+        for p in players {
+            if(p.username == currentUser.username) {
+                let body: [String: AnyHashable] = [
+                    "ready": !p.ready
+                ]
+                apiService.postDataWithoutReturn(body: body, url: Constants.API_BASE_URL + "session/ready")
+            }
+        }
     }
 }

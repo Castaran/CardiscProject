@@ -8,18 +8,26 @@
 import Foundation
 import SignalRClient
 import Combine
+import SwiftUI
 
 class SignalRService: ObservableObject {
+    //SignalR variables
     private let defaults = UserDefaults.standard
     private var connection: HubConnection
     private var apiService = ApiService()
     private var connectionId = ""
     
-    @Published var players: [lobbyPlayerDto] = []
+    //Game variables, these change on the actions of any user in the session
+    @Published var players: [LobbyPlayer] = []
+    @Published var gameIndex: Int = 0
+    @Published var game: Game = Game(cards: [], roundDuration: 0)
+    @Published var currentCard: Card = Card(id: "", number: 0, name: "", body: "", type: 0)
+    @Published var answers: [Answer] = []
+    @Published var chatMessages: [ChatMessage] = []
+    @Published var startedGame: Bool = false
     
-    public init(url: URL) {
-        // has to be created after logging in
-        self.connection = HubConnectionBuilder(url: url)
+    public init() {
+        self.connection = HubConnectionBuilder(url: URL(string: Constants.SIGNALR_BASE_URL + defaults.string(forKey: "X-AUTHTOKEN")!)!)
             .withLogging(minLogLevel: .error)
             .build()
         
@@ -27,52 +35,56 @@ class SignalRService: ObservableObject {
             (id: String) in
             print("NEW CONNECTION ACTION PERFORMED")
             self.connectionId = id
-            //perform action
         })
         
         connection.on(method: "readyStateChanged", callback: {
             (player: lobbyPlayerDto) in
             print("READY STATE CHANGE ACTION PERFORMED")
-            self.onReadyStateChange(player: player)
+            self.onReadyStateChange(player: player.toDomainModel())
         })
         
         connection.on(method: "newPlayer", callback: {
             (player: lobbyPlayerDto) in
             print("NEW PLAYER IN THE ROOM")
-            self.onNewPlayer(player: player)
+            self.onNewPlayer(player: player.toDomainModel())
         })
         
         connection.on(method: "playerLeft", callback: {
+            (player: playerLeftDto) in
             print("PLAYER LEFT ACTION PERFORMED")
+            self.onPlayerLeft(player: player)
         })
         
         connection.on(method: "startGame", callback: {
-            print("START GAME ACTION PERFORMED")
-            //Method te perform
+            (game: startGameDto) in
+            print("START GAME ACTION PERFORMED \(game.cards.count) + \(game.roundDuration)")
+            self.onGameStarted(game: game.toDomainModel())
         })
         
         connection.on(method: "newMessage", callback: {
+            (user: userDto, cardIndex: Int, message: String) in
             print("NEW MESSAGE ACTION PERFORMED")
-            //Method te perform
+            self.onNewMessage(user: user.toDomainModel(), cardIndex: cardIndex, message: message)
         })
         
         connection.on(method: "newAnswer", callback: {
+            (user: userDto, answer: String) in
             print("NEW ANSWER ACTION PERFORMED")
-            //Method te perform
+            self.onNewAnswer(user: user.toDomainModel(), answer: answer)
         })
         
         connection.on(method: "nextRound", callback: {
             print("NEXT ROUND ACTION PERFORMED")
-            //Method te perform
+            self.onNextRound()
         })
         
         connection.on(method: "endSession", callback: {
             print("END SESSION ACTION PERFORMED")
-            //Method te perform
+            //TODO: @TIM add method for ending a session/game
         })
+        
         connection.on(method: "close", callback: {
             print("CONN CLOSED")
-            //Method te perform
         })
         connection.start()
     }
@@ -85,83 +97,64 @@ class SignalRService: ObservableObject {
 
         apiService.postDataWithoutReturn(body: body, url: Constants.API_BASE_URL + "joinGrp")
     }
-
     
-    private func onNewConnection(id: String) {
-        //..
-    }
-    
-    private func onClose() {
-//      console.log("connection closed")
-//      store.setConnectionId("");
-//      store.setConnection(null);
-    }
-    
-    private func onReadyStateChange(player: lobbyPlayerDto) {
+    private func onReadyStateChange(player: LobbyPlayer) {
         var index = 0
-        for var p in self.players {
+        for p in self.players {
             if(p.username == player.username) {
-                self.players[index].ready = !self.players[index].ready
-                self.players[index].username = "changed"
-                print("Player status changed to: \(!p.ready)")
-                index+=1
+                self.players[index].ready.toggle()
+                print("Player \(player.username) status changed to: \(self.players[index].ready)")
             }
+            index+=1
         }
-        print(players.count)
     }
     
-    private func onNewPlayer(player: lobbyPlayerDto) {
-        //is there a better way?
-        var contains = false
-        for p in self.players {
-            if(player.id == p.id) {
-                contains = true
-                break
-            }
-        }
-        if(!contains) {
+    private func onNewPlayer(player: LobbyPlayer) {
+        if(!players.contains(where: { $0.username == player.username })) {
             self.players.append(player)
         }
     }
     
-    private func onPlayerLeft(player: lobbyPlayerDto) {
+    private func onPlayerLeft(player: playerLeftDto) {
         var index = 0
-        for var p in self.players {
-            if(p.username == player.username) {
+        for p in self.players {
+            if(p.username == player.name) {
                 self.players.remove(at: index)
-                print("Player removed from session: \(p.username)")
                 index+=1
             }
         }
     }
     
-    private func onGameStarted(gameInfo: String) {
-//      console.log("GAME STARTED")
-//      gameInfo.rounds = gameInfo.cards.length;
-//      gameInfo.currentRound = 0;
-//      store.setGameState("game");
-//      store.setGameInfo(gameInfo);
+    private func onGameStarted(game: Game) {
+        self.game = game
+        self.startedGame = true
     }
     
-    private func onNewMessage(user: userDto, cardIndex: Int, message: String) {
-//      store.addMessage({ user: user, message: message, round: cardIndex });
+    private func onNewMessage(user: User, cardIndex: Int, message: String) {
+        if(!chatMessages.contains(where: { $0.message == message })) {
+            self.chatMessages.append(ChatMessage(username: user.username, message: message))
+        }
     }
     
-    private func onNewAnswer(user: userDto, answer: submitAnswerDto) {
-//      console.log("OnNewAnswer", user, answer)
-//      store.addAnswer({ user: user, answer: answer });
+    private func onNewAnswer(user: User, answer: String) {
+        self.answers.append(Answer(id: user.id, username: user.username, answer: answer))
     }
     
     private func onNextRound() {
-//      store.setAnswers([]);
-//      store.setAnswerSubmitted(false);
-//      store.setConclusion("");
-//      store.increaseRound();
+        self.gameIndex += 1
+        if(game.cards.count > self.gameIndex) {
+            self.currentCard = game.cards[self.gameIndex]
+            self.chatMessages = []
+            self.answers = []
+        }
+        else {
+            self.game = Game(cards: [], roundDuration: 0)
+            self.currentCard = Card(id: "", number: 0, name: "", body: "", type: 0)
+            print("Game done")
+        }
     }
     
     private func onEndSession() {
-//      console.log("onEndSession")
-//      store.resetState();
-//      store.setGameState('end');
+        //TODO: ...
     }
 }

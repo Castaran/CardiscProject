@@ -11,42 +11,42 @@ import SwiftUI
 struct ScalableQuestionCard : View {
     @State private var answer: Double = 1
     
+    @ObservedObject var vm: GameViewModel
+    
     var body: some View {
         VStack {
             HStack {
-                Text("Question 1").foregroundColor(Color.black).bold().font(.system(size: 20))
-                Spacer()
-                Text("Round 1/3").foregroundColor(Color.black).opacity(0.5)
-            }
-            .padding(10)
+                Text("Question \(vm.gameIndex)").foregroundColor(Color.black).bold().font(.system(size: 20))
+            }.frame(maxWidth: .infinity, alignment: .leading)
+            
             HStack {
-                Text("What fruit type is most innovative?").foregroundColor(Color.black)
+                Text(vm.currentCard.body).foregroundColor(Color.black)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 10)
             
             VStack {
                 Text("**Score:** \(Int(answer))")
-                Slider(value: $answer, in: 1...10, step: 1).padding(.horizontal, 10)
+                Slider(value: $answer, in: 1...10, step: 1) { value in
+                    vm.answer = String(answer)
+                }.padding(.horizontal, 10)
                 HStack {
                     Text("Agree")
                     Spacer()
                     Text("Disagree")
                 }
-                .padding(.horizontal, 20)
             }
-            .padding(.vertical, 100)
+            .padding(.top, 50)
         }
-        .padding(10)
-        .border(Color(UIColor.black), width: 5)
-        .background(Color(UIColor.systemGray3))
         .padding(25)
+        .background(Color.white)
+        .cornerRadius(20, corners: [.allCorners])
+        .padding(.horizontal, 30)
+        .shadow(radius: 10)
         
+        NavigationLink("", destination: ChatView(vm: vm), isActive: $vm.nextView).onAppear { vm.nextView = false }
+        MenuItem(menuIcon: "play.fill", iconHeight: 22, iconWidth: 22, menuTitle: "Play card", menuColor: UIColor.systemBlue, menuPaddingRight: 40).onTapGesture {
+            vm.submitAnswer()
+        }
     }
 }
 
-struct ScalableQuestionCard_Preview: PreviewProvider {
-    static var previews: some View {
-        ScalableQuestionCard()
-    }
-}

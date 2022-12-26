@@ -9,50 +9,48 @@ import Foundation
 import SwiftUI
 
 struct OpenQuestionCard : View {
-    @State private var answer: String = ""
+    @ObservedObject var vm: GameViewModel
     
     var body: some View {
         VStack {
             HStack {
-                Text("Question 1").foregroundColor(Color.black).bold().font(.system(size: 20))
+                Text("Question \(vm.gameIndex)").foregroundColor(Color.black).bold().font(.system(size: 20))
                 Spacer()
-                Text("Round 1/3").foregroundColor(Color.black).opacity(0.5)
+                Text("Round \(vm.gameIndex)/\(vm.rounds)")
             }
             .padding(10)
             HStack {
-                Text("What fruit type is most innovative?").foregroundColor(Color.black)
+                Text(vm.currentCard.body).foregroundColor(Color.black)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 10)
-            
-            HStack {
-                Text("Enther your answer bellow:")
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 10)
-            .padding(.top, 15)
-            
+        }
+        .padding(.top, 10)
+        .padding(.bottom, 20)
+        .padding(.horizontal, 15)
+        .background(Color.white)
+        .cornerRadius(20, corners: [.allCorners])
+        .padding(.horizontal, 30)
+        .shadow(radius: 10)
+        
+        VStack {
             TextField(
-                "",
-                text: $answer
+                "Your answer...",
+                text: $vm.answer
             )
-            .padding(.vertical, 120)
+            .padding(.top, 10)
+            .padding(.bottom, 20)
             .padding(.horizontal, 15)
             .background(Color.white)
-            .cornerRadius(5)
-            .padding(20)
-            
-            Spacer().frame(height: 20)
+            .cornerRadius(15, corners: [.allCorners])
+            .padding(.horizontal, 30)
+            .shadow(radius: 10)
         }
-        .padding(10)
-        .border(Color(UIColor.black), width: 5)
-        .background(Color(UIColor.systemGray3))
-        .padding(25)
+        
+        NavigationLink("", destination: ChatView(vm: vm), isActive: $vm.nextView).onAppear { vm.nextView = false }
+        MenuItem(menuIcon: "play.fill", iconHeight: 22, iconWidth: 22, menuTitle: "Play card", menuColor: UIColor.systemBlue, menuPaddingRight: 40).onTapGesture {
+            vm.submitAnswer()
+        }
     }
 }
 
-struct OpenQuestionCard_Preview: PreviewProvider {
-    static var previews: some View {
-        OpenQuestionCard()
-    }
-}

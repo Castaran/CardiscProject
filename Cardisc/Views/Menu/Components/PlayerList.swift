@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PlayerList: View {
     
-    var players: [lobbyPlayerDto]
+    var players: [LobbyPlayer]
     
     var body: some View {
         ZStack {
@@ -30,7 +30,7 @@ struct PlayerList: View {
                 }
             }
             .frame(maxWidth: .infinity)
-            .frame(minHeight: 350, alignment: .top)
+            .frame(minHeight: 250, alignment: .top)
             .background(Color.white)
             .cornerRadius(10, corners: [.allCorners])
             .padding(.vertical, 5)
