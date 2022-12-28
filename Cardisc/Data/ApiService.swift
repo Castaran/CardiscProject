@@ -50,21 +50,22 @@ class ApiService {
     }
     
     //POST request
-    func postData<T: Decodable>
+    func httpRequest<T: Decodable>
     (
         body: Dictionary<String, AnyHashable>?,
         url: String,
         model: T.Type?,
+        httpMethod: String,
         completion:@escaping(T) -> (),
         failure:@escaping(Error) -> ()
     )
     {
-        guard let url = URL(string: url) else {
+        guard let url = URL(string: Constants.API_BASE_URL + url) else {
             return
         }
         var request = URLRequest(url: url)
         
-        request.httpMethod = "POST"
+        request.httpMethod = httpMethod
         request.setValue("application/json", forHTTPHeaderField: "content-type")
         
         //if token is given with at the manager
@@ -96,18 +97,19 @@ class ApiService {
     }
     
     //POST request
-    func postDataWithoutReturn
+    func httpRequestWithoutReturn
     (
         body: Dictionary<String, AnyHashable>?,
-        url: String
+        url: String,
+        httpMethod: String
     )
     {
-        guard let url = URL(string: url) else {
+        guard let url = URL(string: Constants.API_BASE_URL + url) else {
             return
         }
         var request = URLRequest(url: url)
         
-        request.httpMethod = "POST"
+        request.httpMethod = httpMethod
         request.setValue("application/json", forHTTPHeaderField: "content-type")
         
         //if token is given with at the manager

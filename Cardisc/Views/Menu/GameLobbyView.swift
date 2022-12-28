@@ -107,13 +107,13 @@ struct GameLobbyView: View {
             Text("Leave session")
         }
             .alert(isPresented: $vm.showConfirmation) { Alert(
-                    title: Text("Leaving current session"),
-                    message: Text("Are you sure you want to leave this session?"),
-                    primaryButton: .destructive(Text("Leave"))
-                    {
-                        vm.leaveGame()
-                        dismiss()
-                    }, secondaryButton: .cancel())})
+                title: Text("Leaving current session"),
+                message: Text("Are you sure you want to leave this session?"),
+                primaryButton: .destructive(Text("Leave"))
+                {
+                    vm.leaveGame()
+                    dismiss()
+                }, secondaryButton: .cancel())})
         .background(Image("WP1").resizable()
             .aspectRatio(contentMode: .fill)
             .edgesIgnoringSafeArea(.all))

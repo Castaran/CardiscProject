@@ -9,7 +9,8 @@ import Foundation
 import SwiftUI
 
 struct AccountSettingsView: View {
-    private let vm = UserViewModel()
+    @ObservedObject var vm = UserViewModel()
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack {
@@ -91,6 +92,14 @@ struct AccountSettingsView: View {
                         MenuItem(menuIcon: "trash.fill", iconHeight: 26, iconWidth: 26, menuTitle: "Delete account", menuColor: UIColor.systemRed, menuPaddingRight: 40)
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
+                        .alert(isPresented: $vm.showConfirmation) { Alert(
+                            title: Text("Deleting account permanently"),
+                            message: Text("Are you sure you want to delete your account? There is no way back from that point."),
+                            primaryButton: .destructive(Text("Delete"))
+                            {
+                                vm.deleteUser()
+                                dismiss()
+                            }, secondaryButton: .cancel())}
                     
                 }
                 .frame(maxHeight: .infinity, alignment: .top)

@@ -95,7 +95,7 @@ class SignalRService: ObservableObject {
             "connectionId": self.connectionId,
         ]
 
-        apiService.postDataWithoutReturn(body: body, url: Constants.API_BASE_URL + "joinGrp")
+        apiService.httpRequestWithoutReturn(body: body, url: Constants.API_BASE_URL + "joinGrp", httpMethod: "POST")
     }
     
     private func onReadyStateChange(player: LobbyPlayer) {
