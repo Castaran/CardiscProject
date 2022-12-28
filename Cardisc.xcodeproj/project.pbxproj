@@ -81,6 +81,7 @@
 		22FD227129302CB000E9A02C /* ChatMessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FD227029302CB000E9A02C /* ChatMessageItem.swift */; };
 		B9F38F49C4CC083C02468A7A /* Pods_Cardisc_CardiscUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29D13F3CB9C870FF15F6C57A /* Pods_Cardisc_CardiscUITests.framework */; };
 		C7B7B8132D87BBD042459D48 /* Pods_Cardisc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B626FFDE03C7E1B9A83B885 /* Pods_Cardisc.framework */; };
+		CDF21E0D295C8A6000FA7522 /* LoginMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF21E0C295C8A6000FA7522 /* LoginMainView.swift */; };
 		FAE4FFBA10EC82CCC6985E71 /* Pods_CardiscTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E3E68CA30FC94C26959D26 /* Pods_CardiscTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -184,6 +185,7 @@
 		A1E3E68CA30FC94C26959D26 /* Pods_CardiscTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardiscTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3B7FA5447D43BEEE05F2420 /* Pods-CardiscTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardiscTests.release.xcconfig"; path = "Target Support Files/Pods-CardiscTests/Pods-CardiscTests.release.xcconfig"; sourceTree = "<group>"; };
 		CC1420868FA86C9938FD4475 /* Pods-Cardisc-CardiscUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardisc-CardiscUITests.release.xcconfig"; path = "Target Support Files/Pods-Cardisc-CardiscUITests/Pods-Cardisc-CardiscUITests.release.xcconfig"; sourceTree = "<group>"; };
+		CDF21E0C295C8A6000FA7522 /* LoginMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainView.swift; sourceTree = "<group>"; };
 		F4F4C0DD5DF1692725C079B6 /* Pods-Cardisc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cardisc.release.xcconfig"; path = "Target Support Files/Pods-Cardisc/Pods-Cardisc.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -379,6 +381,7 @@
 				22A80ADB292A774C003CD018 /* Game */,
 				22A80ADA292A7734003CD018 /* Menu */,
 				22A80AAD292A722D003CD018 /* StartView.swift */,
+				CDF21E0C295C8A6000FA7522 /* LoginMainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -747,6 +750,7 @@
 				227E57E229436881006A2955 /* MainMenuViewModel.swift in Sources */,
 				22A40E582931669500FF7952 /* startGameDto.swift in Sources */,
 				22A40E6E29316B1B00FF7952 /* cardDto.swift in Sources */,
+				CDF21E0D295C8A6000FA7522 /* LoginMainView.swift in Sources */,
 				22A40E6829316A6300FF7952 /* conclusionDto.swift in Sources */,
 				22E8C752293CE8A7005CCC00 /* SignalRService.swift in Sources */,
 				229A7BB42944EC460089CC02 /* RegisterViewModel.swift in Sources */,

@@ -69,7 +69,7 @@ struct ChatView: View {
             .padding(15)
             
             
-            ChatMessageList(chatMessages: vm.chatMessages)
+            ChatMessageList(chatMessages: $vm.chatMessages)
             
             HStack {
                 TextField(

@@ -85,9 +85,7 @@ struct MainMenuView: View {
             .navigationBarHidden(true)
             .frame(maxHeight: .infinity, alignment: .top)
         }
-        .background(Image("WP1").resizable()
-        .aspectRatio(contentMode: .fill)
-        .edgesIgnoringSafeArea(.all))
+        .backgroundImage()
     }
 }
 
@@ -95,4 +93,27 @@ struct MainMenuView_Previews: PreviewProvider {
     static var previews: some View {
         MainMenuView()
     }
+}
+
+
+struct BackgroundImage: ViewModifier {
+    
+    var imageName: String
+    
+    func body(content: Content) -> some View {
+        content
+            .background(Image(imageName).resizable()
+                .aspectRatio(contentMode: .fill)
+                .edgesIgnoringSafeArea(.all))
+        
+    }
+}
+
+
+extension View {
+    
+    func backgroundImage(imageName: String = "WP1") -> some View {
+        modifier(BackgroundImage(imageName: imageName))
+    }
+    
 }

@@ -99,6 +99,7 @@ struct GameLobbyView: View {
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .navigationTitle("")
+        .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         
         //SIBTAIN: is this a good location for an alert? or better in a seperate file?

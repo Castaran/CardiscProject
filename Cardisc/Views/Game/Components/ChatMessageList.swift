@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct ChatMessageList: View {
-    var chatMessages: [ChatMessage]
+    @Binding var chatMessages: [ChatMessage]
     
     var body: some View {
         //SIBTAIN: can you make this auto scrollable? That when it gets reloaded, it automaticly scrolls to bottom?
@@ -18,8 +18,14 @@ struct ChatMessageList: View {
                 LazyVStack {
                     ForEach(chatMessages) { message in
                         ChatMessageItem(name: message.username, message: message.message)
+                            .id(message.id)
                     }
                 }
+                
+            }
+            .animation(.easeIn, value: chatMessages)
+            .onChange(of: chatMessages) { newValue in
+                scrollView.scrollTo(chatMessages.last?.id)
             }
             
         }
