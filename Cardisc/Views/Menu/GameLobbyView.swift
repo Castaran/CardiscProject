@@ -95,7 +95,6 @@ struct GameLobbyView: View {
                 vm.changeState()
             }
             
-            NavigationLink("", destination: LoadingView(vm: vm, title: "Starting game", message: "Prepare to answer the first question.."), isActive: $vm.startedGame).onAppear{ vm.startedGame = false }
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .navigationTitle("")

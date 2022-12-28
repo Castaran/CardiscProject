@@ -13,12 +13,12 @@ struct StartView: View {
     var body: some View {
         
         if let token = defaults.string(forKey: "X-AUTHTOKEN"){
-            NavigationView {
+            NavigationStack {
                 MainMenuView()
             }
         }
         else {
-            NavigationView {
+            NavigationStack {
                 LoginMainView()
             }
         }

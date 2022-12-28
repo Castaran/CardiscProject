@@ -46,7 +46,9 @@ class GameViewModel: ObservableObject {
     private func syncVariables() {
         self.gameManager.$players
             .sink(receiveValue: { players in
-                self.players = players
+                DispatchQueue.main.async {
+                    self.players = players
+                }
             })
             .store(in: &cancellables)
         
@@ -145,11 +147,12 @@ class GameViewModel: ObservableObject {
         }
     }
     
-    func createGame() {
-        DispatchQueue.main.async {
-            self.gameManager.createGame() { data in
+    func createGame(completion: @escaping ()->()) {
+        self.gameManager.createGame() { data in
+            DispatchQueue.main.async {
                 self.isHost = true
                 self.lobby = data
+                completion()
             }
         }
     }

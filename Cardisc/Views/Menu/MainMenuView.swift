@@ -84,6 +84,9 @@ struct MainMenuView: View {
             }
             .navigationBarHidden(true)
             .frame(maxHeight: .infinity, alignment: .top)
+            .fullScreenCover(isPresented: $vm.showLoadingScreen) {
+                LoadingView(vm: vm.gameViewModel, title: "Starting game", message: "Prepare to answer the first question..")
+            }
         }
         .backgroundImage()
     }

@@ -12,8 +12,6 @@ struct ConclusionView: View {
     @ObservedObject var vm: GameViewModel
     
     var body: some View {
-        NavigationLink("", destination: NavigationLazyView(MainMenuView()), isActive: $vm.finishedGame)
-        NavigationLink("", destination: CardView(vm: vm), isActive: $vm.nextView).onAppear{ vm.nextView = false }
         
         VStack {
             HStack {
@@ -53,6 +51,8 @@ struct ConclusionView: View {
             .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height+70)
         )
         .navigationBarHidden(true)
+        .navigationDestination(isPresented: $vm.finishedGame) { NavigationLazyView(MainMenuView()) }
+        .navigationDestination(isPresented: $vm.nextView) { CardView(vm: vm) }
         
         
     }

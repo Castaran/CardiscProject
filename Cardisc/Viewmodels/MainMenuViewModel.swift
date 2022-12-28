@@ -15,6 +15,7 @@ class MainMenuViewModel: ObservableObject {
     @Published var hostSucceed: Bool = false
     @Published var logOffIsLoading: Bool = false
     @Published var isLoggedOff: Bool = false
+    @Published var showLoadingScreen: Bool = false
     
     func logOff() {
         self.logOffIsLoading = true
@@ -23,11 +24,13 @@ class MainMenuViewModel: ObservableObject {
         self.logOffIsLoading = false
     }
     
-    func hostGame() -> GameViewModel {
-        DispatchQueue.main.async {
-            self.gameViewModel.createGame()
+    func hostGame() {
+        showLoadingScreen = true
+        gameViewModel.createGame {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+                self.showLoadingScreen = false
+                self.hostSucceed = true
+            }
         }
-        self.hostSucceed = true
-        return self.gameViewModel
     }
 }
