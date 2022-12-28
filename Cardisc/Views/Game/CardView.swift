@@ -16,8 +16,8 @@ struct CardView: View {
             HStack {
                 Image(systemName: "iphone.badge.play").resizable().foregroundColor(Color.white).frame(width: 25, height: 30)
                 Text("Question Room").font(.system(size: 28)).foregroundColor(Color.white).bold()
+                Spacer()
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading, 30)
             .padding(.bottom, 30)
             
@@ -33,15 +33,10 @@ struct CardView: View {
             else {
                 OpenQuestionCard(vm: vm)
             }
+            Spacer()
         }
         .padding(.top, 30)
-        .frame(maxHeight: .infinity, alignment: .top)
-        .background(Image("WP2")
-            .resizable()
-            .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height+70)
-            .brightness(-0.08)
-        )
         .navigationBarHidden(true)
-        
+        .backgroundImage(imageName: "WP3")
     }
 }

@@ -163,10 +163,9 @@ class GameManager: ObservableObject {
     }
     
     //Tells the API that the session/game is ready to start
-    func startGame(rounds: Int, duration: Int) {
+    func startGame(rounds: Int) {
         let body: [String: AnyHashable] = [
-            "rounds": rounds+1,
-            "duration": duration
+            "rounds": rounds+1
         ]
         apiService.httpRequestWithoutReturn(body: body, url: "session/start", httpMethod: "POST")
     }

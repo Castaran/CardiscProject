@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct LoginView: View {
-    @StateObject private var vm = LoginViewModel()
+    @ObservedObject private var vm = LoginViewModel()
     
     var body: some View {
         VStack {
@@ -17,56 +17,72 @@ struct LoginView: View {
                 HStack {
                     Image(systemName: "person.crop.circle.badge.plus.fill")
                         .resizable()
-                        .frame(width: 30, height: 28)
+                        .frame(width: 32, height: 28)
                         .foregroundColor(Color.white)
                         .padding(.trailing, 5)
                     Text("Login").font(.system(size: 24)).foregroundColor(Color.white).bold()
-                }.frame(maxWidth: .infinity, alignment: .leading)
+                    Spacer()
+                }
                 
                 
                 HStack {
-                    Text("Login to your Cardisc-Account")
-                        .foregroundColor(Color.white).padding(.bottom, 20)
-                }.frame(maxWidth: .infinity, alignment: .leading)
+                    Text("Login to your Cardisc-Account").foregroundColor(Color.white).padding(.bottom, 20)
+                    Spacer()
+                }
                 
+                HStack {
+                    Text("Username").bold().foregroundColor(Color(UIColor.white))
+                    Spacer()
+                }
                 
-                Text("Username").frame(maxWidth: .infinity, alignment: .leading).bold().foregroundColor(Color(UIColor.white))
                 TextField(
-                    "...",
+                    "*******",
                     text: $vm.username
                 )
                 .padding(.vertical, 10)
                 .padding(.horizontal, 15)
                 .background(Color.white)
+                .foregroundColor(Color(vm.usernameFieldColor))
                 .autocapitalization(.none)
                 .cornerRadius(10)
                 
-                Text("Password").frame(maxWidth: .infinity, alignment: .leading).bold().foregroundColor(Color(UIColor.white))
+                HStack {
+                    Text("Password").bold().foregroundColor(Color(UIColor.white))
+                    Spacer()
+                }
+                
                 SecureField(
-                    "...",
+                    "*******",
                     text: $vm.password
                 )
                 .padding(.vertical, 10)
                 .padding(.horizontal, 15)
                 .autocapitalization(.none)
                 .background(Color.white)
+                .foregroundColor(Color(vm.passwordFieldColor))
                 .cornerRadius(10)
+                
+                HStack {
+                    Text(vm.errorMessage).foregroundColor(Color.white)
+                    Spacer()
+                }
+                
 
             }
             .padding(.horizontal, 30)
-            NavigationLink("", destination: StartView(), isActive: $vm.isActive)
-            MenuItem(menuIcon: "lock.open.fill", iconHeight: 26, iconWidth: 30, menuTitle: "Login", menuColor: UIColor.systemBlue, menuPaddingRight: 40).onTapGesture {
-                vm.loginUser(username: vm.username, password: vm.password)
+            .padding(.vertical, 20)
+            
+            NavigationLink("", destination: StartView(), isActive: $vm.loggedIn)
+            MenuItem(menuIcon: "lock.open.fill", iconHeight: 26, iconWidth: 30, menuTitle: "Login", menuColor: UIColor.systemBlue, menuPaddingRight: 40, isLoading: vm.isRequestInProgress).onTapGesture {
+                vm.loginUser()
             }
+            Spacer()
         }
-        .frame(maxHeight: .infinity, alignment: .top)
-        .background(Image("WP1").resizable()
-            .aspectRatio(contentMode: .fill)
-            .edgesIgnoringSafeArea(.all))
+        .navigationTitle("")
+        .navigationBarTitleDisplayMode(.inline)
+        .backgroundImage()
         
     }
-    
-    
     
     struct LoginView_Previews: PreviewProvider {
         static var previews: some View {

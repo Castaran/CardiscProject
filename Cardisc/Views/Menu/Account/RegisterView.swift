@@ -80,25 +80,21 @@ struct RegisterView: View {
                     .cornerRadius(10)
                 }
                 
-            }.padding(.horizontal, 30)
+            }
+            .padding(.horizontal, 30)
+            .padding(.top, 20)
             
-            NavigationLink("", destination: StartView(), isActive: $vm.isActive)
             MenuItem(menuIcon: "person.crop.circle.badge.plus.fill", iconHeight: 26, iconWidth: 30, menuTitle: "Register", menuColor: UIColor.systemBlue, menuPaddingRight: 40).onTapGesture {
-                if(vm.password == vm.passwordRepeated) {
-                    if(vm.registerUser(username: vm.username, password: vm.password, email: vm.emailaddress)) {
-                        vm.isActive = true
-                    }
-                    else {
-                    }
-                }
-                
+                vm.registerUser()
             }
             .padding(.top, 15)
-            .frame(maxHeight: .infinity, alignment: .top)
+            
+            Spacer()
         }
-        .background(Image("WP1").resizable()
-            .aspectRatio(contentMode: .fill)
-            .edgesIgnoringSafeArea(.all))
+        .navigationTitle("")
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationDestination(isPresented: $vm.userRegistered, destination: { StartView() })
+        .backgroundImage()
         
     }
 }

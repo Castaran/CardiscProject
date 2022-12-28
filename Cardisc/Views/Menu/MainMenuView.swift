@@ -14,33 +14,9 @@ struct MainMenuView: View {
     var body: some View {
         VStack {
             VStack {
-                HStack {
-                    HStack {
-                        Image("Logo")
-                            .resizable()
-                            .frame(width: 70, height: 70)
-                        VStack (
-                            alignment: .leading
-                        ) {
-                            Text("Cardisc").font(.system(size: 32)).bold()
-                            Text("An idea developing tool").font(.system(size: 18))
-                        }
-                    }
-                    .padding(.vertical, 35)
-                    .padding(.leading, 10)
-                    .padding(.trailing, 20)
-                    .background(Color.white)
-                    .cornerRadius(20, corners: [.topRight, .bottomRight])
-                    
-                    .shadow(radius: 8)
-                    .padding(.top, 20)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
+                Logo()
                 
                 Spacer().frame(height: 70)
-                
-                NavigationLink("", destination: NavigationLazyView(GameLobbyView(vm: vm.gameViewModel)), isActive: $vm.hostSucceed)
-                NavigationLink("", destination: NavigationLazyView(StartView()), isActive: $vm.isLoggedOff)
                 
                 NavigationLink {
                     NavigationLazyView(JoinGameView(vm: vm.gameViewModel))
@@ -85,8 +61,13 @@ struct MainMenuView: View {
             .navigationBarHidden(true)
             .frame(maxHeight: .infinity, alignment: .top)
             .fullScreenCover(isPresented: $vm.showLoadingScreen) {
-                LoadingView(vm: vm.gameViewModel, title: "Starting game", message: "Prepare to answer the first question..")
+                LoadingView(title: "Creating session", message: "This won't take long..")
             }
+            .navigationDestination(isPresented: $vm.hostSucceed) {
+                NavigationLazyView(GameLobbyView(vm: vm.gameViewModel))
+            }
+            .navigationDestination(isPresented: $vm.hostSucceed) { NavigationLazyView(GameLobbyView(vm: vm.gameViewModel)) }
+            .navigationDestination(isPresented: $vm.isLoggedOff) { StartView() }
         }
         .backgroundImage()
     }
@@ -99,24 +80,4 @@ struct MainMenuView_Previews: PreviewProvider {
 }
 
 
-struct BackgroundImage: ViewModifier {
-    
-    var imageName: String
-    
-    func body(content: Content) -> some View {
-        content
-            .background(Image(imageName).resizable()
-                .aspectRatio(contentMode: .fill)
-                .edgesIgnoringSafeArea(.all))
-        
-    }
-}
 
-
-extension View {
-    
-    func backgroundImage(imageName: String = "WP1") -> some View {
-        modifier(BackgroundImage(imageName: imageName))
-    }
-    
-}

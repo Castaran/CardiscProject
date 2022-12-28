@@ -53,15 +53,8 @@ struct ChatView: View {
                 Divider()
                 
                 PlayerAnswerList(answers: vm.answers)
-                
-                VStack {
-                    Image(systemName: "chevron.down")
-                }.onTapGesture {
-                    
-                }
             }
             
-            .frame(maxWidth: .infinity, alignment: .leading)
             .padding(15)
             .shadow(radius: 5)
             .background(Color(UIColor.white))
@@ -90,14 +83,9 @@ struct ChatView: View {
                 }
             }
             .background(Color(UIColor.systemGray5))
-            
+            Spacer()
         }
-        .frame(maxHeight: .infinity, alignment: .top)
-        .background(Image("WP1")
-            .resizable()
-            .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height+30)
-            .brightness(-0.08)
-        )
+        .backgroundImage(imageName: "WP3")
         .navigationBarHidden(true)
     }
 }

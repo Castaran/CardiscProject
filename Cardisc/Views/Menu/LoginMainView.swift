@@ -11,28 +11,7 @@ struct LoginMainView: View {
     var body: some View {
         
         VStack{
-            // Logo
-            HStack {
-                HStack {
-                    Image("Logo")
-                        .resizable()
-                        .frame(width: 70, height: 70)
-                    VStack (
-                        alignment: .leading
-                    ) {
-                        Text("Cardisc").font(.system(size: 32)).bold()
-                        Text("An idea developing tool").font(.system(size: 18))
-                    }
-                }
-                .padding(.vertical, 35)
-                .padding(.leading, 10)
-                .padding(.trailing, 20)
-                .background(Color.white)
-                .cornerRadius(20, corners: [.topRight, .bottomRight])
-                .shadow(radius: 8)
-                .padding(.top, 20)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            Logo()
             
             Spacer().frame(height: 100)
             
@@ -61,11 +40,7 @@ struct LoginMainView: View {
             .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .frame(maxHeight: .infinity, alignment: .top)
-        .background(Image("WP1")
-            .resizable()
-            .frame(maxWidth: .greatestFiniteMagnitude, maxHeight: .greatestFiniteMagnitude)
-            .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height+70)
-        )
+        .backgroundImage()
         .navigationBarHidden(true)
     }
 }

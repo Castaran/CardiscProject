@@ -77,6 +77,9 @@
 		22A80B0C292A8549003CD018 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80B0B292A8549003CD018 /* Constants.swift */; };
 		22A80B0E292A856C003CD018 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80B0D292A856C003CD018 /* ApiService.swift */; };
 		22BB35DD2946940800986383 /* JoinGameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BB35DC2946940800986383 /* JoinGameManager.swift */; };
+		22CB500D295C9EAB0054951A /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CB500C295C9EAB0054951A /* StartViewModel.swift */; };
+		22CB500F295CA1F80054951A /* CustomModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CB500E295CA1F80054951A /* CustomModifiers.swift */; };
+		22CB5011295CAD060054951A /* Logo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CB5010295CAD060054951A /* Logo.swift */; };
 		22E8C752293CE8A7005CCC00 /* SignalRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E8C751293CE8A7005CCC00 /* SignalRService.swift */; };
 		22FD227129302CB000E9A02C /* ChatMessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FD227029302CB000E9A02C /* ChatMessageItem.swift */; };
 		B9F38F49C4CC083C02468A7A /* Pods_Cardisc_CardiscUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29D13F3CB9C870FF15F6C57A /* Pods_Cardisc_CardiscUITests.framework */; };
@@ -176,6 +179,9 @@
 		22A80B0B292A8549003CD018 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		22A80B0D292A856C003CD018 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		22BB35DC2946940800986383 /* JoinGameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGameManager.swift; sourceTree = "<group>"; };
+		22CB500C295C9EAB0054951A /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
+		22CB500E295CA1F80054951A /* CustomModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModifiers.swift; sourceTree = "<group>"; };
+		22CB5010295CAD060054951A /* Logo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logo.swift; sourceTree = "<group>"; };
 		22E8C751293CE8A7005CCC00 /* SignalRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalRService.swift; sourceTree = "<group>"; };
 		22FD227029302CB000E9A02C /* ChatMessageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageItem.swift; sourceTree = "<group>"; };
 		29D13F3CB9C870FF15F6C57A /* Pods_Cardisc_CardiscUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cardisc_CardiscUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,15 +224,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		226B18992943F6ED005BBD06 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				226B189A2943F71F005BBD06 /* PlayerList.swift */,
-				226B189C2943F72A005BBD06 /* PlayerItem.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
 		226B189E2943F9B7005BBD06 /* DomainModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,14 +246,6 @@
 				228A749E295A21D100B6394B /* ExitView.swift */,
 			);
 			path = General;
-			sourceTree = "<group>";
-		};
-		22939307292ADE070010F0FD /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				22939308292ADE1D0010F0FD /* MenuItem.swift */,
-			);
-			path = Components;
 			sourceTree = "<group>";
 		};
 		22A40E4529313F2600FF7952 /* Enums */ = {
@@ -377,11 +366,10 @@
 		22A80AD7292A7270003CD018 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				22FD226F29302C7400E9A02C /* Components */,
 				228A749B295A021500B6394B /* General */,
 				22A80ADB292A774C003CD018 /* Game */,
 				22A80ADA292A7734003CD018 /* Menu */,
-				22A80AAD292A722D003CD018 /* StartView.swift */,
-				CDF21E0C295C8A6000FA7522 /* LoginMainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -394,6 +382,7 @@
 				227E57E129436881006A2955 /* MainMenuViewModel.swift */,
 				22A40E732932CEDF00FF7952 /* GameViewModel.swift */,
 				22A40E792932CF6C00FF7952 /* UserViewModel.swift */,
+				22CB500C295C9EAB0054951A /* StartViewModel.swift */,
 			);
 			path = Viewmodels;
 			sourceTree = "<group>";
@@ -413,12 +402,12 @@
 		22A80ADA292A7734003CD018 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				226B18992943F6ED005BBD06 /* Components */,
 				22A80AFC292A8368003CD018 /* Account */,
-				22A80AF0292A79CE003CD018 /* GameLobbyView.swift */,
-				22A80AE6292A7914003CD018 /* MainMenuView.swift */,
 				22A80AEA292A7944003CD018 /* JoinGameView.swift */,
 				22A80AEE292A7992003CD018 /* HowToPlayView.swift */,
+				22A80AE6292A7914003CD018 /* MainMenuView.swift */,
+				CDF21E0C295C8A6000FA7522 /* LoginMainView.swift */,
+				22A80AAD292A722D003CD018 /* StartView.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -426,7 +415,7 @@
 		22A80ADB292A774C003CD018 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				22FD226F29302C7400E9A02C /* Components */,
+				22A80AF0292A79CE003CD018 /* GameLobbyView.swift */,
 				22A80AF4292A7A34003CD018 /* CardView.swift */,
 				22A80AF6292A7A63003CD018 /* ChatView.swift */,
 				22A80AF8292A7A90003CD018 /* ConclusionView.swift */,
@@ -437,7 +426,6 @@
 		22A80AFC292A8368003CD018 /* Account */ = {
 			isa = PBXGroup;
 			children = (
-				22939307292ADE070010F0FD /* Components */,
 				22A80AE8292A7928003CD018 /* AccountSettingsView.swift */,
 				2281CDD1292B9C1200106B12 /* EditAccountSettingsView.swift */,
 				22A80ADE292A7869003CD018 /* LoginView.swift */,
@@ -449,6 +437,10 @@
 		22FD226F29302C7400E9A02C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				22CB500E295CA1F80054951A /* CustomModifiers.swift */,
+				22939308292ADE1D0010F0FD /* MenuItem.swift */,
+				226B189A2943F71F005BBD06 /* PlayerList.swift */,
+				226B189C2943F72A005BBD06 /* PlayerItem.swift */,
 				226CC8762930EB32005663C5 /* OpenQuestionCard.swift */,
 				226CC8782930ECEB005663C5 /* MPCQuestionCard.swift */,
 				226CC87A2930ED00005663C5 /* ScalableQuestionCard.swift */,
@@ -457,6 +449,7 @@
 				2203C9282957586300FD2921 /* PlayerAnswer.swift */,
 				22FD227029302CB000E9A02C /* ChatMessageItem.swift */,
 				229D09B329587D0300F9EB49 /* ChatMessageList.swift */,
+				22CB5010295CAD060054951A /* Logo.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -705,6 +698,7 @@
 				22BB35DD2946940800986383 /* JoinGameManager.swift in Sources */,
 				226CC87B2930ED00005663C5 /* ScalableQuestionCard.swift in Sources */,
 				2203C9272957585500FD2921 /* PlayerAnswerList.swift in Sources */,
+				22CB500D295C9EAB0054951A /* StartViewModel.swift in Sources */,
 				228A749F295A21D100B6394B /* ExitView.swift in Sources */,
 				22A40E4729313F3F00FF7952 /* SessionResponseType.swift in Sources */,
 				22FD227129302CB000E9A02C /* ChatMessageItem.swift in Sources */,
@@ -727,6 +721,7 @@
 				22A40E53293165B400FF7952 /* userDto.swift in Sources */,
 				226B189D2943F72A005BBD06 /* PlayerItem.swift in Sources */,
 				22A40E722932CCB800FF7952 /* GameManager.swift in Sources */,
+				22CB5011295CAD060054951A /* Logo.swift in Sources */,
 				226CC8792930ECEB005663C5 /* MPCQuestionCard.swift in Sources */,
 				22A80AF3292A7A17003CD018 /* LoadingView.swift in Sources */,
 				22A40E762932CEEF00FF7952 /* LoginViewModel.swift in Sources */,
@@ -757,6 +752,7 @@
 				2203C91B2955E9B100FD2921 /* Game.swift in Sources */,
 				22A80B0E292A856C003CD018 /* ApiService.swift in Sources */,
 				226B18A02943F9F3005BBD06 /* User.swift in Sources */,
+				22CB500F295CA1F80054951A /* CustomModifiers.swift in Sources */,
 				22A40E5E293167F900FF7952 /* loginResponseDto.swift in Sources */,
 				22A40E5A2931670000FF7952 /* sessionResponseDto.swift in Sources */,
 			);

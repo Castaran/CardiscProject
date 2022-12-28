@@ -57,8 +57,8 @@ class SignalRService: ObservableObject {
         
         connection.on(method: "startGame", callback: {
             (game: startGameDto) in
-            print("START GAME ACTION PERFORMED \(game.cards.count) + \(game.roundDuration)")
-            self.onGameStarted(game: game.toDomainModel())
+            print("START GAME ACTION PERFORMED")
+//            self.onGameStarted(game: game.toDomainModel())
         })
         
         connection.on(method: "newMessage", callback: {
@@ -95,7 +95,7 @@ class SignalRService: ObservableObject {
             "connectionId": self.connectionId,
         ]
 
-        apiService.httpRequestWithoutReturn(body: body, url: Constants.API_BASE_URL + "joinGrp", httpMethod: "POST")
+        apiService.httpRequestWithoutReturn(body: body, url: "joinGrp", httpMethod: "POST")
     }
     
     private func onReadyStateChange(player: LobbyPlayer) {

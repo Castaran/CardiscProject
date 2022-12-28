@@ -46,14 +46,10 @@ struct ConclusionView: View {
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .padding(.top, 40)
-        .background(Image("WP2")
-            .resizable()
-            .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height+70)
-        )
+        .backgroundImage(imageName: "WP3")
         .navigationBarHidden(true)
+        //TODO: TIM
         .navigationDestination(isPresented: $vm.finishedGame) { NavigationLazyView(MainMenuView()) }
         .navigationDestination(isPresented: $vm.nextView) { CardView(vm: vm) }
-        
-        
     }
 }

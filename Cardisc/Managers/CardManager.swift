@@ -12,7 +12,7 @@ class CardManager {
     private let apiService = ApiService()
     
     func getCards(id: Int, completion:@escaping (userDto) -> ()) {
-        apiService.getData(body: nil, url: Constants.API_BASE_URL + "users/\(id)", model: userDto.self) { data in
+        apiService.httpRequest(body: nil, url: "users/\(id)", model: userDto.self, httpMethod: "GET") { data in
             completion(data)
         } failure: { error in
             print(error)
@@ -20,7 +20,7 @@ class CardManager {
     }
     
     func getCardById(id: Int, completion:@escaping (userDto) -> ()) {
-        apiService.getData(body: nil, url: Constants.API_BASE_URL + "users/\(id)", model: userDto.self) { data in
+        apiService.httpRequest(body: nil, url: "users/\(id)", model: userDto.self, httpMethod: "GET") { data in
             completion(data)
         } failure: { error in
             print(error)

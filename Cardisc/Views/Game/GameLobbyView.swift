@@ -47,29 +47,10 @@ struct GameLobbyView: View {
                     .cornerRadius(10, corners: [.allCorners])
                     .shadow(radius: 5)
                     .padding(.bottom, 10)
-                    
-                    HStack {
-                        //SIBTAIN: can we change this to a not static form?
-                        Picker(selection: $vm.duration, label: Text("Some Label")) {
-                            Text("60 seconds").tag(60)
-                            Text("120 seconds").tag(120)
-                            Text("180 seconds").tag(180)
-                        }.onChange(of: vm.duration) { tag in
-                            vm.duration = tag
-                        }
-                        .padding(.vertical, 5)
-                        .padding(.horizontal, 50)
-                        .background(Color.white)
-                        .frame(maxWidth: .infinity)
-                        .cornerRadius(25, corners: [.allCorners])
-                    }
-                    .background(Color.white)
-                    .cornerRadius(10, corners: [.allCorners])
-                    .shadow(radius: 5)
-                    .padding(.bottom, 10)
                 }
             }
             .padding(.horizontal, 30)
+            .padding(.top, 20)
             
             if(vm.isHost) {
                 MenuItem(
@@ -88,7 +69,7 @@ struct GameLobbyView: View {
                 menuIcon: "person.crop.circle.badge.checkmark",
                 iconHeight: 30,
                 iconWidth: 35,
-                menuTitle: "Ready/unready",
+                menuTitle: "Change status",
                 menuColor: UIColor.systemBlue,
                 menuPaddingRight: 30
             ).onTapGesture {
@@ -100,8 +81,7 @@ struct GameLobbyView: View {
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-        
-        //SIBTAIN: is this a good location for an alert? or better in a seperate file?
+        .backgroundImage(imageName: "WP3")
         .navigationBarItems(leading: Button(action: { vm.showConfirmation.toggle()}) {
             Image(systemName: "chevron.left")
             Text("Leave session")
@@ -114,8 +94,6 @@ struct GameLobbyView: View {
                     vm.leaveGame()
                     dismiss()
                 }, secondaryButton: .cancel())})
-        .background(Image("WP1").resizable()
-            .aspectRatio(contentMode: .fill)
-            .edgesIgnoringSafeArea(.all))
+
     }
 }

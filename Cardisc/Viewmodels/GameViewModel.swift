@@ -15,14 +15,17 @@ class GameViewModel: ObservableObject {
     
     @Published var isPresentingConfirm: Bool = false
     @Published var showConfirmation: Bool = false
-    @Published var duration = 120
     @Published var rounds = 2
     @Published var isHost: Bool = false
     
-    @Published var players: [LobbyPlayer] = []
-    @Published var game = Game(cards: [], roundDuration: 0)
+    //Loading states
+    @Published var isLoadingHostGame: Bool = false
+    @Published var isLoadingJoinSession: Bool = false
+    
 
     //Game data
+    @Published var players: [LobbyPlayer] = []
+    @Published var game = Game(cards: [], roundDuration: 0)
     @Published var lobby: Lobby = Lobby(id: "", hostId: "", sessionCode: "", created: "", sessionAuth: "", players: [])
     @Published var currentCard: Card = Card(id: "", number: 0, name: "", body: "", type: 0)
     @Published var gameIndex: Int = 0
@@ -88,6 +91,7 @@ class GameViewModel: ObservableObject {
         self.gameManager.$startedGame
             .sink(receiveValue: { startedGame in
                 self.startGame()
+                print("AKSLDJAKSJDLASKJDLAKJLKSJALDKJASLD")
             })
             .store(in: &cancellables)
     }
@@ -142,7 +146,7 @@ class GameViewModel: ObservableObject {
     func startGame() {
         self.startedGame = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.gameManager.startGame(rounds: self.rounds, duration: self.duration)
+            self.gameManager.startGame(rounds: self.rounds)
             self.nextView = true
         }
     }

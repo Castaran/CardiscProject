@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct StartView: View {
-    
-    let defaults = UserDefaults.standard
+    @ObservedObject var vm = StartViewModel()
     var body: some View {
-        
-        if let token = defaults.string(forKey: "X-AUTHTOKEN"){
+        if (vm.userLoggedIn()){
             NavigationStack {
                 MainMenuView()
             }

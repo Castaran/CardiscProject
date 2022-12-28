@@ -6,22 +6,41 @@
 //
 
 import Foundation
+import SwiftUI
 
 class LoginViewModel: ObservableObject {
     
     private let accountManager = AccountManager()
     
     @Published var username: String = ""
+    @Published var usernameFieldColor = UIColor.black
     @Published var password: String = ""
-    @Published var isActive: Bool = false
+    @Published var passwordFieldColor = UIColor.black
+    @Published var loggedIn: Bool = false
     @Published var isRequestInProgress: Bool = false
+    @Published var errorMessage: String = ""
     
-    func loginUser(username: String, password: String) {
+    func loginUser() {
+        self.isRequestInProgress = true
         DispatchQueue.main.async {
-            self.accountManager.loginUser(username: username, password: password) { data in
-                self.isActive = true
+            if(!self.username.isEmpty) {
+                if(!self.password.isEmpty) {
+                    self.accountManager.loginUser(username: self.username, password: self.password) { data in
+                        self.isRequestInProgress = false
+                        self.loggedIn = true
+                        self.errorMessage = ""
+                    }
+                }
+                else {
+                    self.errorMessage = "Passwordfield is empty!"
+                    self.isRequestInProgress = false
+                }
             }
+            else {
+                self.errorMessage = "Usernamefield is empty!"
+                self.isRequestInProgress = false
+            }
+
         }
-        
     }
 }

@@ -15,16 +15,22 @@ class RegisterViewModel: ObservableObject {
     @Published var emailaddress: String = ""
     @Published var password: String = ""
     @Published var passwordRepeated: String = ""
-    @Published var isActive: Bool = false
+    @Published var userRegistered: Bool = false
     
-    func registerUser(username: String, password: String, email: String) -> Bool {
-        var response = false
-        accountManager.registerUser(username: username, password: password, emailadress: email) { data in
-            response = true
+    func registerUser() {
+        DispatchQueue.main.async {
+            if(!self.username.isEmpty && !self.emailaddress.isEmpty && !self.password.isEmpty && !self.passwordRepeated.isEmpty) {
+                if(self.password == self.passwordRepeated) {
+                    self.accountManager.registerUser(username: self.username, password: self.password, emailadress: self.emailaddress) { data in
+                        self.userRegistered = true
+                        print("\(data.username) registered")
+                    }
+                }
+            }
+            else {
+                print("Some fields are empty..")
+            }
             
         }
-        sleep(1)
-        return response
     }
-    
 }

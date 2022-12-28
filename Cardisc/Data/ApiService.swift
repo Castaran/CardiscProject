@@ -78,15 +78,13 @@ class ApiService {
             request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
         }
         
-        let task = URLSession.shared.dataTask(with: request) { data, _, error in
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 return
             }
             do {
-                if (model != nil) {
-                    let response = try JSONDecoder().decode(T.self, from: data)
-                    completion(response)
-                }
+                let response = try JSONDecoder().decode(T.self, from: data)
+                completion(response)
             }
             catch{
                 print(error)

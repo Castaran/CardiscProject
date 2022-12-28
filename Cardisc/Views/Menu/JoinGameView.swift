@@ -22,16 +22,13 @@ struct JoinGameView: View {
                         .foregroundColor(Color.white)
                         .padding(.trailing, 5)
                     Text("Join a game").font(.system(size: 24)).foregroundColor(Color.white).bold()
+                    Spacer()
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                
                 
                 HStack {
                     Text("Join a game by entering the Game ID you received from the game host.").foregroundColor(Color.white)
+                    Spacer()
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                
-                
             }
             .padding(.horizontal, 30)
             .padding(.vertical, 20)
@@ -39,8 +36,8 @@ struct JoinGameView: View {
             VStack{
                 HStack {
                     Text("Enter game id.").foregroundColor(Color(UIColor.white)).bold()
+                    Spacer()
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 20)
                 
                 HStack {
@@ -58,7 +55,6 @@ struct JoinGameView: View {
             HStack {
                 
             }
-            .frame(maxWidth: .infinity, alignment: .trailing)
             .padding(.top, 40)
             
             NavigationLink("", destination: GameLobbyView(vm: vm), isActive: $vm.nextView).onAppear {
@@ -69,11 +65,10 @@ struct JoinGameView: View {
                 self.vm.joinGame()
             }
             
+            Spacer()
         }
-        .frame(maxHeight: .infinity, alignment: .top)
-        .background(Image("WP1").resizable()
-        .aspectRatio(contentMode: .fill)
-        .edgesIgnoringSafeArea(.all))
+        
+        .backgroundImage()
     }
 }
 
