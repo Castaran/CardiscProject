@@ -12,6 +12,7 @@ import SwiftUI
 struct GameLobbyView: View {
     @StateObject var vm: GameViewModel
     @Environment(\.dismiss) var dismiss
+    @State private var showingActionSheet = false
     
     var body: some View {
         VStack {
@@ -22,7 +23,7 @@ struct GameLobbyView: View {
                         .frame(width: 38, height: 22)
                         .foregroundColor(Color.white)
                         .padding(.trailing, 1)
-                    Text("Game lobby (\(vm.lobby.sessionCode ?? "0000"))").font(.system(size: 20)).bold().foregroundColor(Color.white)
+                    Text("Game lobby #\(vm.lobby.sessionCode))").font(.system(size: 20)).bold().foregroundColor(Color.white)
                     Spacer()
                     Image(systemName: "square.and.arrow.up").foregroundColor(Color.white).padding(.trailing, 20)
                 }
@@ -52,38 +53,52 @@ struct GameLobbyView: View {
             .padding(.horizontal, 30)
             .padding(.top, 20)
             
+            if(vm.playerReady) {
+                MenuItem(
+                    menuIcon: "person.fill.xmark",
+                    iconHeight: 30,
+                    iconWidth: 35,
+                    menuTitle: "Unready",
+                    menuColor: UIColor.systemRed,
+                    menuPaddingRight: 30
+                ).onTapGesture {
+                    vm.changeState()
+                }
+            }
+            else {
+                MenuItem(
+                    menuIcon: "person.crop.circle.badge.checkmark",
+                    iconHeight: 30,
+                    iconWidth: 35,
+                    menuTitle: "Ready",
+                    menuColor: UIColor.systemGreen,
+                    menuPaddingRight: 30
+                ).onTapGesture {
+                    vm.changeState()
+                }
+            }
+
             if(vm.isHost) {
                 MenuItem(
                     menuIcon: "play.fill",
                     iconHeight: 25,
                     iconWidth: 25,
                     menuTitle: "Start game",
-                    menuColor: UIColor.systemGreen,
+                    menuColor: UIColor.systemBlue,
                     menuPaddingRight: 30,
                     isLoading: vm.isLoadingStartingSession
                 ).onTapGesture {
                     vm.startGame()
                 }
             }
-            
-            MenuItem(
-                menuIcon: "person.crop.circle.badge.checkmark",
-                iconHeight: 30,
-                iconWidth: 35,
-                menuTitle: "Change status",
-                menuColor: UIColor.systemBlue,
-                menuPaddingRight: 30
-            ).onTapGesture {
-                vm.changeState()
-            }
-            
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .navigationTitle("")
         .fullScreenCover(isPresented: $vm.isLoadingStartingSession) {
-            LoadingView(title: "Starting session", message: "Prepare to answer the first questioncard..")
+            LoadingView(title: "Starting session", message: "Prepare to answer the first questioncard..", icon: "hourglass.tophalf.filled")
         }
         .navigationDestination(isPresented: $vm.startedGame, destination: { CardView(vm: vm) })
+
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .backgroundImage(imageName: "WP3")

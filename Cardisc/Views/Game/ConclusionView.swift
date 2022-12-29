@@ -53,5 +53,8 @@ struct ConclusionView: View {
         .navigationBarHidden(true)
         .navigationDestination(isPresented: $vm.finishedGame) { NavigationLazyView(MainMenuView()) }
         .navigationDestination(isPresented: $vm.nextRoundStarted) { CardView(vm: vm) }
+        .fullScreenCover(isPresented: $vm.isLoadingMainMenu) {
+            LoadingView(title: "Game finished", message: "The gamehost thanks you for playing this game!", icon: "flag.2.crossed.fill")
+        }
     }
 }

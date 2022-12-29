@@ -89,25 +89,28 @@ struct AccountSettingsView: View {
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     
                     HStack {
-                        MenuItem(menuIcon: "trash.fill", iconHeight: 26, iconWidth: 26, menuTitle: "Delete account", menuColor: UIColor.systemRed, menuPaddingRight: 40)
+                        MenuItem(menuIcon: "trash.fill", iconHeight: 26, iconWidth: 26, menuTitle: "Delete account", menuColor: UIColor.systemRed, menuPaddingRight: 40).onTapGesture {
+                            vm.showDeleteUserComfirmation = true
+                        }
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
-                        .alert(isPresented: $vm.showConfirmation) { Alert(
-                            title: Text("Deleting account permanently"),
-                            message: Text("Are you sure you want to delete your account? There is no way back from that point."),
-                            primaryButton: .destructive(Text("Delete"))
-                            {
-                                vm.deleteUser()
-                                dismiss()
-                            }, secondaryButton: .cancel())}
+
                     
                 }
                 .frame(maxHeight: .infinity, alignment: .top)
                 .padding(.top, 30)
             }
-        .background(Image("WP1").resizable()
-            .aspectRatio(contentMode: .fill)
-            .edgesIgnoringSafeArea(.all))
+        .backgroundImage()
+        .navigationDestination(isPresented: $vm.userDeleted, destination: {
+            StartView()
+        })
+        .alert(isPresented: $vm.showDeleteUserComfirmation) { Alert(
+            title: Text("Deleting account permanently"),
+            message: Text("Are you sure you want to delete your account? There is no way back from that point."),
+            primaryButton: .destructive(Text("Delete"))
+            {
+                vm.deleteUser()
+            }, secondaryButton: .cancel())}
     }
 }
 

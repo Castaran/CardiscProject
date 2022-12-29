@@ -72,8 +72,8 @@ struct LoginView: View {
             .padding(.horizontal, 30)
             .padding(.vertical, 20)
             
-            NavigationLink("", destination: StartView(), isActive: $vm.loggedIn)
-            MenuItem(menuIcon: "lock.open.fill", iconHeight: 26, iconWidth: 30, menuTitle: "Login", menuColor: UIColor.systemBlue, menuPaddingRight: 40, isLoading: vm.isRequestInProgress).onTapGesture {
+            MenuItem(menuIcon: "lock.open.fill", iconHeight: 26, iconWidth: 30, menuTitle: "Login", menuColor: UIColor.systemBlue, menuPaddingRight: 40, isLoading: vm.isRequestInProgress
+            ).onTapGesture {
                 vm.loginUser()
             }
             Spacer()
@@ -81,6 +81,7 @@ struct LoginView: View {
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
         .backgroundImage()
+        .navigationDestination(isPresented: $vm.loggedIn) { StartView() }
         
     }
     

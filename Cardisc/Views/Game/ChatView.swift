@@ -71,6 +71,9 @@ struct ChatView: View {
         .ignoresSafeArea(.all, edges: .bottom)
         .navigationBarHidden(true)
         .navigationDestination(isPresented: $vm.nextRoundStarted) { CardView(vm: vm) }
-        .navigationDestination(isPresented: $vm.finishedGame) { ExitView(vm: vm) }
+        .navigationDestination(isPresented: $vm.finishedGame) { NavigationLazyView(MainMenuView()) }
+        .fullScreenCover(isPresented: $vm.isLoadingMainMenu) {
+            LoadingView(title: "Game finished", message: "The gamehost thanks you for playing this game!", icon: "flag.2.crossed.fill")
+        }
     }
 }

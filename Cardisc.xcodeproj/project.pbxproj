@@ -26,7 +26,6 @@
 		22801DCF2938F03300E7F825 /* SignalRClient in Frameworks */ = {isa = PBXBuildFile; productRef = 22801DCE2938F03300E7F825 /* SignalRClient */; };
 		2281CDD2292B9C1200106B12 /* EditAccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2281CDD1292B9C1200106B12 /* EditAccountSettingsView.swift */; };
 		228A749A2959F9F000B6394B /* NavigationLazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228A74992959F9EF00B6394B /* NavigationLazyView.swift */; };
-		228A749F295A21D100B6394B /* ExitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228A749E295A21D100B6394B /* ExitView.swift */; };
 		22939309292ADE1D0010F0FD /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22939308292ADE1D0010F0FD /* MenuItem.swift */; };
 		229A7BB42944EC460089CC02 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229A7BB32944EC460089CC02 /* RegisterViewModel.swift */; };
 		229D09B429587D0300F9EB49 /* ChatMessageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229D09B329587D0300F9EB49 /* ChatMessageList.swift */; };
@@ -125,7 +124,6 @@
 		227E57E129436881006A2955 /* MainMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewModel.swift; sourceTree = "<group>"; };
 		2281CDD1292B9C1200106B12 /* EditAccountSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountSettingsView.swift; sourceTree = "<group>"; };
 		228A74992959F9EF00B6394B /* NavigationLazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLazyView.swift; sourceTree = "<group>"; };
-		228A749E295A21D100B6394B /* ExitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitView.swift; sourceTree = "<group>"; };
 		22939308292ADE1D0010F0FD /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		229A7BB32944EC460089CC02 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		229D09B329587D0300F9EB49 /* ChatMessageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageList.swift; sourceTree = "<group>"; };
@@ -243,7 +241,6 @@
 			children = (
 				22A80AF2292A7A17003CD018 /* LoadingView.swift */,
 				228A74992959F9EF00B6394B /* NavigationLazyView.swift */,
-				228A749E295A21D100B6394B /* ExitView.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -699,7 +696,6 @@
 				226CC87B2930ED00005663C5 /* ScalableQuestionCard.swift in Sources */,
 				2203C9272957585500FD2921 /* PlayerAnswerList.swift in Sources */,
 				22CB500D295C9EAB0054951A /* StartViewModel.swift in Sources */,
-				228A749F295A21D100B6394B /* ExitView.swift in Sources */,
 				22A40E4729313F3F00FF7952 /* SessionResponseType.swift in Sources */,
 				22FD227129302CB000E9A02C /* ChatMessageItem.swift in Sources */,
 				2203C92329572F7B00FD2921 /* MPCButton.swift in Sources */,

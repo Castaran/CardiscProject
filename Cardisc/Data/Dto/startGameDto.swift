@@ -15,7 +15,7 @@ struct startGameDto: Codable {
         var cards: [Card] = []
         
         for c in self.cards {
-            var card = c.toDomainModel()
+            let card = c.toDomainModel()
             cards.append(card)
         }
         

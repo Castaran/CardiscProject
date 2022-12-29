@@ -24,12 +24,8 @@ class UserManager {
         }
     }
     
-    func deleteUserById(id: String, completion:@escaping (userDto) -> ()) {
-        apiService.httpRequest(body: nil, url: "users/\(id)", model: userDto.self, httpMethod: "POST") { data in
-            completion(data)
-        } failure: { error in
-            print(error)
-        }
+    func deleteUserById(id: String) {
+        apiService.httpRequestWithoutReturn(body: nil, url: "user/\(id)", httpMethod: "DELETE")
     }
     
     func updateUser(id: Int, completion:@escaping (userDto) -> ()) {

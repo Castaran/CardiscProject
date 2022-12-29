@@ -19,6 +19,7 @@ class GameViewModel: ObservableObject {
     //Loading states
     @Published var isLoadingJoinSession: Bool = false
     @Published var isLoadingStartingSession: Bool = false
+    @Published var isLoadingMainMenu: Bool = false
     @Published var nextRoundStarted: Bool = false
     @Published var submittedAnswer: Bool = false
     @Published var startedGame: Bool = false
@@ -27,7 +28,8 @@ class GameViewModel: ObservableObject {
 
     //Game data
     @Published var isHost: Bool = false
-    @Published var rounds = 2
+    @Published var playerReady: Bool = false
+    @Published var rounds: Int = 2
     @Published var players: [LobbyPlayer] = []
     @Published var game = Game(cards: [], roundDuration: 0)
     @Published var lobby: Lobby = Lobby(id: "", hostId: "", sessionCode: "", created: "", sessionAuth: "", players: [])
@@ -66,7 +68,7 @@ class GameViewModel: ObservableObject {
             .sink(receiveValue: { game in
                 self.game = game
                 if(game.cards.count > 0) {
-                    self.currentCard = self.game.cards[0]
+                    self.currentCard = self.game.cards[self.gameIndex]
                 }
             })
             .store(in: &cancellables)
@@ -126,7 +128,7 @@ class GameViewModel: ObservableObject {
                 self.nextRoundStarted = true
             }
             else {
-                self.finishedGame = true
+                self.endSession()
             }
             
             self.answer = ""
@@ -158,9 +160,11 @@ class GameViewModel: ObservableObject {
     func startGame() {
         self.isLoadingStartingSession = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.gameManager.startGame(rounds: self.rounds)
-            self.isLoadingStartingSession = false
-            self.startedGame = true
+            self.gameManager.startGame(rounds: self.rounds) {
+                self.startedGame = true
+                self.isLoadingStartingSession = false
+            }
+            
         }
     }
     
@@ -178,14 +182,19 @@ class GameViewModel: ObservableObject {
     }
     
     func endSession() {
-        DispatchQueue.main.async {
-            self.gameManager.endGame()
+        self.isLoadingMainMenu = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.gameManager.endGame(conclusion: self.conclusion)
+            self.isLoadingMainMenu = false
+            self.finishedGame = true
         }
     }
     
     func changeState() {
         DispatchQueue.main.async {
             self.gameManager.changeState()
+            self.playerReady.toggle()
         }
     }
+    
 }

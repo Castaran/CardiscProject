@@ -118,8 +118,12 @@ class GameManager: ObservableObject {
     }
     
     //Tells the API that the game is completed
-    func endGame() {
-        apiService.httpRequestWithoutReturn(body: nil, url: "session/end", httpMethod: "POST")
+    func endGame(conclusion: String) {
+        let body: [String: AnyHashable] = [
+            "conclussion": conclusion
+        ]
+        
+        apiService.httpRequestWithoutReturn(body: body, url: "session/end", httpMethod: "POST")
     }
     
     //Joins a session and gets the lobby object from the API
@@ -145,7 +149,6 @@ class GameManager: ObservableObject {
         ]
         
         apiService.httpRequestWithoutReturn(body: body, url: "session/leave", httpMethod: "POST")
-        
     }
     
     //Creates a new session
@@ -162,11 +165,12 @@ class GameManager: ObservableObject {
     }
     
     //Tells the API that the session/game is ready to start
-    func startGame(rounds: Int) {
+    func startGame(rounds: Int, completion:@escaping () -> Void) {
         let body: [String: AnyHashable] = [
             "rounds": rounds+1
         ]
         apiService.httpRequestWithoutReturn(body: body, url: "session/start", httpMethod: "POST")
+        completion()
     }
     
     //Changes the state of the player

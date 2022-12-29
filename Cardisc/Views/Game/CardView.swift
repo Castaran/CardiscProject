@@ -19,11 +19,13 @@ struct CardView: View {
                 Spacer()
             }
             .padding(.leading, 30)
-            .padding(.bottom, 30)
+            .padding(.bottom, 30).onAppear{
+                print(vm.currentCard.type)
+            }
             
-            //JUREK: What cardtype is what number?
             if(vm.currentCard.type == 1) {
-                ScalableQuestionCard(vm: vm)
+                OpenQuestionCard(vm: vm)
+                
             }
             
             else if(vm.currentCard.type == 2) {
@@ -31,7 +33,7 @@ struct CardView: View {
             }
             
             else {
-                OpenQuestionCard(vm: vm)
+                ScalableQuestionCard(vm: vm)
             }
             Spacer()
         }

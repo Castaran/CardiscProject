@@ -15,6 +15,7 @@ struct cardDto: Codable {
     let type: Int
     
     func toDomainModel() -> Card {
+        print("\(self.cardBody): \(self.type)")
         return Card(
             id: self.id,
             number: self.cardNumber,
