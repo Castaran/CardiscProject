@@ -27,7 +27,6 @@ class GameManager: ObservableObject {
     @Published var chatMessages: [ChatMessage] = []
     @Published var startedGame: Bool = false
     
-    
     init() {
         self.syncVariables()
         
@@ -110,9 +109,9 @@ class GameManager: ObservableObject {
     }
     
     //Tells the API that the next round is ready to start
-    func nextRound() {
+    func nextRound(conclusion: String) {
         let body: [String: AnyHashable] = [
-            "conclussion": ""
+            "conclussion": conclusion
         ]
         
         apiService.httpRequestWithoutReturn(body: body, url: "session/next", httpMethod: "POST")

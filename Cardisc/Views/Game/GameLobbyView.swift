@@ -59,7 +59,8 @@ struct GameLobbyView: View {
                     iconWidth: 25,
                     menuTitle: "Start game",
                     menuColor: UIColor.systemGreen,
-                    menuPaddingRight: 30
+                    menuPaddingRight: 30,
+                    isLoading: vm.isLoadingStartingSession
                 ).onTapGesture {
                     vm.startGame()
                 }
@@ -79,6 +80,10 @@ struct GameLobbyView: View {
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .navigationTitle("")
+        .fullScreenCover(isPresented: $vm.isLoadingStartingSession) {
+            LoadingView(title: "Starting session", message: "Prepare to answer the first questioncard..")
+        }
+        .navigationDestination(isPresented: $vm.startedGame, destination: { CardView(vm: vm) })
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .backgroundImage(imageName: "WP3")

@@ -30,7 +30,15 @@ struct MainMenuView: View {
                         menuPaddingRight: 74)
                 }
                 
-                MenuItem(menuIcon: "crown.fill", iconHeight: 24, iconWidth: 36, menuTitle: "Host a game", menuColor: UIColor.systemBlue, menuPaddingRight: 68, isLoading: false).onTapGesture {
+                MenuItem(
+                    menuIcon: "crown.fill",
+                    iconHeight: 24,
+                    iconWidth: 36,
+                    menuTitle: "Host a game",
+                    menuColor: UIColor.systemBlue,
+                    menuPaddingRight: 68,
+                    isLoading: vm.hostGameIsLoading
+                ).onTapGesture {
                     self.vm.hostGame()
                 }
                 
@@ -60,9 +68,6 @@ struct MainMenuView: View {
             }
             .navigationBarHidden(true)
             .frame(maxHeight: .infinity, alignment: .top)
-            .fullScreenCover(isPresented: $vm.showLoadingScreen) {
-                LoadingView(title: "Creating session", message: "This won't take long..")
-            }
             .navigationDestination(isPresented: $vm.hostSucceed) {
                 NavigationLazyView(GameLobbyView(vm: vm.gameViewModel))
             }

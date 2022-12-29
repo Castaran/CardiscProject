@@ -58,7 +58,7 @@ class SignalRService: ObservableObject {
         connection.on(method: "startGame", callback: {
             (game: startGameDto) in
             print("START GAME ACTION PERFORMED")
-//            self.onGameStarted(game: game.toDomainModel())
+            self.onGameStarted(game: game.toDomainModel())
         })
         
         connection.on(method: "newMessage", callback: {

@@ -13,8 +13,23 @@ struct PlayerAnswerList: View {
     var answers: [Answer]
     
     var body: some View {
-        ForEach(answers) { answer in
-            PlayerAnswer(answer: answer)
+        VStack {
+            HStack {
+                Text("Answers:").bold()
+                Spacer()
+            }
+            
+            Divider()
+            
+            ForEach(answers) { answer in
+                PlayerAnswer(answer: answer)
+            }
         }
+        .padding(15)
+        .shadow(radius: 5)
+        .background(Color(UIColor.white))
+        .cornerRadius(10, corners: [.allCorners])
+        .padding(15)
+
     }
 }

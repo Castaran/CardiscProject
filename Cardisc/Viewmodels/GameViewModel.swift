@@ -15,15 +15,19 @@ class GameViewModel: ObservableObject {
     
     @Published var isPresentingConfirm: Bool = false
     @Published var showConfirmation: Bool = false
-    @Published var rounds = 2
-    @Published var isHost: Bool = false
     
     //Loading states
-    @Published var isLoadingHostGame: Bool = false
     @Published var isLoadingJoinSession: Bool = false
-    
+    @Published var isLoadingStartingSession: Bool = false
+    @Published var nextRoundStarted: Bool = false
+    @Published var submittedAnswer: Bool = false
+    @Published var startedGame: Bool = false
+    @Published var finishedGame: Bool = false
+    @Published var joinedGame: Bool = false
 
     //Game data
+    @Published var isHost: Bool = false
+    @Published var rounds = 2
     @Published var players: [LobbyPlayer] = []
     @Published var game = Game(cards: [], roundDuration: 0)
     @Published var lobby: Lobby = Lobby(id: "", hostId: "", sessionCode: "", created: "", sessionAuth: "", players: [])
@@ -35,9 +39,6 @@ class GameViewModel: ObservableObject {
     @Published var chatMessage: String = ""
     @Published var chatMessages: [ChatMessage] = []
     @Published var conclusion = ""
-    @Published var nextView: Bool = false
-    @Published var startedGame: Bool = false
-    @Published var finishedGame: Bool = false
     
     private var cancellables: [AnyCancellable] = []
     
@@ -85,13 +86,17 @@ class GameViewModel: ObservableObject {
         self.gameManager.$currentCard
             .sink(receiveValue: { currentCard in
                 self.currentCard = currentCard
+                if(!self.isHost){
+                    self.nextRound()
+                }
             })
             .store(in: &cancellables)
         
         self.gameManager.$startedGame
             .sink(receiveValue: { startedGame in
-                self.startGame()
-                print("AKSLDJAKSJDLASKJDLAKJLKSJALDKJASLD")
+                if(startedGame) {
+                    self.startGame()
+                }
             })
             .store(in: &cancellables)
     }
@@ -99,7 +104,8 @@ class GameViewModel: ObservableObject {
     func submitAnswer() {
         DispatchQueue.main.async {
             self.gameManager.submitAnswer(answer: self.answer)
-            self.nextView = true
+            self.submittedAnswer = true
+            self.nextRoundStarted = false
         }
     }
     
@@ -114,23 +120,29 @@ class GameViewModel: ObservableObject {
     
     func nextRound() {
         DispatchQueue.main.async {
-            self.gameManager.nextRound()
-            self.answer = ""
+            self.gameManager.nextRound(conclusion: self.conclusion)
+
             if(self.gameIndex <= self.rounds) {
-                self.nextView = true
+                self.nextRoundStarted = true
             }
             else {
                 self.finishedGame = true
             }
+            
+            self.answer = ""
+            self.conclusion = ""
+            self.submittedAnswer = false
         }
     }
     
     func joinGame() {
         DispatchQueue.main.async {
+            self.isLoadingJoinSession = true
             self.gameManager.joinGame(sessionAuth: self.gameId) { data in
                 self.isHost = false
                 self.lobby = data
-                self.nextView = true
+                self.joinedGame = true
+                self.isLoadingJoinSession = false
             }
         }
     }
@@ -144,18 +156,22 @@ class GameViewModel: ObservableObject {
     }
     
     func startGame() {
-        self.startedGame = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+        self.isLoadingStartingSession = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.gameManager.startGame(rounds: self.rounds)
-            self.nextView = true
+            self.isLoadingStartingSession = false
+            self.startedGame = true
         }
     }
     
     func createGame(completion: @escaping ()->()) {
+        self.isLoadingStartingSession = true
         self.gameManager.createGame() { data in
             DispatchQueue.main.async {
-                self.isHost = true
                 self.lobby = data
+                self.isHost = true
+                self.startedGame = false
+                self.isLoadingStartingSession = false
                 completion()
             }
         }

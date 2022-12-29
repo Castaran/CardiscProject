@@ -50,9 +50,9 @@ struct MPCQuestionCard : View {
         .padding(.horizontal, 30)
         .shadow(radius: 10)
         
-        NavigationLink("", destination: ChatView(vm: vm), isActive: $vm.nextView).onAppear { vm.nextView = false }
         MenuItem(menuIcon: "play.fill", iconHeight: 22, iconWidth: 22, menuTitle: "Play card", menuColor: UIColor.systemBlue, menuPaddingRight: 40).onTapGesture {
             vm.submitAnswer()
         }
+        .navigationDestination(isPresented: $vm.submittedAnswer) { ChatView(vm: vm) }
     }
 }

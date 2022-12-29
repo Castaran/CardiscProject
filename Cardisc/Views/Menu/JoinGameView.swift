@@ -16,9 +16,9 @@ struct JoinGameView: View {
         VStack {
             VStack{
                 HStack {
-                    Image(systemName: "person.fill.questionmark.rtl")
+                    Image(systemName: "person.2.fill")
                         .resizable()
-                        .frame(width: 30, height: 28)
+                        .frame(width: 36, height: 22)
                         .foregroundColor(Color.white)
                         .padding(.trailing, 5)
                     Text("Join a game").font(.system(size: 24)).foregroundColor(Color.white).bold()
@@ -57,18 +57,22 @@ struct JoinGameView: View {
             }
             .padding(.top, 40)
             
-            NavigationLink("", destination: GameLobbyView(vm: vm), isActive: $vm.nextView).onAppear {
-                vm.nextView = false
-                vm.startedGame = false
-            }
-            MenuItem(menuIcon: "lock.open.fill", iconHeight: 24, iconWidth: 30, menuTitle: "Join Game", menuColor: UIColor.systemBlue, menuPaddingRight: 40, isLoading: false).onTapGesture {
+            MenuItem(
+                menuIcon: "person.wave.2.fill",
+                iconHeight: 24,
+                iconWidth: 30,
+                menuTitle: "Join Game",
+                menuColor: UIColor.systemBlue,
+                menuPaddingRight: 40,
+                isLoading: vm.isLoadingJoinSession
+            ).onTapGesture {
                 self.vm.joinGame()
             }
             
             Spacer()
         }
-        
         .backgroundImage()
+        .navigationDestination(isPresented: $vm.joinedGame) { GameLobbyView(vm: vm) }
     }
 }
 

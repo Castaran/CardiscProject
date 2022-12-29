@@ -42,14 +42,16 @@ struct ConclusionView: View {
             }
             MenuItem(menuIcon: "play.fill", iconHeight: 20, iconWidth: 18, menuTitle: "Continue", menuColor: UIColor.systemBlue, menuPaddingRight: 10).onTapGesture {
                 vm.nextRound()
+            }.onAppear {
+                vm.nextRoundStarted = false
+                vm.finishedGame = false
             }
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .padding(.top, 40)
         .backgroundImage(imageName: "WP3")
         .navigationBarHidden(true)
-        //TODO: TIM
         .navigationDestination(isPresented: $vm.finishedGame) { NavigationLazyView(MainMenuView()) }
-        .navigationDestination(isPresented: $vm.nextView) { CardView(vm: vm) }
+        .navigationDestination(isPresented: $vm.nextRoundStarted) { CardView(vm: vm) }
     }
 }
