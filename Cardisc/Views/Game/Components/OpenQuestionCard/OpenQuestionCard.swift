@@ -9,14 +9,14 @@ import Foundation
 import SwiftUI
 
 struct OpenQuestionCard : View {
-    @ObservedObject var vm: GameViewModel
+    @StateObject var vm: GameViewModel
     
     var body: some View {
         VStack {
             HStack {
-                Text("Question \(vm.gameIndex)").foregroundColor(Color.black).bold().font(.system(size: 20))
+                Text("\(vm.currentCard.name)").foregroundColor(Color.black).bold().font(.system(size: 20))
                 Spacer()
-                Text("Round \(vm.gameIndex)/\(vm.rounds)")
+                Text("Round \(vm.gameIndex+1)/\(vm.rounds+1)")
             }
             .padding(10)
             HStack {
@@ -38,8 +38,7 @@ struct OpenQuestionCard : View {
                 "Your answer...",
                 text: $vm.answer
             )
-            .padding(.top, 10)
-            .padding(.bottom, 20)
+            .padding(.vertical, 10)
             .padding(.horizontal, 15)
             .background(Color.white)
             .cornerRadius(15, corners: [.allCorners])

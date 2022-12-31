@@ -71,7 +71,7 @@ struct HowToPlayView: View {
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .padding(.top, 10)
-        .backgroundImage()
+        .backgroundImage(imageName: "WP2")
     }
 }
 

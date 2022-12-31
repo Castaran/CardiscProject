@@ -40,8 +40,15 @@ struct ChatView: View {
                 }
             }
             
-            //TODO: Dit even ergens anders neerzetten
-            PlayerAnswerList(answers: vm.answers)
+            if(vm.currentCard.type == 1) {
+                SummaryScalable(vm: vm)
+            }
+            else if(vm.currentCard.type == 2) {
+                SummaryMPC(vm: vm)
+            }
+            else {
+                SummaryOpen(vm: vm)
+            }
             
             ChatMessageList(chatMessages: $vm.chatMessages)
 
@@ -67,13 +74,13 @@ struct ChatView: View {
             .background(Color(UIColor.systemGray5))
             Spacer()
         }
-        .backgroundImage(imageName: "WP3")
+        .backgroundImage(imageName: "WP1")
         .ignoresSafeArea(.all, edges: .bottom)
         .navigationBarHidden(true)
         .navigationDestination(isPresented: $vm.nextRoundStarted) { CardView(vm: vm) }
         .navigationDestination(isPresented: $vm.finishedGame) { NavigationLazyView(MainMenuView()) }
         .fullScreenCover(isPresented: $vm.isLoadingMainMenu) {
-            LoadingView(title: "Game finished", message: "The gamehost thanks you for playing this game!", icon: "flag.2.crossed.fill")
+            LoadingView(title: "Game finished", message: "The gamehost thanks you for playing this game!", icon: "flag.2.crossed.fill", iconWidth: 45)
         }
     }
 }

@@ -10,14 +10,15 @@ import SwiftUI
 
 struct MPCQuestionCard : View {
     @State private var answer: Int = 0
-    @ObservedObject var vm: GameViewModel
+    @StateObject var vm: GameViewModel
     
     var body: some View {
         VStack {
             HStack {
-                Text("Question \(vm.gameIndex)").foregroundColor(Color.black).bold().font(.system(size: 20))
+                Text("\(vm.currentCard.name)").foregroundColor(Color.black).bold().font(.system(size: 20))
                 Spacer()
-            }
+                Text("Round \(vm.gameIndex+1)/\(vm.rounds+1)")
+            }.padding(.bottom, 10)
             
             HStack {
                 Text(vm.currentCard.body).foregroundColor(Color.black)
@@ -26,7 +27,8 @@ struct MPCQuestionCard : View {
             .padding(.top, 5)
             
             HStack {
-                Text("Pick an answer: \(vm.answer)")
+                Text("Pick an answer: ")
+                Text(vm.answer).bold()
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.top, 15)

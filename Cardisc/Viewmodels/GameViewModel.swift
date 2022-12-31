@@ -25,7 +25,7 @@ class GameViewModel: ObservableObject {
     @Published var startedGame: Bool = false
     @Published var finishedGame: Bool = false
     @Published var joinedGame: Bool = false
-
+    
     //Game data
     @Published var isHost: Bool = false
     @Published var playerReady: Bool = false
@@ -37,6 +37,9 @@ class GameViewModel: ObservableObject {
     @Published var gameIndex: Int = 0
     @Published var gameId = ""
     @Published var answer: String = ""
+    @Published var scalableAnswer: Double = 3
+    @Published var averageScalable: Double = 0
+    @Published var summaryMPC: [String: Int] = ["A": 0, "B": 0, "C": 0, "D": 0]
     @Published var answers: [Answer] = []
     @Published var chatMessage: String = ""
     @Published var chatMessages: [ChatMessage] = []
@@ -52,30 +55,27 @@ class GameViewModel: ObservableObject {
     private func syncVariables() {
         self.gameManager.$players
             .sink(receiveValue: { players in
-                DispatchQueue.main.async {
-                    self.players = players
-                }
+                self.players = players
             })
             .store(in: &cancellables)
         
         self.gameManager.$gameIndex
             .sink(receiveValue: { gameIndex in
                 self.gameIndex = gameIndex
+                self.continueGame()
             })
             .store(in: &cancellables)
         
         self.gameManager.$game
             .sink(receiveValue: { game in
                 self.game = game
-                if(game.cards.count > 0) {
-                    self.currentCard = self.game.cards[self.gameIndex]
-                }
+                self.startGame()
             })
             .store(in: &cancellables)
         
         self.gameManager.$answers
             .sink(receiveValue: { answers in
-                self.answers = answers
+                self.procesAnswers(answers: answers)
             })
             .store(in: &cancellables)
         
@@ -84,25 +84,9 @@ class GameViewModel: ObservableObject {
                 self.chatMessages = chatMessages
             })
             .store(in: &cancellables)
-        
-        self.gameManager.$currentCard
-            .sink(receiveValue: { currentCard in
-                self.currentCard = currentCard
-                if(!self.isHost){
-                    self.nextRound()
-                }
-            })
-            .store(in: &cancellables)
-        
-        self.gameManager.$startedGame
-            .sink(receiveValue: { startedGame in
-                if(startedGame) {
-                    self.startGame()
-                }
-            })
-            .store(in: &cancellables)
     }
     
+    // Submits an answer to the session
     func submitAnswer() {
         DispatchQueue.main.async {
             self.gameManager.submitAnswer(answer: self.answer)
@@ -111,6 +95,7 @@ class GameViewModel: ObservableObject {
         }
     }
     
+    // Sends a chatmessage from current user to the session
     func sendChatMessage() {
         if(chatMessage != "") {
             DispatchQueue.main.async {
@@ -120,23 +105,64 @@ class GameViewModel: ObservableObject {
         }
     }
     
+    // Gets executed by the gamehost, marks the current round finished and asks for a new round
     func nextRound() {
-        DispatchQueue.main.async {
+        if(self.isHost) {
             self.gameManager.nextRound(conclusion: self.conclusion)
-
-            if(self.gameIndex <= self.rounds) {
-                self.nextRoundStarted = true
-            }
-            else {
-                self.endSession()
-            }
-            
-            self.answer = ""
-            self.conclusion = ""
-            self.submittedAnswer = false
         }
     }
     
+    // Summarises the answers for special card types
+    func procesAnswers(answers: [Answer]) {
+        self.answers = answers
+        if(currentCard.type == 1) {
+            var sum: Double = 0.0
+            for a in answers {
+                sum += Double(a.answer) ?? 0
+            }
+            self.averageScalable = sum/Double(answers.count)
+        }
+        else if(currentCard.type == 2) {
+            self.summaryMPC = ["A": 0, "B": 0, "C": 0, "D": 0]
+            for a in answers {
+                switch a.answer {
+                case "A":
+                    summaryMPC["A"]! += 1
+                case "B":
+                    summaryMPC["B"]! += 1
+                case "C":
+                    summaryMPC["C"]! += 1
+                case "D":
+                    summaryMPC["D"]! += 1
+                default:
+                    print("Error: wrong answer!")
+                }
+            }
+        }
+    }
+    
+    // Gets executed when a new round is started
+    func continueGame() {
+        DispatchQueue.main.async {
+            self.answer = ""
+            self.conclusion = ""
+            self.scalableAnswer = 3
+            self.chatMessage = ""
+            self.summaryMPC = ["A": 0, "B": 0, "C": 0, "D": 0]
+            if(self.game.cards.count > 0) {
+                if(self.gameIndex < self.game.cards.count) {
+                    self.currentCard = self.game.cards[self.gameIndex]
+                    self.submittedAnswer = false
+                    self.nextRoundStarted = true
+                }
+                else {
+                    self.endSession()
+                }
+            }
+        }
+    }
+    
+    // Joins an existing game with a gameId
     func joinGame() {
         DispatchQueue.main.async {
             self.isLoadingJoinSession = true
@@ -149,44 +175,57 @@ class GameViewModel: ObservableObject {
         }
     }
     
+    // Leaves a game, could be a self hosted game or a joined one
     func leaveGame() {
         DispatchQueue.main.async {
             self.gameManager.leaveGame(sessionCode: self.lobby.sessionCode)
+            self.lobby = Lobby(id: "", hostId: "", sessionCode: "", created: "", sessionAuth: "", players: [])
+            self.chatMessages = []
         }
-        self.lobby = Lobby(id: "", hostId: "", sessionCode: "", created: "", sessionAuth: "", players: [])
-        self.chatMessages = []
     }
     
+    // Starts the game, could be a hosted or a joined one. If user is the host, then a start request is sent to the API to let all players know the game has been started
     func startGame() {
-        self.isLoadingStartingSession = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.gameManager.startGame(rounds: self.rounds) {
-                self.startedGame = true
-                self.isLoadingStartingSession = false
+        DispatchQueue.main.async {
+            if(self.isHost && self.game.cards.count == 0) {
+                self.gameManager.startGame(rounds: self.rounds)
             }
-            
+            else {
+                if(self.game.cards.count > 0) {
+                    self.isLoadingStartingSession = true
+                    self.currentCard = self.game.cards[self.gameIndex]
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        self.startedGame = true
+                        self.isLoadingStartingSession = false
+                    }
+                }
+            }
         }
     }
     
+    // Creates a session where the current player is host of
     func createGame(completion: @escaping ()->()) {
         self.isLoadingStartingSession = true
         self.gameManager.createGame() { data in
             DispatchQueue.main.async {
+                self.isLoadingStartingSession = false
                 self.lobby = data
                 self.isHost = true
                 self.startedGame = false
-                self.isLoadingStartingSession = false
                 completion()
             }
         }
     }
     
+    // Ends the session if executed
     func endSession() {
         self.isLoadingMainMenu = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.gameManager.endGame(conclusion: self.conclusion)
-            self.isLoadingMainMenu = false
+            if(self.isHost) {
+                self.gameManager.endGame(conclusion: self.conclusion)
+            }
             self.finishedGame = true
+            self.isLoadingMainMenu = false
         }
     }
     

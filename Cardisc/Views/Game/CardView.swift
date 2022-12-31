@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct CardView: View {
-    let vm: GameViewModel
+    @StateObject var vm: GameViewModel
     
     var body: some View {
         VStack {
@@ -19,13 +19,10 @@ struct CardView: View {
                 Spacer()
             }
             .padding(.leading, 30)
-            .padding(.bottom, 30).onAppear{
-                print(vm.currentCard.type)
-            }
+            .padding(.bottom, 30)
             
             if(vm.currentCard.type == 1) {
-                OpenQuestionCard(vm: vm)
-                
+                ScalableQuestionCard(vm: vm)
             }
             
             else if(vm.currentCard.type == 2) {
@@ -33,12 +30,12 @@ struct CardView: View {
             }
             
             else {
-                ScalableQuestionCard(vm: vm)
+                OpenQuestionCard(vm: vm)
             }
             Spacer()
         }
         .padding(.top, 30)
         .navigationBarHidden(true)
-        .backgroundImage(imageName: "WP3")
+        .backgroundImage(imageName: "WP2")
     }
 }

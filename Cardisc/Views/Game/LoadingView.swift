@@ -12,12 +12,13 @@ struct LoadingView: View {
     let title: String
     let message: String
     let icon: String
+    let iconWidth: CGFloat
     
     var body: some View {
         VStack {
             Spacer()
             HStack {
-                Image(systemName: icon).resizable().foregroundColor(Color.white).frame(width: 25, height: 30)
+                Image(systemName: icon).resizable().foregroundColor(Color.white).frame(width: iconWidth, height: 30)
                 Text(title).font(.system(size: 28)).foregroundColor(Color.white).bold()
             }
             
@@ -35,6 +36,6 @@ struct LoadingView: View {
 
 struct LoadingView_Previews: PreviewProvider {
     static var previews: some View {
-        LoadingView(title: "Loading view", message: "Please wait while the next view is being loaded..", icon: "hourglass.tophalf.filled")
+        LoadingView(title: "Loading view", message: "Please wait while the next view is being loaded..", icon: "hourglass.tophalf.filled", iconWidth: 25)
     }
 }

@@ -19,12 +19,10 @@ class SignalRService: ObservableObject {
     
     //Game variables, these change on the actions of any user in the session
     @Published var players: [LobbyPlayer] = []
-    @Published var gameIndex: Int = 0
     @Published var game: Game = Game(cards: [], roundDuration: 0)
-    @Published var currentCard: Card = Card(id: "", number: 0, name: "", body: "", type: 0)
     @Published var answers: [Answer] = []
     @Published var chatMessages: [ChatMessage] = []
-    @Published var startedGame: Bool = false
+    @Published var gameIndex: Int = 0
     
     public init() {
         self.connection = HubConnectionBuilder(url: URL(string: Constants.SIGNALR_BASE_URL + defaults.string(forKey: "X-AUTHTOKEN")!)!)
@@ -80,7 +78,7 @@ class SignalRService: ObservableObject {
         
         connection.on(method: "endSession", callback: {
             print("END SESSION ACTION PERFORMED")
-            //TODO: @TIM add method for ending a session/game
+            self.onEndSession()
         })
         
         connection.on(method: "close", callback: {
@@ -103,7 +101,6 @@ class SignalRService: ObservableObject {
         for p in self.players {
             if(p.username == player.username) {
                 self.players[index].ready.toggle()
-                print("Player \(player.username) status changed to: \(self.players[index].ready)")
             }
             index+=1
         }
@@ -127,7 +124,6 @@ class SignalRService: ObservableObject {
     
     private func onGameStarted(game: Game) {
         self.game = game
-        self.startedGame = true
     }
     
     private func onNewMessage(user: User, cardIndex: Int, message: String) {
@@ -141,20 +137,15 @@ class SignalRService: ObservableObject {
     }
     
     private func onNextRound() {
-        self.gameIndex += 1
-        if(game.cards.count > self.gameIndex) {
-            self.currentCard = game.cards[self.gameIndex]
-            self.chatMessages = []
+        if(game.cards.count > 0) {
+            self.gameIndex += 1
             self.answers = []
-        }
-        else {
-            self.game = Game(cards: [], roundDuration: 0)
-            self.currentCard = Card(id: "", number: 0, name: "", body: "", type: 0)
-            print("Game done")
+            self.chatMessages = []
         }
     }
     
     private func onEndSession() {
-        //TODO: ...
+        self.game = Game(cards: [], roundDuration: 0)
+        self.gameIndex += 1
     }
 }

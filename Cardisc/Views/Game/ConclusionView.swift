@@ -42,9 +42,6 @@ struct ConclusionView: View {
             }
             MenuItem(menuIcon: "play.fill", iconHeight: 20, iconWidth: 18, menuTitle: "Continue", menuColor: UIColor.systemBlue, menuPaddingRight: 10).onTapGesture {
                 vm.nextRound()
-            }.onAppear {
-                vm.nextRoundStarted = false
-                vm.finishedGame = false
             }
         }
         .frame(maxHeight: .infinity, alignment: .top)
@@ -54,7 +51,7 @@ struct ConclusionView: View {
         .navigationDestination(isPresented: $vm.finishedGame) { NavigationLazyView(MainMenuView()) }
         .navigationDestination(isPresented: $vm.nextRoundStarted) { CardView(vm: vm) }
         .fullScreenCover(isPresented: $vm.isLoadingMainMenu) {
-            LoadingView(title: "Game finished", message: "The gamehost thanks you for playing this game!", icon: "flag.2.crossed.fill")
+            LoadingView(title: "Game finished", message: "The gamehost thanks you for playing this game!", icon: "flag.2.crossed.fill", iconWidth: 45)
         }
     }
 }

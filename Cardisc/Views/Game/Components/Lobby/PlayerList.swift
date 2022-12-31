@@ -34,6 +34,7 @@ struct PlayerList: View {
             .background(Color.white)
             .cornerRadius(10, corners: [.allCorners])
             .padding(.vertical, 5)
+            .shadow(radius: 5)
         }
     }
 }
