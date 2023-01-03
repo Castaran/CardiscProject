@@ -20,7 +20,7 @@ struct ScalableQuestionCard : View {
             }.padding(.bottom, 10)
             
             HStack {
-                Text(vm.currentCard.body).foregroundColor(Color.black)
+                Text(vm.currentCard.body)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
@@ -44,6 +44,7 @@ struct ScalableQuestionCard : View {
         .cornerRadius(20, corners: [.allCorners])
         .padding(.horizontal, 30)
         .shadow(radius: 10)
+        .foregroundColor(Color.black)
         
         MenuItem(menuIcon: "play.fill", iconHeight: 22, iconWidth: 22, menuTitle: "Play card", menuColor: UIColor.systemBlue, menuPaddingRight: 40).onTapGesture {
             vm.submitAnswer()

@@ -33,7 +33,7 @@ struct MainMenuView: View {
                 MenuItem(
                     menuIcon: "crown.fill",
                     iconHeight: 24,
-                    iconWidth: 36,
+                    iconWidth: 34,
                     menuTitle: "Host a game",
                     menuColor: UIColor.systemBlue,
                     menuPaddingRight: 68,

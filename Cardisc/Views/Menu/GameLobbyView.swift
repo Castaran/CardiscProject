@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import UIKit
 
 struct GameLobbyView: View {
     @StateObject var vm: GameViewModel
@@ -23,9 +24,11 @@ struct GameLobbyView: View {
                         .frame(width: 38, height: 22)
                         .foregroundColor(Color.white)
                         .padding(.trailing, 1)
-                    Text("Game lobby     #\(vm.lobby.sessionCode)").font(.system(size: 20)).bold().foregroundColor(Color.white)
+                    Text("Game lobby: \(vm.lobby.sessionCode)").font(.system(size: 20)).bold().foregroundColor(Color.white)
                     Spacer()
-                    Image(systemName: "square.and.arrow.up").foregroundColor(Color.white).padding(.trailing, 20)
+                    Image(systemName: "square.and.arrow.up").foregroundColor(Color.white).padding(.trailing, 20).onTapGesture {
+                        vm.shareGame()
+                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
@@ -34,7 +37,7 @@ struct GameLobbyView: View {
                 if(vm.isHost) {
                     HStack {
                         Picker("Number of cards", selection: $vm.rounds) {
-                            ForEach(1 ..< 8) {
+                            ForEach(3 ..< 10) {
                                 Text("\($0) round(s)")
                             }
                         }
@@ -69,8 +72,8 @@ struct GameLobbyView: View {
             if(vm.playerReady) {
                 MenuItem(
                     menuIcon: "person.fill.xmark",
-                    iconHeight: 20,
-                    iconWidth: 30,
+                    iconHeight: 25,
+                    iconWidth: 35,
                     menuTitle: "Unready",
                     menuColor: UIColor.systemRed,
                     menuPaddingRight: 30

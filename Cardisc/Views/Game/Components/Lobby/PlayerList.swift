@@ -20,6 +20,7 @@ struct PlayerList: View {
                     Spacer()
                     Text("Status").bold(true)
                 }
+                .foregroundColor(Color.black)
                 .padding(.horizontal, 15)
                 .padding(.top, 10)
                 

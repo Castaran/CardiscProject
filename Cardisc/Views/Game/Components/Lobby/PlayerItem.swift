@@ -14,13 +14,26 @@ struct PlayerItem: View {
     var body: some View {
         HStack {
             if(player.picture != "") {
-                AsyncImage(url: URL(string: player.picture)).frame(width: 25, height: 25)
+                AsyncImage(url: URL(string: player.picture)) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 25, height: 25)
+                        .clipShape(Circle())
+                } placeholder: {
+                    ProgressView()
+                }
             }
             else {
-                Image(systemName: "person.circle.fill").resizable().frame(width: 25, height: 25)
+                Image(systemName: "person.circle.fill")
+                    .resizable()
+                    .frame(width: 25, height: 25)
+                    .foregroundColor(Color.black)
             }
             
-            Text(player.username).font(.system(size: 20))
+            Text(player.username)
+                .font(.system(size: 20))
+                .foregroundColor(Color.black)
             
             Spacer()
             

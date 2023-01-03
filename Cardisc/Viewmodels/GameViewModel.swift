@@ -8,6 +8,7 @@
 import Foundation
 import SignalRClient
 import Combine
+import UIKit
 
 class GameViewModel: ObservableObject {
     
@@ -29,7 +30,7 @@ class GameViewModel: ObservableObject {
     //Game data
     @Published var isHost: Bool = false
     @Published var playerReady: Bool = false
-    @Published var rounds: Int = 2
+    @Published var rounds: Int = 0
     @Published var players: [LobbyPlayer] = []
     @Published var game = Game(cards: [], roundDuration: 0)
     @Published var lobby: Lobby = Lobby(id: "", hostId: "", sessionCode: "", created: "", sessionAuth: "", players: [])
@@ -38,11 +39,14 @@ class GameViewModel: ObservableObject {
     @Published var gameId = ""
     @Published var answer: String = ""
     @Published var scalableAnswer: Double = 3
+    @Published var answerGiven: Bool = false
     @Published var averageScalable: Double = 0
     @Published var summaryMPC: [String: Int] = ["A": 0, "B": 0, "C": 0, "D": 0]
     @Published var answers: [Answer] = []
     @Published var chatMessage: String = ""
     @Published var chatMessages: [ChatMessage] = []
+    @Published var keyboardHeigtChat: CGFloat = 0
+    @Published var chatting: Bool = false
     @Published var conclusion = ""
     
     private var cancellables: [AnyCancellable] = []
@@ -89,9 +93,12 @@ class GameViewModel: ObservableObject {
     // Submits an answer to the session
     func submitAnswer() {
         DispatchQueue.main.async {
-            self.gameManager.submitAnswer(answer: self.answer)
-            self.submittedAnswer = true
-            self.nextRoundStarted = false
+            if(self.answer != "") {
+                self.gameManager.submitAnswer(answer: self.answer)
+                self.submittedAnswer = true
+                self.answerGiven = false
+                self.nextRoundStarted = false
+            }
         }
     }
     
@@ -188,6 +195,7 @@ class GameViewModel: ObservableObject {
     func startGame() {
         DispatchQueue.main.async {
             if(self.isHost && self.game.cards.count == 0) {
+                self.rounds += 2
                 self.gameManager.startGame(rounds: self.rounds)
             }
             else {
@@ -229,11 +237,21 @@ class GameViewModel: ObservableObject {
         }
     }
     
+    // Changes the players state
     func changeState() {
         DispatchQueue.main.async {
             self.gameManager.changeState()
             self.playerReady.toggle()
         }
+    }
+    
+    // Shares the game code via supported social media platforms
+    func shareGame() {
+        let activityViewController = UIActivityViewController(
+            activityItems: ["Join my Cardisc game with the following GameID: \(self.lobby.sessionCode)"],
+            applicationActivities: nil)
+        
+        UIApplication.shared.windows.first?.rootViewController?.present(activityViewController, animated: true, completion: nil)
     }
     
 }

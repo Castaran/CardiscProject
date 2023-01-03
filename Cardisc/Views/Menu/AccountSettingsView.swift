@@ -45,7 +45,10 @@ struct AccountSettingsView: View {
                         }
                         VStack {
                             HStack {
-                                Text(vm.currentUser.username).bold().font(.system(size: 16))
+                                Text(vm.currentUser.username)
+                                    .bold()
+                                    .font(.system(size: 16))
+                                    .foregroundColor(Color.black)
                                 Spacer()
                             }
                             Divider().frame(height: 0.2)
@@ -61,7 +64,7 @@ struct AccountSettingsView: View {
                                     Text("********")
                                 }
                             }
-                            .foregroundColor(Color(UIColor.systemGray))
+                            .foregroundColor(Color.gray)
                         }
                         .padding(.trailing,40)
                         .padding(.vertical, 20)
@@ -79,7 +82,7 @@ struct AccountSettingsView: View {
                 }.padding(.horizontal, 30)
                 
                 NavigationLink {
-                    EditAccountSettingsView()
+                    EditAccountSettingsView(vm: vm)
                 } label: {
                     HStack {
                         MenuItem(menuIcon: "square.and.pencil", iconHeight: 26, iconWidth: 26, menuTitle: "Edit account info", menuColor: UIColor.systemBlue, menuPaddingRight: 40)
@@ -103,9 +106,7 @@ struct AccountSettingsView: View {
                 
                 Spacer()
             }
-            .padding(.top, 30)
-            
-            
+            .padding(.top, 20)
         }
         .backgroundImage()
         .navigationDestination(isPresented: $vm.userDeleted, destination: {

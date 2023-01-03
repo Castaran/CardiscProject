@@ -24,6 +24,8 @@ struct SummaryScalable: View {
                 Text("Average score: \(String(format: "%.1f", vm.averageScalable * 20))%")
                 Spacer()
             }
+            .padding(.vertical, 10)
+            
             HStack {
                 Slider(value: $vm.averageScalable, in: 1...5, step: 0.1).disabled(true)
             }
@@ -34,6 +36,7 @@ struct SummaryScalable: View {
                 Text("Agree")
             }
         }
+        .foregroundColor(Color.black)
         .padding(15)
         .background(Color.white)
         .cornerRadius(10, corners: [.allCorners])

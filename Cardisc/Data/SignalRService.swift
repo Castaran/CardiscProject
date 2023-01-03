@@ -14,6 +14,7 @@ class SignalRService: ObservableObject {
     //SignalR variables
     private let defaults = UserDefaults.standard
     private var connection: HubConnection
+    private var connectionDelegation = ConnectionDelegation()
     private var apiService = ApiService()
     private var connectionId = ""
     
@@ -26,12 +27,15 @@ class SignalRService: ObservableObject {
     
     public init() {
         self.connection = HubConnectionBuilder(url: URL(string: Constants.SIGNALR_BASE_URL + defaults.string(forKey: "X-AUTHTOKEN")!)!)
+            .withHubConnectionDelegate(delegate: self.connectionDelegation)
             .withLogging(minLogLevel: .error)
+            .withAutoReconnect()
             .build()
         
         connection.on(method: "newConnection", callback: {
             (id: String) in
             print("NEW CONNECTION ACTION PERFORMED")
+            self.defaults.set(id, forKey: "connectionId")
             self.connectionId = id
         })
         
@@ -84,9 +88,13 @@ class SignalRService: ObservableObject {
         connection.on(method: "close", callback: {
             print("CONN CLOSED")
         })
+
         connection.start()
     }
     
+    public func stopConnection() {
+        self.connection.stop()
+    }
     
     public func joinMessageGroup() {
         let body: [String: AnyHashable] = [
@@ -149,3 +157,39 @@ class SignalRService: ObservableObject {
         self.gameIndex += 1
     }
 }
+
+class ConnectionDelegation: HubConnectionDelegate {
+    private let apiService = ApiService()
+    
+    func connectionDidOpen(hubConnection: SignalRClient.HubConnection) {
+        //..
+    }
+    
+    func connectionDidReconnect() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            let body: [String: AnyHashable] = [
+                "connectionId": UserDefaults.standard.string(forKey: "connectionId"),
+            ]
+
+            self.apiService.httpRequestWithoutReturn(body: body, url: "joinGrp", httpMethod: "POST")
+        }
+    }
+    
+    func connectionWillReconnect(error: Error) {
+        //..
+    }
+    
+    func connectionDidFailToOpen(error: Error) {
+        //..
+    }
+    
+    func connectionDidClose(error: Error?) {
+        //..
+    }
+    
+    func didReceiveData(data: Data) {
+        //..
+    }
+
+}
+

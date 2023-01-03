@@ -26,9 +26,17 @@ class LoginViewModel: ObservableObject {
             if(!self.username.isEmpty) {
                 if(!self.password.isEmpty) {
                     self.accountManager.loginUser(username: self.username, password: self.password) { data in
-                        self.isRequestInProgress = false
-                        self.loggedIn = true
-                        self.errorMessage = ""
+                        if (data != nil) {
+                            self.isRequestInProgress = false
+                            self.loggedIn = true
+                            self.errorMessage = ""
+                        }
+                        else {
+                            self.isRequestInProgress = false
+                            self.errorMessage = "Wrong usercredentials"
+                            print("wrong credentials")
+                        }
+                        
                     }
                 }
                 else {

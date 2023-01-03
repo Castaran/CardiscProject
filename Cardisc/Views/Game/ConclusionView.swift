@@ -39,11 +39,13 @@ struct ConclusionView: View {
                 .cornerRadius(15, corners: [.allCorners])
                 .padding(.horizontal, 30)
                 .shadow(radius: 10)
+                .padding(.bottom, 20)
             }
             MenuItem(menuIcon: "play.fill", iconHeight: 20, iconWidth: 18, menuTitle: "Continue", menuColor: UIColor.systemBlue, menuPaddingRight: 10).onTapGesture {
                 vm.nextRound()
             }
         }
+        .foregroundColor(Color.black)
         .frame(maxHeight: .infinity, alignment: .top)
         .padding(.top, 40)
         .backgroundImage(imageName: "WP3")

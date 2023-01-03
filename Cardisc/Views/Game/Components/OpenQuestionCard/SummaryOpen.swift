@@ -37,6 +37,7 @@ struct SummaryOpen: View {
             }
             
         }
+        .foregroundColor(Color.black)
         .padding(15)
         .background(Color.white)
         .cornerRadius(10, corners: [.allCorners])

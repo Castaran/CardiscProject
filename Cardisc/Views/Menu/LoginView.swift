@@ -36,7 +36,7 @@ struct LoginView: View {
                 }
                 
                 TextField(
-                    "*******",
+                    "JohnDoe123",
                     text: $vm.username
                 )
                 .padding(.vertical, 10)
@@ -52,7 +52,7 @@ struct LoginView: View {
                 }
                 
                 SecureField(
-                    "*******",
+                    "*********",
                     text: $vm.password
                 )
                 .padding(.vertical, 10)

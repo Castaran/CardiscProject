@@ -13,7 +13,7 @@ struct ChatMessageItem: View {
     let name: String?
     let message: String
     
-    let msgWidth: CGFloat = 170
+    let msgWidth: CGFloat = 230
     
     var body: some View {
         if let name = self.name {

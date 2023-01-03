@@ -43,9 +43,10 @@ struct MPCQuestionCard : View {
                     MPCButton(buttonBody: "D", color: UIColor.systemGreen).onTapGesture { vm.answer = "D" }
                 }
             }
-            .padding(.horizontal, 25)
+            .padding(.horizontal, 10)
             .padding(.vertical, 10)
         }
+        .foregroundColor(Color.black)
         .padding(20)
         .background(Color.white)
         .cornerRadius(20, corners: [.allCorners])

@@ -19,8 +19,12 @@ struct Logo: View {
                 VStack (
                     alignment: .leading
                 ) {
-                    Text("Cardisc").font(.system(size: 32)).bold()
+                    Text("Cardisc")
+                        .font(.system(size: 32))
+                        .bold()
+                        .foregroundColor(Color.black)
                     Text("An idea developing tool").font(.system(size: 18))
+                        .foregroundColor(Color.black)
                 }
             }
             .padding(.vertical, 35)

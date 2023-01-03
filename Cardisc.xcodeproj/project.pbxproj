@@ -84,6 +84,8 @@
 		22CB5017295F6A610054951A /* MultiImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CB5016295F6A610054951A /* MultiImagePicker.swift */; };
 		22CB501E295F9A0B0054951A /* SummaryMPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CB501D295F9A0B0054951A /* SummaryMPC.swift */; };
 		22CB5022295F9A270054951A /* SummaryScalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CB5021295F9A270054951A /* SummaryScalable.swift */; };
+		22CB50262961C4410054951A /* CardiscTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CB50252961C4410054951A /* CardiscTextfield.swift */; };
+		22CB50282961C7190054951A /* CardiscPasswordfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CB50272961C7190054951A /* CardiscPasswordfield.swift */; };
 		22E8C752293CE8A7005CCC00 /* SignalRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E8C751293CE8A7005CCC00 /* SignalRService.swift */; };
 		22FD227129302CB000E9A02C /* ChatMessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FD227029302CB000E9A02C /* ChatMessageItem.swift */; };
 		B9F38F49C4CC083C02468A7A /* Pods_Cardisc_CardiscUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29D13F3CB9C870FF15F6C57A /* Pods_Cardisc_CardiscUITests.framework */; };
@@ -190,6 +192,9 @@
 		22CB5016295F6A610054951A /* MultiImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiImagePicker.swift; sourceTree = "<group>"; };
 		22CB501D295F9A0B0054951A /* SummaryMPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryMPC.swift; sourceTree = "<group>"; };
 		22CB5021295F9A270054951A /* SummaryScalable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryScalable.swift; sourceTree = "<group>"; };
+		22CB50252961C4410054951A /* CardiscTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardiscTextfield.swift; sourceTree = "<group>"; };
+		22CB50272961C7190054951A /* CardiscPasswordfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardiscPasswordfield.swift; sourceTree = "<group>"; };
+		22CB502B2963322B0054951A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		22E8C751293CE8A7005CCC00 /* SignalRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalRService.swift; sourceTree = "<group>"; };
 		22FD227029302CB000E9A02C /* ChatMessageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageItem.swift; sourceTree = "<group>"; };
 		29D13F3CB9C870FF15F6C57A /* Pods_Cardisc_CardiscUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cardisc_CardiscUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -257,6 +262,8 @@
 				22CB5016295F6A610054951A /* MultiImagePicker.swift */,
 				22A80AF2292A7A17003CD018 /* LoadingView.swift */,
 				228A74992959F9EF00B6394B /* NavigationLazyView.swift */,
+				22CB50252961C4410054951A /* CardiscTextfield.swift */,
+				22CB50272961C7190054951A /* CardiscPasswordfield.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -319,6 +326,7 @@
 		22A80AAA292A722D003CD018 /* Cardisc */ = {
 			isa = PBXGroup;
 			children = (
+				22CB502B2963322B0054951A /* Info.plist */,
 				22A80AAB292A722D003CD018 /* CardiscApp.swift */,
 				22A80AD5292A7260003CD018 /* Data */,
 				22A80AD9292A7284003CD018 /* Managers */,
@@ -414,7 +422,11 @@
 		22A80ADA292A7734003CD018 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				22A80AFC292A8368003CD018 /* Account */,
+				22A80AE8292A7928003CD018 /* AccountSettingsView.swift */,
+				2281CDD1292B9C1200106B12 /* EditAccountSettingsView.swift */,
+				22A80ADE292A7869003CD018 /* LoginView.swift */,
+				22A80AE2292A78C1003CD018 /* RegisterView.swift */,
+				22A80AF0292A79CE003CD018 /* GameLobbyView.swift */,
 				22A80AEA292A7944003CD018 /* JoinGameView.swift */,
 				22A80AEE292A7992003CD018 /* HowToPlayView.swift */,
 				22A80AE6292A7914003CD018 /* MainMenuView.swift */,
@@ -428,23 +440,11 @@
 			isa = PBXGroup;
 			children = (
 				22CB5018295F98970054951A /* Components */,
-				22A80AF0292A79CE003CD018 /* GameLobbyView.swift */,
 				22A80AF4292A7A34003CD018 /* CardView.swift */,
 				22A80AF6292A7A63003CD018 /* ChatView.swift */,
 				22A80AF8292A7A90003CD018 /* ConclusionView.swift */,
 			);
 			path = Game;
-			sourceTree = "<group>";
-		};
-		22A80AFC292A8368003CD018 /* Account */ = {
-			isa = PBXGroup;
-			children = (
-				22A80AE8292A7928003CD018 /* AccountSettingsView.swift */,
-				2281CDD1292B9C1200106B12 /* EditAccountSettingsView.swift */,
-				22A80ADE292A7869003CD018 /* LoginView.swift */,
-				22A80AE2292A78C1003CD018 /* RegisterView.swift */,
-			);
-			path = Account;
 			sourceTree = "<group>";
 		};
 		22CB5018295F98970054951A /* Components */ = {
@@ -756,6 +756,7 @@
 				22A40E6A29316AB400FF7952 /* changeReadinessDto.swift in Sources */,
 				22A40E562931664E00FF7952 /* submitAnswerDto.swift in Sources */,
 				22A40E7A2932CF6C00FF7952 /* UserViewModel.swift in Sources */,
+				22CB50262961C4410054951A /* CardiscTextfield.swift in Sources */,
 				22CB5015295F6A390054951A /* SingleImagePicker.swift in Sources */,
 				22A80AF7292A7A63003CD018 /* ChatView.swift in Sources */,
 				22A40E602931686E00FF7952 /* lobbyResponseDto.swift in Sources */,
@@ -798,6 +799,7 @@
 				22E8C752293CE8A7005CCC00 /* SignalRService.swift in Sources */,
 				229A7BB42944EC460089CC02 /* RegisterViewModel.swift in Sources */,
 				2203C91B2955E9B100FD2921 /* Game.swift in Sources */,
+				22CB50282961C7190054951A /* CardiscPasswordfield.swift in Sources */,
 				22A80B0E292A856C003CD018 /* ApiService.swift in Sources */,
 				226B18A02943F9F3005BBD06 /* User.swift in Sources */,
 				22CB500F295CA1F80054951A /* CustomModifiers.swift in Sources */,
@@ -962,13 +964,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Cardisc/Preview Content\"";
+				DEVELOPMENT_TEAM = B8GKUPRDCL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cardisc/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Cardisc;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.trivia-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -976,9 +983,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.vankesteren.tim.Cardisc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -991,13 +1001,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Cardisc/Preview Content\"";
+				DEVELOPMENT_TEAM = B8GKUPRDCL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cardisc/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Cardisc;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.trivia-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1005,9 +1020,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.vankesteren.tim.Cardisc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

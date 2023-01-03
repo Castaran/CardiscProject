@@ -87,7 +87,7 @@ class ApiService {
                 completion(response)
             }
             catch{
-                print(error)
+                failure(error)
             }
         }
         

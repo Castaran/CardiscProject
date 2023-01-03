@@ -18,7 +18,7 @@ struct PlayerAnswerOpen: View {
                 Spacer()
             }
             HStack {
-                Text("\(answer.answer)")
+                Text("\(answer.answer)").foregroundColor(Color.black)
                 Spacer()
             }
         }
