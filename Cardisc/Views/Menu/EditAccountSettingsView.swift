@@ -38,9 +38,14 @@ struct EditAccountSettingsView: View {
                         
                         CardiscTextfield(value: $vm.email, label: "Emailadress")
                         
-                        CardiscPasswordfield(value: vm.password, label: "New password")
+                        CardiscPasswordfield(value: $vm.password, label: "New password")
                         
-                        CardiscPasswordfield(value: vm.password2, label: "New password repeated")
+                        CardiscPasswordfield(value: $vm.password2, label: "New password repeated")
+                        
+                        HStack {
+                            Text(vm.errorMsg).foregroundColor(Color.white)
+                            Spacer()
+                        }
                         
                     }
                 }
@@ -49,7 +54,10 @@ struct EditAccountSettingsView: View {
             .padding(.horizontal, 30)
             .padding(.vertical, 20)
             
-            MenuItem(menuIcon: "checkmark", iconHeight: 22, iconWidth: 26, menuTitle: "Confirm", menuColor: UIColor.systemBlue, menuPaddingRight: 40)
+            MenuItem(menuIcon: "checkmark", iconHeight: 22, iconWidth: 26, menuTitle: "Confirm", menuColor: UIColor.systemBlue, menuPaddingRight: 40).onTapGesture {
+                vm.updateUser()
+            }
+            .navigationDestination(isPresented: $vm.updatedUser) { StartView() }
             
             Spacer()
         }

@@ -12,6 +12,7 @@ import Combine
 struct ChatView: View {
     @ObservedObject var vm: GameViewModel
     @FocusState private var chatFocussed: Bool
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack {
@@ -94,11 +95,26 @@ struct ChatView: View {
         }
         .backgroundImage(imageName: "WP1")
         .edgesIgnoringSafeArea(.bottom)
-        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
         .navigationDestination(isPresented: $vm.nextRoundStarted) { CardView(vm: vm) }
         .navigationDestination(isPresented: $vm.finishedGame) { NavigationLazyView(MainMenuView()) }
+        .navigationDestination(isPresented: $vm.leftGame) { NavigationLazyView(MainMenuView()) }
         .fullScreenCover(isPresented: $vm.isLoadingMainMenu) {
             LoadingView(title: "Game finished", message: "The gamehost thanks you for playing this game!", icon: "flag.2.crossed.fill", iconWidth: 45)
         }
+        .navigationBarItems(
+            leading:
+                Button(action: { vm.showConfirmation.toggle()}) {
+                    Image(systemName: "chevron.left")
+                    Text("Leave session")
+                }
+        .alert(isPresented: $vm.showConfirmation) {
+            Alert(
+                title: Text("Leaving current session"),
+                message: Text("Are you sure you want to leave this session?"),
+                primaryButton: .destructive(Text("Leave")) { vm.leaveGame()},
+                secondaryButton: .cancel())
+        })
+
     }
 }

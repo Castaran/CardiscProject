@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct CardiscPasswordfield: View {
-    @State var value: String
+    @State var value: Binding<String>
     let label: String
     
     var body: some View {
@@ -20,7 +20,7 @@ struct CardiscPasswordfield: View {
                 .foregroundColor(Color(UIColor.white))
             SecureField(
                 "********",
-                text: $value
+                text: value
             )
             .keyboardType(.asciiCapable)
             .padding(.vertical, 10)

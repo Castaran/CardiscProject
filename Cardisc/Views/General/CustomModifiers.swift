@@ -51,7 +51,6 @@ struct RoundedCorner: Shape {
 }
 
 
-
 extension View {
     
     func backgroundImage(imageName: String = "WP1") -> some View {
@@ -67,6 +66,3 @@ extension View {
     }
     
 }
-
-
-

@@ -30,18 +30,23 @@ struct AccountSettingsView: View {
                     
                     
                     HStack {
-                        if let image = vm.image {
-                            image
-                                .resizable()
-                                .clipShape(Circle())
-                                .frame(width: 90, height: 90)
-                                .padding(20)
+                        if(vm.currentUser.picture != "") {
+                            AsyncImage(url: URL(string: vm.currentUser.picture)) { image in
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 80, height: 80)
+                                    .clipShape(Circle())
+                                    .padding(20)
+                            } placeholder: {
+                                ProgressView()
+                            }
                         }
                         else {
-                            Image("UserIcon")
+                            Image(systemName: "person.circle.fill")
                                 .resizable()
-                                .frame(width: 60, height: 60)
-                                .padding(20)
+                                .frame(width: 80, height: 80)
+                                .foregroundColor(Color.black)
                         }
                         VStack {
                             HStack {
@@ -96,6 +101,12 @@ struct AccountSettingsView: View {
                     matching: .images,
                     photoLibrary: .shared()
                 ) {
+                    MenuItem(menuIcon: "camera.fill", iconHeight: 22, iconWidth: 30, menuTitle: "Change picture", menuColor: UIColor.systemBlue, menuPaddingRight: 40)
+                }
+                
+                NavigationLink {
+                    TestView()
+                }label: {
                     MenuItem(menuIcon: "camera.fill", iconHeight: 22, iconWidth: 30, menuTitle: "Change picture", menuColor: UIColor.systemBlue, menuPaddingRight: 40)
                 }
                 

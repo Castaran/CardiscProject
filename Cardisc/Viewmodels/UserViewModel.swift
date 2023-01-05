@@ -11,8 +11,9 @@ import PhotosUI
 
 class UserViewModel: ObservableObject {
     private let userManager = UserManager()
+    private var tempUser: [String: AnyHashable] = [:]
     
-    @Published var currentUser = userDto(id: "", username: "", email: "", picture: "")
+    @Published var currentUser = User(id: "", username: "", email: "", picture: "")
     @Published var showDeleteUserComfirmation: Bool = false
     @Published var userDeleted: Bool = false
     @Published var confirmMessageShow: Bool = false
@@ -23,6 +24,9 @@ class UserViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var password2: String = ""
+    @Published var errorMsg: String = ""
+    @Published var changedUserDetails = ""
+    @Published var updatedUser: Bool = false
     
     @Published var imageSelection: PhotosPickerItem? {
         didSet {
@@ -38,7 +42,7 @@ class UserViewModel: ObservableObject {
         if let currentUser = UserDefaults.standard.data(forKey: "user") {
             do {
                 let decoder = JSONDecoder()
-                self.currentUser = try decoder.decode(loginResponseDto.self, from: currentUser).user
+                self.currentUser = try decoder.decode(loginResponseDto.self, from: currentUser).user.toDomainModel()
                 self.username = self.currentUser.username
                 self.email = self.currentUser.email
                 
@@ -66,49 +70,55 @@ class UserViewModel: ObservableObject {
     }
     
     func updateUser() {
+        self.errorMsg = ""
+        self.changedUserDetails = ""
+        self.updatedUser = false
+        
+        
         if(self.username != self.currentUser.username) {
-            print("Username changed")
-        }
-        if(self.email != self.currentUser.email) {
-            print("Emailadress changed")
-        }
-        if(!password.isEmpty || !password2.isEmpty) {
-            if(password == password2) {
-                if(password.count > 8) {
-                    if((password.rangeOfCharacter(from: .uppercaseLetters)) != nil) {
-                        if((password.rangeOfCharacter(from: .lowercaseLetters)) != nil) {
-                            if((password.rangeOfCharacter(from: .decimalDigits)) != nil) {
-                                if((password.rangeOfCharacter(from: .symbols)) != nil) {
-                                    print("Password OK")
-                                }
-                                else {
-                                    print("Password must at least contain one special character")
-                                }
-                            }
-                            else {
-                                print("Password must at least contain one numeric character")
-                            }
-                        }
-                        else {
-                            print("Password must at least contain one lowercase character")
-                        }
-                    }
-                    else {
-                        print("Password must at least contain one uppercase character")
-                    }
-                }
-                else {
-                    print("Password should at least be 8 characters long, please try another one.")
-                }
+            if(!self.username.isEmpty) {
+                self.changedUserDetails += "Username \(currentUser.username) -> \(self.username) \n"
             }
             else {
-                print("Passwords aren't matching!")
+                self.errorMsg = "Username field can not be empty"
+            }
+        }
+        
+        if(self.email != self.currentUser.email) {
+            if(!self.email.isEmpty) {
+                self.changedUserDetails += "Email \(currentUser.email) -> \(self.email) \n"
+            }
+            else {
+                self.errorMsg = "Emailfield can not be empty"
+            }
+        }
+        
+        if(self.password != "" && self.password2 != "") {
+            if(password == password2) {
+                self.changedUserDetails += "Password ****** -> \(self.password) \n"
+            }
+            else {
+                self.errorMsg = "Passwords aren't matching!"
+            }
+        }
+        
+        if(self.errorMsg.isEmpty && !self.changedUserDetails.isEmpty) {
+            DispatchQueue.main.async {
+                self.userManager.updateUser(username: self.username, password: self.password, email: self.email) { data in
+                    if(data?.username != nil) {
+                        self.currentUser = data!
+                        self.updatedUser = true
+                    }
+                    else {
+                        self.errorMsg = "Username aleady exists"
+                    }
+                }
             }
         }
     }
     
     func uploadAvatar() {
-        //..
+        
     }
     
     func loadTransferable(from imageSelection: PhotosPickerItem?) async throws {

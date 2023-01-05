@@ -45,6 +45,7 @@ struct ScalableQuestionCard : View {
         .padding(.horizontal, 30)
         .shadow(radius: 10)
         .foregroundColor(Color.black)
+        .padding(.bottom, 20)
         
         MenuItem(menuIcon: "play.fill", iconHeight: 22, iconWidth: 22, menuTitle: "Play card", menuColor: UIColor.systemBlue, menuPaddingRight: 40).onTapGesture {
             vm.submitAnswer()

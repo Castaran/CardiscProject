@@ -27,6 +27,7 @@ class GameViewModel: ObservableObject {
     @Published var finishedGame: Bool = false
     @Published var joinedGame: Bool = false
     @Published var isReconnecting: Bool = false
+    @Published var leftGame: Bool = false
     
     //Game data
     @Published var isHost: Bool = false
@@ -195,6 +196,7 @@ class GameViewModel: ObservableObject {
             self.gameManager.leaveGame(sessionCode: self.lobby.sessionCode)
             self.lobby = Lobby(id: "", hostId: "", sessionCode: "", created: "", sessionAuth: "", players: [])
             self.chatMessages = []
+            self.leftGame = true
         }
     }
     

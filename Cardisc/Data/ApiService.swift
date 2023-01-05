@@ -87,6 +87,7 @@ class ApiService {
                 completion(response)
             }
             catch{
+                print("error: \(error.localizedDescription)")
                 failure(error)
             }
         }
@@ -124,4 +125,5 @@ class ApiService {
         
         task.resume()
     }
+
 }

@@ -25,9 +25,6 @@ class AccountManager {
                 let encoder = JSONEncoder()
                 let user = try encoder.encode(data)
                 self.defaults.set(user, forKey: "user")
-                
-                
-
             } catch {
                 print("Unable to Encode Note (\(error))")
             }

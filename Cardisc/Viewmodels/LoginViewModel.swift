@@ -33,8 +33,7 @@ class LoginViewModel: ObservableObject {
                         }
                         else {
                             self.isRequestInProgress = false
-                            self.errorMessage = "Wrong usercredentials"
-                            print("wrong credentials")
+                            self.errorMessage = "Usercredentials incorrect"
                         }
                         
                     }

@@ -44,6 +44,7 @@ struct SummaryOpen: View {
         .padding(.horizontal, 30)
         .shadow(radius: 5)
         .frame(maxHeight: 220)
+        .padding(.bottom, 20)
     }
 }
 

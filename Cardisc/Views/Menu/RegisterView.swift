@@ -17,7 +17,7 @@ struct RegisterView: View {
                 HStack {
                     Image(systemName: "person.crop.circle.badge.plus.fill")
                         .resizable()
-                        .frame(width: 30, height: 28)
+                        .frame(width: 30, height: 26)
                         .foregroundColor(Color.white)
                         .padding(.trailing, 5)
                     Text("Register").font(.system(size: 24)).foregroundColor(Color.white).bold()
@@ -31,7 +31,7 @@ struct RegisterView: View {
                     }.frame(maxWidth: .infinity, alignment: .leading)
                     Text("Username").frame(maxWidth: .infinity, alignment: .leading).bold().foregroundColor(Color(UIColor.white))
                     TextField(
-                        "...",
+                        "JohnDoe123",
                         text: $vm.username
                     )
                     .padding(.vertical, 10)
@@ -44,7 +44,7 @@ struct RegisterView: View {
                 VStack {
                     Text("Emailadress").frame(maxWidth: .infinity, alignment: .leading).bold().foregroundColor(Color(UIColor.white))
                     TextField(
-                        "...",
+                        "johndoe123@bakmail.nl",
                         text: $vm.emailaddress
                     )
                     .padding(.vertical, 10)
@@ -57,7 +57,7 @@ struct RegisterView: View {
                 VStack {
                     Text("Password").frame(maxWidth: .infinity, alignment: .leading).bold().foregroundColor(Color(UIColor.white))
                     SecureField(
-                        "...",
+                        "*********",
                         text: $vm.password
                     )
                     .padding(.vertical, 10)
@@ -70,7 +70,7 @@ struct RegisterView: View {
                 VStack {
                     Text("Password repeated").frame(maxWidth: .infinity, alignment: .leading).bold().foregroundColor(Color(UIColor.white))
                     SecureField(
-                        "...",
+                        "*********",
                         text: $vm.passwordRepeated
                     )
                     .padding(.vertical, 10)
