@@ -17,7 +17,7 @@ struct OpenQuestionCard : View {
                 HStack {
                     Text("\(vm.currentCard.name)").foregroundColor(Color.black).bold().font(.system(size: 20))
                     Spacer()
-                    Text("Round \(vm.gameIndex+1)/\(vm.rounds+1)")
+                    Text("Round \(vm.gameIndex+1)/\(vm.game.cards.count)")
                 }
                 .padding(.vertical, 10)
                 

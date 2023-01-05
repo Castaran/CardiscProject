@@ -99,6 +99,9 @@ struct GameLobbyView: View {
         .fullScreenCover(isPresented: $vm.isLoadingStartingSession) {
             LoadingView(title: "Starting session", message: "Prepare to answer the first questioncard..", icon: "hourglass.tophalf.filled", iconWidth: 25)
         }
+        .fullScreenCover(isPresented: $vm.isReconnecting) {
+            LoadingView(title: "Reconnecting", message: "Reconnecting to last session..", icon: "network", iconWidth: 30)
+        }
         .navigationDestination(isPresented: $vm.startedGame, destination: { CardView(vm: vm) })
 
         .navigationBarTitleDisplayMode(.inline)

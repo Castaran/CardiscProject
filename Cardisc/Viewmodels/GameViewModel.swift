@@ -26,6 +26,7 @@ class GameViewModel: ObservableObject {
     @Published var startedGame: Bool = false
     @Published var finishedGame: Bool = false
     @Published var joinedGame: Bool = false
+    @Published var isReconnecting: Bool = false
     
     //Game data
     @Published var isHost: Bool = false
@@ -86,6 +87,12 @@ class GameViewModel: ObservableObject {
         self.gameManager.$chatMessages
             .sink(receiveValue: { chatMessages in
                 self.chatMessages = chatMessages
+            })
+            .store(in: &cancellables)
+        
+        self.gameManager.$isReconnecting
+            .sink(receiveValue: { isReconnecting in
+                self.isReconnecting = isReconnecting
             })
             .store(in: &cancellables)
     }

@@ -24,6 +24,7 @@ class GameManager: ObservableObject {
     @Published var players: [LobbyPlayer] = []
     @Published var answers: [Answer] = []
     @Published var chatMessages: [ChatMessage] = []
+    @Published var isReconnecting: Bool = false
     
     init() {
         self.syncVariables()
@@ -71,6 +72,12 @@ class GameManager: ObservableObject {
         self.signalRService.$gameIndex
             .sink(receiveValue: { gameIndex in
                 self.gameIndex = gameIndex
+            })
+            .store(in: &cancellables)
+        
+        self.signalRService.$isReconnecting
+            .sink(receiveValue: { isReconnecting in
+                self.isReconnecting = isReconnecting
             })
             .store(in: &cancellables)
     }

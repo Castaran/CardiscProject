@@ -17,7 +17,7 @@ struct SummaryScalable: View {
             HStack {
                 Text("Answers: ").bold()
                 Spacer()
-                Text("\(vm.answers.count)/\(vm.players.count)")
+                Text("Completed \(vm.answers.count)/\(vm.players.count)")
             }
 
             HStack {

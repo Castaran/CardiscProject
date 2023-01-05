@@ -86,6 +86,7 @@
 		22CB5022295F9A270054951A /* SummaryScalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CB5021295F9A270054951A /* SummaryScalable.swift */; };
 		22CB50262961C4410054951A /* CardiscTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CB50252961C4410054951A /* CardiscTextfield.swift */; };
 		22CB50282961C7190054951A /* CardiscPasswordfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CB50272961C7190054951A /* CardiscPasswordfield.swift */; };
+		22CB502D2966F6CD0054951A /* ConnectionDelegation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CB502C2966F6CD0054951A /* ConnectionDelegation.swift */; };
 		22E8C752293CE8A7005CCC00 /* SignalRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E8C751293CE8A7005CCC00 /* SignalRService.swift */; };
 		22FD227129302CB000E9A02C /* ChatMessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FD227029302CB000E9A02C /* ChatMessageItem.swift */; };
 		B9F38F49C4CC083C02468A7A /* Pods_Cardisc_CardiscUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29D13F3CB9C870FF15F6C57A /* Pods_Cardisc_CardiscUITests.framework */; };
@@ -195,6 +196,7 @@
 		22CB50252961C4410054951A /* CardiscTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardiscTextfield.swift; sourceTree = "<group>"; };
 		22CB50272961C7190054951A /* CardiscPasswordfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardiscPasswordfield.swift; sourceTree = "<group>"; };
 		22CB502B2963322B0054951A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		22CB502C2966F6CD0054951A /* ConnectionDelegation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionDelegation.swift; sourceTree = "<group>"; };
 		22E8C751293CE8A7005CCC00 /* SignalRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalRService.swift; sourceTree = "<group>"; };
 		22FD227029302CB000E9A02C /* ChatMessageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageItem.swift; sourceTree = "<group>"; };
 		29D13F3CB9C870FF15F6C57A /* Pods_Cardisc_CardiscUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cardisc_CardiscUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -372,6 +374,7 @@
 				22A80B0B292A8549003CD018 /* Constants.swift */,
 				22A80B0D292A856C003CD018 /* ApiService.swift */,
 				22E8C751293CE8A7005CCC00 /* SignalRService.swift */,
+				22CB502C2966F6CD0054951A /* ConnectionDelegation.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -805,6 +808,7 @@
 				22CB500F295CA1F80054951A /* CustomModifiers.swift in Sources */,
 				22A40E5E293167F900FF7952 /* loginResponseDto.swift in Sources */,
 				22A40E5A2931670000FF7952 /* sessionResponseDto.swift in Sources */,
+				22CB502D2966F6CD0054951A /* ConnectionDelegation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

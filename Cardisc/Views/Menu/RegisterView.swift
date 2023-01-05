@@ -80,14 +80,24 @@ struct RegisterView: View {
                     .cornerRadius(10)
                 }
                 
+                HStack {
+                    Text(vm.errorMsg).foregroundColor(Color.white)
+                    Spacer()
+                }
+                
             }
             .padding(.horizontal, 30)
             .padding(.top, 20)
+            
+
+            
             
             MenuItem(menuIcon: "person.crop.circle.badge.plus.fill", iconHeight: 26, iconWidth: 30, menuTitle: "Register", menuColor: UIColor.systemBlue, menuPaddingRight: 40).onTapGesture {
                 vm.registerUser()
             }
             .padding(.top, 15)
+            
+            
             
             Spacer()
         }

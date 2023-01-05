@@ -39,7 +39,7 @@ class AccountManager {
         }
     }
     
-    func registerUser(username: String, password: String, emailadress: String, completion:@escaping (registerResponseDto) -> ()) {
+    func registerUser(username: String, password: String, emailadress: String, completion:@escaping (registerResponseDto?) -> ()) {
         let body: [String: AnyHashable] = [
             "username": username,
             "password": password,
@@ -51,7 +51,7 @@ class AccountManager {
             completion(data)
             
         } failure: { error in
-            print(error)
+            completion(nil)
         }
     }
 }
