@@ -22,14 +22,19 @@ struct TestView: View {
             Button(action: {
                 // Maak de URL voor de request
                 let url = URL(string: Constants.API_BASE_URL + "user/avatar")!
+                let boundary = "Boundary-\(UUID().uuidString)"
+                
                 
                 let formData = MultipartForm(parts: [
-                    MultipartForm.Part(name: "file", data: imageData!, filename: "avatarPlayer.png", contentType: "image/png"),
+                    MultipartForm.Part(name: "file", data: imageData!, filename: "avatarPlayer.png", contentType: "multipart/form-data; boundary=\(boundary)"),
                 ])
 
                 var request = URLRequest(url: URL(string: Constants.API_BASE_URL + "user/avatar")!)
                 request.httpMethod = "POST"
                 request.setValue(formData.contentType, forHTTPHeaderField: "Content-Type")
+                if let token = UserDefaults.standard.string(forKey: "X-AUTHTOKEN") {
+                    request.setValue("bearer \(token)", forHTTPHeaderField: "Authorization")
+                }
 
                 let task = URLSession.shared.dataTask(with: request) { data, response, error in
                     guard let data = data, error == nil else {
