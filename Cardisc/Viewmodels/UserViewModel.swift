@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import PhotosUI
+import MultipartForm
 
 class UserViewModel: ObservableObject {
     private let userManager = UserManager()
@@ -27,12 +28,13 @@ class UserViewModel: ObservableObject {
     @Published var errorMsg: String = ""
     @Published var changedUserDetails = ""
     @Published var updatedUser: Bool = false
+    @Published var imageLoading: Bool = false
     
     @Published var imageSelection: PhotosPickerItem? {
         didSet {
             if let imageSelection {
                 Task {
-                    try await loadTransferable(from: imageSelection)
+                    try await uploadAvatar(from: imageSelection)
                 }
             }
         }
@@ -117,15 +119,17 @@ class UserViewModel: ObservableObject {
         }
     }
     
-    func uploadAvatar() {
-        
-    }
-    
-    func loadTransferable(from imageSelection: PhotosPickerItem?) async throws {
+    func uploadAvatar(from imageSelection: PhotosPickerItem?) async throws {
+        self.imageLoading = true
         do {
             if let data = try await imageSelection?.loadTransferable(type: Data.self) {
                 if let uiImage = UIImage(data: data) {
-                    self.image = Image(uiImage: uiImage)
+                    self.userManager.uploadAvatar(uiimage: uiImage, id: self.currentUser.id) { data in
+                        if let data = data {
+                            self.currentUser = data
+                            self.imageLoading = false
+                        }
+                    }
                 }
             }
         } catch {

@@ -47,9 +47,8 @@ struct ConclusionView: View {
         }
         .foregroundColor(Color.black)
         .frame(maxHeight: .infinity, alignment: .top)
-        .padding(.top, 40)
+        .padding(.top, 10)
         .backgroundImage(imageName: "WP3")
-        .navigationBarHidden(true)
         .navigationDestination(isPresented: $vm.finishedGame) { NavigationLazyView(MainMenuView()) }
         .navigationDestination(isPresented: $vm.nextRoundStarted) { CardView(vm: vm) }
         .fullScreenCover(isPresented: $vm.isLoadingMainMenu) {

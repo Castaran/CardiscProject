@@ -27,7 +27,7 @@ struct ChatView: View {
                         .font(.system(size: 24))
                 }
                 .padding(.horizontal,30)
-                .padding(.vertical,30)
+                .padding(.vertical,10)
                 
                 Spacer()
                 

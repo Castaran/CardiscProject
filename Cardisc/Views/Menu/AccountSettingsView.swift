@@ -30,7 +30,11 @@ struct AccountSettingsView: View {
                     
                     
                     HStack {
-                        if(vm.currentUser.picture != "") {
+                        if(vm.imageLoading) {
+                            ProgressView()
+                                .frame(width: 120, height: 80)
+                        }
+                        else if(vm.currentUser.picture != "") {
                             AsyncImage(url: URL(string: vm.currentUser.picture)) { image in
                                 image
                                     .resizable()
@@ -40,6 +44,7 @@ struct AccountSettingsView: View {
                                     .padding(20)
                             } placeholder: {
                                 ProgressView()
+                                    .frame(width: 80, height: 80)
                             }
                         }
                         else {
@@ -104,12 +109,6 @@ struct AccountSettingsView: View {
                     MenuItem(menuIcon: "camera.fill", iconHeight: 22, iconWidth: 30, menuTitle: "Change picture", menuColor: UIColor.systemBlue, menuPaddingRight: 40)
                 }
                 
-                NavigationLink {
-                    TestView()
-                }label: {
-                    MenuItem(menuIcon: "camera.fill", iconHeight: 22, iconWidth: 30, menuTitle: "Change picture", menuColor: UIColor.systemBlue, menuPaddingRight: 40)
-                }
-                
                 
                 MenuItem(menuIcon: "trash.fill", iconHeight: 26, iconWidth: 26, menuTitle: "Delete account", menuColor: UIColor.systemRed, menuPaddingRight: 40).onTapGesture {
                     vm.showDeleteUserComfirmation = true
@@ -119,6 +118,8 @@ struct AccountSettingsView: View {
             }
             .padding(.top, 20)
         }
+        .navigationTitle("")
+        .navigationBarTitleDisplayMode(.inline)
         .backgroundImage()
         .navigationDestination(isPresented: $vm.userDeleted, destination: {
             StartView()

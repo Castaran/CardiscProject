@@ -28,7 +28,7 @@ struct EditAccountSettingsView: View {
                         
                         
                         HStack {
-                            Text("Edit your profile information bellow")
+                            Text("Edit your profile information bellow.\n*NOTE:* You must log in again when you change your account credentials.")
                                 .foregroundColor(Color.white).padding(.bottom, 20)
                             Spacer()
                         }
@@ -51,6 +51,8 @@ struct EditAccountSettingsView: View {
                 }
                 
             }
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
             .padding(.horizontal, 30)
             .padding(.vertical, 20)
             

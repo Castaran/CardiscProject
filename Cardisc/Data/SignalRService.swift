@@ -36,60 +36,49 @@ class SignalRService: ObservableObject {
         
         connection.on(method: "newConnection", callback: {
             (id: String) in
-            print("NEW CONNECTION ACTION PERFORMED")
             self.defaults.set(id, forKey: "connectionId")
             self.connectionId = id
         })
         
         connection.on(method: "readyStateChanged", callback: {
             (player: lobbyPlayerDto) in
-            print("READY STATE CHANGE ACTION PERFORMED")
             self.onReadyStateChange(player: player.toDomainModel())
         })
         
         connection.on(method: "newPlayer", callback: {
             (player: lobbyPlayerDto) in
-            print("NEW PLAYER IN THE ROOM")
             self.onNewPlayer(player: player.toDomainModel())
         })
         
         connection.on(method: "playerLeft", callback: {
             (player: playerLeftDto) in
-            print("PLAYER LEFT ACTION PERFORMED")
             self.onPlayerLeft(player: player)
         })
         
         connection.on(method: "startGame", callback: {
             (game: startGameDto) in
-            print("START GAME ACTION PERFORMED")
             self.onGameStarted(game: game.toDomainModel())
         })
         
         connection.on(method: "newMessage", callback: {
             (user: userDto, cardIndex: Int, message: String) in
-            print("NEW MESSAGE ACTION PERFORMED")
             self.onNewMessage(user: user.toDomainModel(), cardIndex: cardIndex, message: message)
         })
         
         connection.on(method: "newAnswer", callback: {
             (user: userDto, answer: String) in
-            print("NEW ANSWER ACTION PERFORMED")
             self.onNewAnswer(user: user.toDomainModel(), answer: answer)
         })
         
         connection.on(method: "nextRound", callback: {
-            print("NEXT ROUND ACTION PERFORMED")
             self.onNextRound()
         })
         
         connection.on(method: "endSession", callback: {
-            print("END SESSION ACTION PERFORMED")
             self.onEndSession()
         })
         
-        connection.on(method: "close", callback: {
-            print("CONN CLOSED")
-        })
+        connection.on(method: "close", callback: { })
 
         connection.start()
         

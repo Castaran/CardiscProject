@@ -6,9 +6,9 @@
 //
 
 import Foundation
+import MultipartForm
 
 class ApiService {
-    let defaults = UserDefaults.standard
     
     // GET request
     func getData<T: Decodable>
@@ -69,7 +69,7 @@ class ApiService {
         request.setValue("application/json", forHTTPHeaderField: "content-type")
         
         //if token is given with at the manager
-        if let token = defaults.string(forKey: "X-AUTHTOKEN") {
+        if let token = UserDefaults.standard.string(forKey: "X-AUTHTOKEN") {
             request.setValue("bearer \(token)", forHTTPHeaderField: "Authorization")
         }
         
@@ -79,6 +79,14 @@ class ApiService {
         }
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse {
+                let responseCode = httpResponse.statusCode
+                if responseCode == 204 {
+                    UserDefaults.standard.removeObject(forKey: "X-AUTHTOKEN")
+                }
+                
+            }
+            
             guard let data = data, error == nil else {
                 return
             }
@@ -112,7 +120,7 @@ class ApiService {
         request.setValue("application/json", forHTTPHeaderField: "content-type")
         
         //if token is given with at the manager
-        if let token = defaults.string(forKey: "X-AUTHTOKEN") {
+        if let token = UserDefaults.standard.string(forKey: "X-AUTHTOKEN") {
             request.setValue("bearer \(token)", forHTTPHeaderField: "Authorization")
         }
         
@@ -125,5 +133,23 @@ class ApiService {
         
         task.resume()
     }
-
+    
+    func httpUploadRequest<T: Decodable>
+    (
+        model: T.Type,
+        formData: MultipartForm
+    ) {
+        let url = URL(string: Constants.API_BASE_URL + "user/avatar")!
+        var request = URLRequest(url: url)
+        
+        if let token = UserDefaults.standard.string(forKey: "X-AUTHTOKEN") {
+            request.setValue("bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+        request.httpMethod = "POST"
+        request.setValue(formData.contentType, forHTTPHeaderField: "Content-Type")
+        
+        let task = URLSession.shared.uploadTask(with: request, from: formData.bodyData)
+        task.resume()
+    }
+    
 }
